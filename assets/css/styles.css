@@ -2,32 +2,44 @@
 
 @import url('https://fonts.googleapis.com/css?family=Anton:100,200,300,400,500,600,700');
 
-html,body{
+html,
+body {
     box-sizing: border-box;
     /* http://www.ourownthing.co.uk/gradpad.html#. Use this tool to define the linear gradient for the background of the site*/
-    background-image: linear-gradient(90deg, rgba(240, 215, 117,1) 20.09375%,rgba(239, 214, 116,1) 20.09375%,rgba(103, 163, 107,1) 80.09375%)
+    /* background-image: linear-gradient(90deg, rgba(240, 215, 117, 1) 20.09375%, rgba(239, 214, 116, 1) 20.09375%, rgba(103, 163, 107, 1) 80.09375%); */
+    height: 100%;
+    margin: 0;
+    padding: 0;
 }
-header {
-    display: flex;
-    flex-flow: row nowrap
+
+header>div {
+    display: inline-block;
 }
-.container-fluid{
-    padding:0;
+
+.container-fluid {
+    padding: 0;
 }
+
 .header-text {
     color: #e4420f;
-    font-size: 8vh;
-    line-height: 2;
     font-family: Anton, sans-serif
 }
-/* .header-title{
-    text-transform: uppercase}
-.header-moto{
-    /* font-size: 5vh; */
-    font-style: italic;
-    text-transform: capitalize */
+
+.header-title {
+    font-size: 8vh;
+    text-transform: uppercase
 }
-.navbar-toggler-icon{
+
+.header-moto {
+    font-size: 5vh;
+    font-style: italic;
+    text-transform: capitalize
+}
+
+.navbar-nav{
+    flex-direction: row;
+}
+.navbar-toggler-icon {
     display: block;
     width: 6vh;
     height: 1vh;
@@ -35,7 +47,7 @@ header {
     background-color: #0f0f0f
 }
 
-#hero-video video{
+#hero-video video {
     position: absolute;
     width: 100%;
     height: 100%;
@@ -43,7 +55,7 @@ header {
     object-fit: cover
 }
 
-#search-form{
+#search-form {
     position: relative;
     top: 200px;
     z-index: 2;
@@ -52,28 +64,35 @@ header {
     justify-content: center
 }
 
-.form-inline{
+.form-inline {}
 
-}
-
-.form-group{
+.form-group {
     flex-wrap: nowrap;
     justify-content: space-between;
 }
-#main-search{
+
+#destiny-input {
     background-color: #fafafa;
-    padding:0;
+    padding: 0;
     border: none;
     line-height: 3;
     text-align: center;
 }
-#search-btn{
+
+#search-btn {
     padding: 0;
     border: none;
     line-height: 2;
     width: 30%;
-    margin:0 35%;
+    margin: 0 35%;
 }
+#map {
+    height: 100%;
+  }
+.modal-dialog {}
+
+#search-modal {}
+
 /* .container-fluid{
     display: flex;
 } */
