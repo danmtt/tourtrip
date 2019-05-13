@@ -10,6 +10,9 @@ html,body{
 header > div{
     display: inline-block;
 }
+.container-fluid{
+    padding:0;
+}
 
 .header-text {
     color: #e4420f;
