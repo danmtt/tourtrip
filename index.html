@@ -14,98 +14,54 @@
         <!--Javascript Sources -->
         <script type="text/javascript" src="assets/js/scripts.js"></script>      
     </head>    
-    <body>		
-		<!-- header / nav -->
-		<!-- <div class="container-wrapper header_css"> -->
-			<!-- header -->
-			<header class="container-fluid col-xs-4 col-sm-8 col-md-12">
-				<div class=" header-text text-center header-title">tourtrip </div>
-				<div class=" header-text text-center header-moto">your best holiday in just a few clicks</div>
-				<nav class="container-fluid col-xs-4 col-sm-8 col-md-12 navbar navbar-default">
-						<button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarToggleExternalContent" aria-controls="navbarToggleExternalContent" aria-expanded="false" aria-label="Toggle navigation">
-							<span class="navbar-toggler-icon"></span>
-							<span class="navbar-toggler-icon"></span>
-							<span class="navbar-toggler-icon"></span>
-						</button>
-					</nav>
-					<div class="collapse" id="navbarToggleExternalContent">
-						<div class="bg-dark p-4">						
-							<ul class="nav navbar-nav">
-								<li role="presentation"><a href="index.html">Home</a></li>
-									<li role="presentation"><a href="lang/en.html">Reset All</a></li>
-								<li class="visible-xs"><a href="#">Sign In</a></li>
-							</ul>
-							<div class="navbar-header navbar-right hidden-xs">
-								<a href="/login" class='btn btn-default navbar-btn'>Sign Up</a>
-								<p class="navbar-text"><i>Wanna see more? Join us!</i></p>
-							</div>
-									
-							<!-- <h5 class="text-white h4">Collapsed content</h5> -->
-							<!-- <span class="text-muted">Toggleable via the navbar brand.</span> -->
-						</div>
+    <body>
+		<header class="container-fluid col-xs-12">
+			<div class="header-text text-center header-title col-xs-12 col-sm-8">tourtrip</div>
+			<div class="header-text text-center header-moto col-xs-12 col-sm-4">alive your best holiday in just a few clicks</div>
+			<nav class="navbar navbar-default col-xs-12 col-sm-4">
+				<button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarToggleExternalContent" aria-controls="navbarToggleExternalContent" aria-expanded="false" aria-label="Toggle navigation">
+					<span class="navbar-toggler-icon"></span>
+					<span class="navbar-toggler-icon"></span>
+					<span class="navbar-toggler-icon"></span>
+				</button>
+			</nav>
+			<div class="collapse" id="navbarToggleExternalContent">
+				<div class="bg-dark p-4">						
+					<ul class="nav navbar-nav">
+						<li role="presentation"><a href="index.html">Home</a></li>
+							<li role="presentation"><a href="lang/en.html">Reset All</a></li>
+						<li class="visible-xs"><a href="#">Sign In</a></li>
+					</ul>
+					<div class="navbar-header navbar-right hidden-xs">
+						<a href="/login" class='btn btn-default navbar-btn'>Sign Up</a>
+						<p class="navbar-text"><i>Wanna see more? Join us!</i></p>
 					</div>
-			</header>
-			<!-- ./header -->
-			<!-- nav -->
-			<!-- <div class="pos-f-t"> -->
-
-			<!-- </div> -->
-	
-
-
-        	<!-- ./nav -->
-        <!-- ./header / nav -->
-        
-		<!-- main -->
-		<div class="container-wrapper">
-			<div class="container-fluid main_css">
-				<!-- opaque layer over background  -->		
-				<div class="opaque-overlay">&nbsp;</div>
-				<!-- ./opaque layer over background  -->
-				<!-- welcome -->
-				<div class="row">
-					<div class="col-xs-12">
-						<section class="jumbotron text-center welcome">
-							<!--<a href="#"><img class="img-responsive monster_left" src="img/crazy_emoticon_yellow.png"  alt="monster left"></a>-->
-							<!--<a href="#"><img class="img-responsive monster_right" src="img/crazy_emoticon_darkgreen.png" alt="monster right"></a>-->
-							<h1>Lorem ipsum dolor sit amet, consectetur</h1>
-							<hr class="theme-divider theme-divider-red">
-							<!--<a href="#"><img class="img-responsive monster_left" src="img/crazy_emoticon_yellow.png"  alt="monster left"></a>-->
-							<!--<a href="#"><img class="img-responsive monster_right" src="img/crazy_emoticon_darkgreen.png" alt="monster right"></a>-->
-							<h1>Lorem ipsum dolor sit amet, consectetur</h1>
-						</section>
-					</div>
+							
+					<!-- <h5 class="text-white h4">Collapsed content</h5> -->
+					<!-- <span class="text-muted">Toggleable via the navbar brand.</span> -->
 				</div>
-			<!-- ./welcome -->
-			<!-- briefing -->
-				<div class="row">
-					<div class="col-xs-12">
-						<section class="jumbotron text-center numbers">
-							<h1>Lorem ipsum dolor sit amet, consectetur</h1>
-							<hr class="theme-divider theme-divider-red theme-divider-short">
-							<h1>Lorem ipsum dolor sit amet, consectetur</h1>
-							<p><button class="btn btn-lg btn_style" data-toggle='modal' data-target='#signUpModal'>Sign Up!</button></p>
-						</section>
-					</div>
-				</div>
-			<!-- ./briefing -->	
 			</div>
-		</div>
-		<!-- ./main -->
-		
-		<!-- footer-->
-		<div class="container-wrapper">
-			<section class="container-fluid footer_css">
-				<div class="row">
-					<section class="col-xs-12">
-						<h1 class="footer_text">DanMtt 2018</h1>
-						<a href="#"><img class="img-responsive" src="img/cube_rubik.png" alt="cubik" style="width:100px;margin:10px;float:right"></a>
-					</section>
-				</div>
-
-    		</section>
-		</div>
-		<!-- ./footer-->
+		</header>
+		<section id="hero-video" class="container-fluid col-xs-12"> 
+			<video src="assets\videos\Pexels Videos 1723017.mp4" autoplay>
+			<!-- <video src="https://player.vimeo.com/video/308162286/" autoplay></video> -->
+			<!-- <video src="https://www.pexels.com/video/view-of-a-beautiful-horizon-1723017/Pexels Videos 1723017.mp4" autoplay> -->
+			</video>
+			<form id="search-form">
+				<div class="form-group">
+					<input type="text" id="main-search" class="form-control" placeholder="Type your destiny here, please"/>
+					<button type="submit" id="search-btn" class="btn btn-primary mb-2">Search</button>
+				</div>					
+			</form>
+		</section>
+		<footer class="container-fluid col-xs-12">
+			<div class="row">
+				<!-- <section class="col-xs-12"> -->
+					<!-- <h1 class="footer_text">DanMtt 2018</h1> -->
+					<!-- <a href="#"><img class="img-responsive" src="img/cube_rubik.png" alt="cubik" style="width:100px;margin:10px;float:right"></a> -->
+				<!-- </section> -->
+			</div>
+		</footer>
 		
 		<!-- To enable JavaScript functionality on this site the sources to the libraries containing
 		the scripts needed (jQuery, Popper.js and bootstrap JavaScript) are linked below. -->	    
@@ -116,7 +72,7 @@
 </html>
 
 
-<!-------------------------------------------------------------------------------------->
+
 
 
 		
