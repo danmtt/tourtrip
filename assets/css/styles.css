@@ -99,10 +99,7 @@ footer {
 }
 
 
-    margin:0;
-}
-
-#destiny-input {
+#search-input {
     background-color: #fafafa;
     padding: 0;
     border: none;
@@ -147,7 +144,9 @@ footer a{
 }
 
 #map {
-    height: 40%;
+    width: 600px; 
+    height: 400px;
+    /* height: 100%; */
 }
 
 .modal-dialog {}
