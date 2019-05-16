@@ -62,7 +62,6 @@
 					data-target="#search-modal">Search</button>
 			</div>
 		</form>
-		<!-- <div id="map"></div> -->
 	</section>
 	<footer class="container-fluid col-xs-12">
 		<div class="footer-media">
@@ -84,7 +83,6 @@
 		</a>
 	</footer>
 	
-	<div id="map"></div>
 
 	<!-- About Modal -->
 	<div class="modal fade ml-auto" id="about-modal" tabindex="-1" role="dialog" aria-labelledby="about-modal"
@@ -144,6 +142,7 @@
 					</button>
 				</div>
 				<div class="modal-body">
+					
 					<div class="row">
 						<div class="col-md-12 modal_body_content">
 							<p>Some contents...</p>
@@ -151,9 +150,12 @@
 					</div>
 					<div class="row">
 						<div class="col-md-12 modal_body_map">
-							<div id="map">
-								<!-- <div style="" id="map_canvas"></div> -->
-							</div>
+								<div id="map"></div>
+								<div id="infowindow-content">
+									<span id="place-name" class="title"></span><br>
+									<strong>Place ID:</strong> <span id="place-id"></span><br>
+									<span id="place-address"></span>
+								</div>
 						</div>
 					</div>
 					<div class="row">
@@ -206,15 +208,24 @@
 	<script
 		src="https://developers.google.com/maps/documentation/javascript/examples/markerclusterer/markerclusterer.js">
 	</script>
+	
 	<!-- Link to get GoogleMaps API file to generate our maps. As not able to update Developer's APIKey 
-	on it, Code Institute generic's APIKey used -->
-	<!-- <script async defer.src="https://maps.googleapis.com/maps/api/js?key=AIzaSyC47mfYKRHvHnXwqI2JH1sDRCn6At5b-wQ&callback=initMap">
+	on it,  used -->
+	
+	<!-- Developer's APIKey NOT WORKING! -->
+	<!-- <script async defer
+		src="https://maps.googleapis.com/maps/api/js?key=AIzaSyC47mfYKRHvHnXwqI2JH1sDRCn6At5b-wQ&callback=initMap&libraries=places">
 	</script> -->
+
+	<!-- Code Institute generic's APIKey WORKING! (places library included) -->
 	<script async defer
-		src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDDHHyac2SiOYPNYxXMK7rqJjnB8nCaaxE&callback=initMap">
+		src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDDHHyac2SiOYPNYxXMK7rqJjnB8nCaaxE&callback=initMap&libraries=places">
 	</script>
-	<!-- Link to get GoogleMaps places library to allow user to look for a place. Documentation reference: 
-	https://developers.google.com/maps/documentation/javascript/examples/places-placeid-finder-->
+
+	<!-- Link to get GoogleMaps places library to allow user to look for a place. 
+		https://maps.googleapis.com/maps/api/js?key=[APIKey]&libraries=places
+		Documentation reference: 
+		https://developers.google.com/maps/documentation/javascript/examples/places-placeid-finder -->
 
 
 
