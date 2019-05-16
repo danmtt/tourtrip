@@ -16,8 +16,9 @@
 	<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
 		integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
 	<link rel="stylesheet" href="assets/css/styles.css" type="text/css" />
-	<!--Javascript Sources -->
+	<!--Javascript Sources (local library) -->
 	<script type="text/javascript" src="assets/js/scripts.js"></script>
+
 </head>
 
 <body>
@@ -55,14 +56,13 @@
 		<form id="search-form">
 			<div class="form-group">
 				<!-- Input holiday destiny -->
-				<input type="text" id="destiny-input" class="form-control"
-					placeholder="Type your destiny here" />
+				<input type="text" id="search-input" class="form-control" placeholder="Type your destiny here" />
 				<!-- Button search to trigger modal -->
 				<button type="button" id="search-btn" class="btn btn-primary" data-toggle="modal"
 					data-target="#search-modal">Search</button>
 			</div>
 		</form>
-
+		<!-- <div id="map"></div> -->
 	</section>
 	<footer class="container-fluid col-xs-12">
 		<div class="footer-media">
@@ -83,17 +83,9 @@
 			<img src="assets/images/icons/rubik-icon-23_trnsp_100x100.png" alt="Developer's info link"></img>
 		</a>
 	</footer>
-	<!-- To enable JavaScript functionality on this site the sources to the libraries containing
-		the scripts needed (jQuery, Popper.js and bootstrap JavaScript) are linked below. -->
-	<script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"
-		integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous">
-	</script>
-	<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"
-		integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous">
-	</script>
-	<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"
-		integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous">
-	</script>
+	
+	<div id="map"></div>
+
 	<!-- About Modal -->
 	<div class="modal fade ml-auto" id="about-modal" tabindex="-1" role="dialog" aria-labelledby="about-modal"
 		aria-hidden="true">
@@ -152,41 +144,39 @@
 					</button>
 				</div>
 				<div class="modal-body">
-					<div class="container-fluid">
-						<div class="row">
-							<div class="col-xs-12 modal-how-to">
-								Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod
-								tempor
-								incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam,
-								quis
-								nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo
-								consequat.
-								Duis aute irure dolor in reprehenderit in voluptate velit esse cillum
-								dolore eu
-								fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident,
-								sunt in
-								culpa qui officia deserunt mollit anim id est laborum
+					<div class="row">
+						<div class="col-md-12 modal_body_content">
+							<p>Some contents...</p>
+						</div>
+					</div>
+					<div class="row">
+						<div class="col-md-12 modal_body_map">
+							<div id="map">
+								<!-- <div style="" id="map_canvas"></div> -->
 							</div>
 						</div>
-						<div class="row">
-							<div id="map" class="col-xs-12"></div>
+					</div>
+					<div class="row">
+						<div class="col-md-12 modal_body_end">
+							<p>Else...</p>
 						</div>
-						<div class="row">
-							<div class="col-xs-2 map-option">.opt 1</div>
-							<div class="col-xs-2 map-option">.opt 2</div>
-							<div class="col-xs-2 map-option">.opt 3</div>
-							<div class="col-xs-2 map-option">.opt 4</div>
-							<div class="col-xs-2 map-option">.opt 5</div>
-							<div class="col-xs-2 map-option">.opt 6</div>
-						</div>
-						<div class="row">
-							<div class="col-xs-2 map-option">.opt 7</div>
-							<div class="col-xs-2 map-option">.opt 8</div>
-							<div class="col-xs-2 map-option">.opt 9</div>
-							<div class="col-xs-2 map-option">.opt 10</div>
-							<div class="col-xs-2 map-option">.opt 11</div>
-							<div class="col-xs-2 map-option">.opt 12</div>
-						</div>
+					</div>
+					<!-- GoogleMaps rendering -->
+					<div id="map"></div>
+					<!-- Cluster selections -->
+					<div class="row">
+						<div class="col-xs-2 map-option">.opt 1</div>
+						<div class="col-xs-2 map-option">.opt 2</div>
+						<div class="col-xs-2 map-option">.opt 3</div>
+						<div class="col-xs-2 map-option">.opt 4</div>
+						<div class="col-xs-2 map-option">.opt 5</div>
+						<div class="col-xs-2 map-option">.opt 6</div>
+						<div class="col-xs-2 map-option">.opt 7</div>
+						<div class="col-xs-2 map-option">.opt 8</div>
+						<div class="col-xs-2 map-option">.opt 9</div>
+						<div class="col-xs-2 map-option">.opt 10</div>
+						<div class="col-xs-2 map-option">.opt 11</div>
+						<div class="col-xs-2 map-option">.opt 12</div>
 					</div>
 				</div>
 				<div class="modal-footer">
@@ -197,22 +187,37 @@
 		</div>
 	</div>
 
-	<script>
-		var map;
+	<!-- Placing the links to get this .js files at the end of the HTML file 
+	is meant to make the page load quick -->
+	<!-- To enable JavaScript functionality on this site the sources to the libraries containing
+	the scripts needed (jQuery, Popper.js and bootstrap JavaScript) are linked below. -->
+	<script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"
+		integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous">
+	</script>
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"
+		integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous">
+	</script>
+	<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"
+		integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous">
+	</script>
 
-		function initMap() {
-			map = new google.maps.Map(document.getElementById('map'), {
-				center: {
-					lat: -34.397,
-					lng: 150.644
-				},
-				zoom: 8
-			});
-		}
+	<!-- GoogleMaps scripts -->
+	<!-- Link to get GoogleMaps .js file needed to add clusters to our maps -->
+	<script
+		src="https://developers.google.com/maps/documentation/javascript/examples/markerclusterer/markerclusterer.js">
 	</script>
+	<!-- Link to get GoogleMaps API file to generate our maps. As not able to update Developer's APIKey 
+	on it, Code Institute generic's APIKey used -->
+	<!-- <script async defer.src="https://maps.googleapis.com/maps/api/js?key=AIzaSyC47mfYKRHvHnXwqI2JH1sDRCn6At5b-wQ&callback=initMap">
+	</script> -->
 	<script async defer
-		src="https://maps.googleapis.com/maps/api/js?key=AIzaSyC47mfYKRHvHnXwqI2JH1sDRCn6At5b-wQ&callback=initMap">
+		src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDDHHyac2SiOYPNYxXMK7rqJjnB8nCaaxE&callback=initMap">
 	</script>
+	<!-- Link to get GoogleMaps places library to allow user to look for a place. Documentation reference: 
+	https://developers.google.com/maps/documentation/javascript/examples/places-placeid-finder-->
+
+
+
 </body>
 
 </html>
