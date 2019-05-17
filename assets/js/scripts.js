@@ -28,7 +28,8 @@ function initMap() {
   // To select only the data fields needed.
   autocomplete.setFields(['place_id', 'geometry', 'name']);
 
-// To call back from googleMaps API for InfoWindow information about window for the place selected.
+// To call back from googleMaps API for an information window 
+// without setting the HTML element to render. 
 var infowindow = new google.maps.InfoWindow();
 // To define the identity of the element that will contain the informationthe information retrieved from googlemaps into a variable.
 var infowindowContent = document.getElementById('infowindow-content');
