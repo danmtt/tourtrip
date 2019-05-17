@@ -73,4 +73,17 @@ var infowindowContent = document.getElementById('infowindow-content');
           infowindow.open(map, marker);
         });
 
-}
+};
+
+// function resetSeasrch(){
+//   document.getElementById("search-input").reset();
+// }
+
+// $('input').on('hidden.bs.modal', '.modal', function () {
+//   document.getElementById("search-input").reset();
+//   // $(this).removeData('bs.modal');
+// }
+
+$('#search-modal').on('hidden.bs.modal', function () {
+  $('#search-modal input')[0].reset();
+  });
