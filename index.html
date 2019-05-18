@@ -136,27 +136,34 @@
 		<div class="modal-dialog modal-dialog-centered" role="document">
 			<div class="modal-content">
 				<div class="modal-header">
-					<h5 class="modal-title" id="search-modal">Your have selected:</h5>
+					<!-- <div id="infowindow-content"></div>
+						<span id="place-name" class="title"></span><br>
+						<strong>Place ID:</strong> <span id="place-id"></span><br>
+						<span id="place-address"></span>
+					</div> -->					
+					<h5 class="modal-title" id="search-modal">- YOUR TRIP INFO -</h5>
 					<button type="button" class="close" data-dismiss="modal" aria-label="Close">
 						<span aria-hidden="true">&times;</span>
 					</button>
 				</div>
-				<div class="modal-body">
-					
+				<div class="modal-body">					
+						<h5 class="modal-title" id="search-modal">- <span id="place-name">PRUEBA</span> -</h5>				
+
 					<div class="row">
-						<div class="col-md-12 modal_body_content">
+						
+						<!-- <div id="infowindow-content"></div>
+						<span id="place-name" class="title"></span><br>
+						<strong>Place ID:</strong> <span id="place-id"></span><br>
+						<span id="place-address"></span>
+						</div> -->
+						<!-- <div class="col-md-12 modal_body_content">
 							<p>Some contents...</p>
-						</div>
+						</div> -->
 					</div>
 					<div class="row">
 						<div class="col-md-12 modal_body_map">
-								<!-- GoogleMaps rendering -->
-								<div id="map"></div>
-								<div id="infowindow-content">
-									<span id="place-name" class="title"></span><br>
-									<strong>Place ID:</strong> <span id="place-id"></span><br>
-									<span id="place-address"></span>
-								</div>
+							<!-- GoogleMaps rendering -->
+							<div id="map"></div>
 						</div>
 					</div>
 					<div class="row">

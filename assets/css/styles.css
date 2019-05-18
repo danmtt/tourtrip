@@ -142,11 +142,14 @@ footer a {
     width: 95%;
     height: 95%;
 }
+.modal-header{
+    border: 1px solid #0f0f0f
+}
 .modal_body_map{
-    border:  1px solid red
+    border:  1px solid rgb(255, 0, 0)
 }
 .modal-dialog {
-    border:  2px solid blue;
+    border:  2px solid rgb(5, 5, 248);
     margin: 0 2.5%;
 
     width: 95%;
