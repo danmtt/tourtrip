@@ -135,22 +135,15 @@
 		aria-hidden="true">
 		<div class="modal-dialog modal-dialog-centered" role="document">
 			<div class="modal-content">
-				<div class="modal-header">
-					<!-- <div id="infowindow-content"></div>
-						<span id="place-name" class="title"></span><br>
-						<strong>Place ID:</strong> <span id="place-id"></span><br>
-						<span id="place-address"></span>
-					</div> -->					
+				<div class="modal-header">			
 					<h5 class="modal-title" id="search-modal">- YOUR TRIP INFO -</h5>
 					<button type="button" class="close" data-dismiss="modal" aria-label="Close">
 						<span aria-hidden="true">&times;</span>
 					</button>
 				</div>
 				<div class="modal-body">					
-						<h5 class="modal-title" id="search-modal">- <span id="place-name">PRUEBA</span> -</h5>				
-
+					<h5 class="modal-title" id="search-modal">- <span id="place-name">PRUEBA</span> -</h5>				
 					<div class="row">
-						
 						<!-- <div id="infowindow-content"></div>
 						<span id="place-name" class="title"></span><br>
 						<strong>Place ID:</strong> <span id="place-id"></span><br>
@@ -167,28 +160,31 @@
 						</div>
 					</div>
 					<div class="row">
-						<div class="col-md-12 modal_body_end">
-							<p>Else...</p>
+						<h5 class="modal-title" id="search-modal" style=" width:100%">- <span id="place-name">PRUEBA</span> -</h5>				
+						<!-- Cluster selections -->
+						<div class=" modal_body_end">
+							<div id="beach-marker" class="col-xs-2 map-marker">
+								<p><i class="fas fa-umbrella-beach"></i></p>
+								<p><strong>Beaches</strong></p>
+							</div>
+							<div id="lake-marker" class="col-xs-2 map-marker">
+								<p><i class="fas fa-water"></i></p>
+								<p><strong>Lakes</strong></p>
+							</div>
+							<div id="river-marker" class="col-xs-2 map-marker">
+								<p><i class="fas fa-umbrella-beach"></i></p>
+								<p><strong>Rivers</strong></p>
+							</div>
+							<div id="swimmingpool-marker" class="col-xs-2 map-marker">
+								<p><i class="fas fa-swimming-pool"></i></p>
+								<p><strong>Swimming-pools</strong></p>
+							</div>
+							</div>
 						</div>
-					</div>
 
 
-					<!-- Cluster selections -->
-					<div class="row">
-						<div class="col-xs-2 map-option">.opt 1</div>
-						<div class="col-xs-2 map-option">.opt 2</div>
-						<div class="col-xs-2 map-option">.opt 3</div>
-						<div class="col-xs-2 map-option">.opt 4</div>
-						<div class="col-xs-2 map-option">.opt 5</div>
-						<div class="col-xs-2 map-option">.opt 6</div>
-						<div class="col-xs-2 map-option">.opt 7</div>
-						<div class="col-xs-2 map-option">.opt 8</div>
-						<div class="col-xs-2 map-option">.opt 9</div>
-						<div class="col-xs-2 map-option">.opt 10</div>
-						<div class="col-xs-2 map-option">.opt 11</div>
-						<div class="col-xs-2 map-option">.opt 12</div>
-					</div>
-				</div>
+					
+					
 				<div class="modal-footer">
 					<button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
 					<button type="button" class="btn btn-primary">Save changes</button>
