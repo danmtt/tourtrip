@@ -85,6 +85,7 @@
 	
 
 	<!-- About Modal -->
+	
 	<div class="modal fade ml-auto" id="about-modal" tabindex="-1" role="dialog" aria-labelledby="about-modal"
 		aria-hidden="true">
 		<div class="modal-dialog modal-dialog-centered" role="document">
@@ -135,24 +136,31 @@
 		aria-hidden="true">
 		<div class="modal-dialog modal-dialog-centered" role="document">
 			<div class="modal-content">
-				<div class="modal-header">			
+				<div class="modal-header">
+					<!-- <div id="infowindow-content"></div>
+						<span id="place-name" class="title"></span><br>
+						<strong>Place ID:</strong> <span id="place-id"></span><br>
+						<span id="place-address"></span>
+					</div> -->					
 					<h5 class="modal-title" id="search-modal">- YOUR TRIP INFO -</h5>
 					<button type="button" class="close" data-dismiss="modal" aria-label="Close">
 						<span aria-hidden="true">&times;</span>
 					</button>
 				</div>
 				<div class="modal-body">					
-					<h5 class="modal-title" id="search-modal">- <span id="place-name">PRUEBA</span> -</h5>				
-					<!-- <div class="row">
-						<div id="infowindow-content"></div>
+						<h5 class="modal-title" id="search-modal">- <span id="place-name">PRUEBA</span> -</h5>				
+
+					<div class="row">
+						
+						<!-- <div id="infowindow-content"></div>
 						<span id="place-name" class="title"></span><br>
 						<strong>Place ID:</strong> <span id="place-id"></span><br>
 						<span id="place-address"></span>
-						</div>
-						<div class="col-md-12 modal_body_content">
+						</div> -->
+						<!-- <div class="col-md-12 modal_body_content">
 							<p>Some contents...</p>
-						</div>
-					</div> -->
+						</div> -->
+					</div>
 					<div class="row">
 						<div class="col-md-12 modal_body_map">
 							<!-- GoogleMaps rendering -->
@@ -160,28 +168,28 @@
 						</div>
 					</div>
 					<div class="row">
-						<h5 class="modal-title" id="search-modal" style=" width:100%">- <span id="place-name">SELECTORS</span> -</h5>				
-						<!-- Cluster selections -->
-						<div class=" modal_body_end">
-							<!-- <button type="button" class="btn btn-secondary" -->
-							<button type="button" class="btn btn-secondary col-xs-2 map-marker" id="beach-marker">
-								<p><i class="fas fa-umbrella-beach"></i></p>
-								<!-- <p><strong>Beaches</strong></p> -->
-							</button>
-							<button type="button" class="btn btn-secondary col-xs-2 map-marker" id="lake-marker">
-								<p><i class="fas fa-water"></i></p>
-								<!-- <p><strong>Lakes</strong></p> -->
-							</button>
-							<button type="button" class="btn btn-secondary col-xs-2 map-marker" id="river-marker">
-								<p><i class="fas fa-umbrella-beach"></i></p>
-								<!-- <p><strong>Rivers</strong></p> -->
-							</button>
-							<button type="button" class="btn btn-secondary col-xs-2 map-marker" id="swimmingpool-marker">
-								<p><i class="fas fa-swimming-pool"></i></p>
-								<!-- <p><strong>Pools</strong></p> -->
-							</button>
-							</div>
-						</div>	
+						<div class="col-md-12 modal_body_end">
+							<p>Else...</p>
+						</div>
+					</div>
+
+
+					<!-- Cluster selections -->
+					<div class="row">
+						<div class="col-xs-2 map-option">.opt 1</div>
+						<div class="col-xs-2 map-option">.opt 2</div>
+						<div class="col-xs-2 map-option">.opt 3</div>
+						<div class="col-xs-2 map-option">.opt 4</div>
+						<div class="col-xs-2 map-option">.opt 5</div>
+						<div class="col-xs-2 map-option">.opt 6</div>
+						<div class="col-xs-2 map-option">.opt 7</div>
+						<div class="col-xs-2 map-option">.opt 8</div>
+						<div class="col-xs-2 map-option">.opt 9</div>
+						<div class="col-xs-2 map-option">.opt 10</div>
+						<div class="col-xs-2 map-option">.opt 11</div>
+						<div class="col-xs-2 map-option">.opt 12</div>
+					</div>
+				</div>
 				<div class="modal-footer">
 					<button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
 					<button type="button" class="btn btn-primary">Save changes</button>
