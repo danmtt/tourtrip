@@ -6,14 +6,16 @@ function initMap() {
 
   // To call back from googleMaps API for a new map and select the 
   // identity of the HTML element to render it.
-  var map = new google.maps.Map(document.getElementById('map'))
- 
+  var map = new google.maps.Map(document.getElementById('map'),
+  
     // Options to include in the future
     { 
-    // center: {lat: 51.4934, lng: 0.0098}, // Greenwich coordinates,
-    // zoom: 13 // Zoom definition, far away at first...
-    // mapTypeId: 'roadmap' // Default 2D map
-    };
+      disableDefaultUI: true, // Remove controls from map
+      // mapTypeControl: false, // Remove controls from map
+      // center: {lat: 51.4934, lng: 0.0098}, // Greenwich coordinates,
+      // zoom: 17, // Zoom definition, far away at first...
+      // mapTypeId: 'roadmap' // Default 2D map
+    });
 
   // To define which HTML element is the input search box.
   searchInput = document.getElementById("search-input");
@@ -28,12 +30,14 @@ function initMap() {
   // To select only the data fields needed.
   autocomplete.setFields(['place_id', 'geometry', 'name']);
 
-// To call back from googleMaps API for an information window 
-// without setting the HTML element to render. 
-var infowindow = new google.maps.InfoWindow();
-// To define the identity of the element that will contain the informationthe information retrieved from googlemaps into a variable.
-var infowindowContent = document.getElementById('infowindow-content');
-// To send the information retrieved from googlemaps into a variable.
+  // To call back from googleMaps API for an information window 
+  // without setting the HTML element to render. 
+  var infowindow = new google.maps.InfoWindow();
+
+  // To define the identity of the element that will contain the informationthe information retrieved from googlemaps into a variable.
+  var infowindowContent = document.getElementById('infowindow-content');
+
+  // To send the information retrieved from googlemaps into a variable.
         infowindow.setContent(infowindowContent);
 
         var marker = new google.maps.Marker({map: map});
@@ -68,8 +72,7 @@ var infowindowContent = document.getElementById('infowindow-content');
 
           infowindowContent.children['place-name'].textContent = place.name;
           infowindowContent.children['place-id'].textContent = place.place_id;
-          infowindowContent.children['place-address'].textContent =
-              place.formatted_address;
+          infowindowContent.children['place-address'].textContent = place.formatted_address;
           infowindow.open(map, marker);
         });
 
