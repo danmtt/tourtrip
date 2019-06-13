@@ -31,8 +31,6 @@
 				aria-controls="navbarMenu" aria-expanded="false" aria-label="Toggle navigation">
 				<!-- Fontawesome nav bar icon -->
 				<i class="fas fa-bars"></i>
-
-
 			</button>
 		</nav>
 	</header>
@@ -54,7 +52,7 @@
 	<section id="hero-video" class="container-fluid col-xs-12">
 		<video src="assets\videos\Palms at Sunset.mp4" autoplay loop muted playsinline></video>
 		<form id="search-form">
-			<div class="form-group">
+			<div class="search-input-block">
 				<!-- Input holiday destiny -->
 				<input type="text" id="search-input" class="form-control" placeholder="Type your destiny here" />
 				<!-- Button search to trigger modal -->
@@ -82,10 +80,7 @@
 			<img src="assets/images/icons/rubik-icon-23_trnsp_100x100.png" alt="Developer's info link"></img>
 		</a>
 	</footer>
-	
-
 	<!-- About Modal -->
-	
 	<div class="modal fade ml-auto" id="about-modal" tabindex="-1" role="dialog" aria-labelledby="about-modal"
 		aria-hidden="true">
 		<div class="modal-dialog modal-dialog-centered" role="document">
@@ -132,29 +127,20 @@
 		</div>
 	</div>
 	<!-- Search Modal -->
-	<div class="modal fade ml-auto" id="search-modal" tabindex="-1" role="dialog" aria-labelledby="search-modal" aria-hidden="true">
+	<div class="modal fade ml-auto" id="search-modal" tabindex="-1" role="dialog" aria-labelledby="search-modal"
+		aria-hidden="true">
 		<div class="modal-dialog modal-dialog-centered" role="document">
 			<div class="modal-content">
-				<div class="modal-header">				
-					<h5 class="modal-title">YOUR TRIP INFO</h5>
+				<div class="modal-header">
+					<h5 class="modal-title text-center">YOUR TRIP INFO</h5>
 					<button type="button" class="close" data-dismiss="modal" aria-label="Close">
 						<span aria-hidden="true">&times;</span>
 					</button>
 				</div>
 				<div class="modal-body">					
-					<h5 class="modal-title">YOUR MAP SELECTION</h5>				
-					<div class="row">						
-						<!-- <div id="infowindow-content"></div>
-						<span id="place-name" class="title"></span><br>
-						<strong>Place ID:</strong> <span id="place-id"></span><br>
-						<span id="place-address"></span>
-						</div> -->
-						<!-- <div class="col-md-12 modal-body-content">
-							<p>Some contents...</p>
-						</div> -->
-					</div>
-					<div class="row">
-						<div class="col-md-12 modal-body-map">
+					<div id="map-block" class="row">
+						<h5 class="modal-title text-center">YOUR MAP SELECTION</h5>
+						<div class="col-sm-12 modal-body-map">
 							<!-- GoogleMaps rendering -->
 							<div id="map"></div>
 							<div id="infowindow-content">
@@ -164,67 +150,83 @@
 							</div>
 						</div>
 					</div>
-					<div class="row">
+					<div id="map-markers" class="row map-markers">
 						<!-- Cluster selections -->
 						<div class="modal-body-end">
-							<h5 class="modal-title">LODGING</h5>				
+							<h5 class="modal-title text-center">LODGING</h5>
 							<div class="cluster">
 								<button type="button" class="btn btn-secondary col-xs-2 map-marker" id="hotel-marker">
-									<i class="fas fa-hotel"></i>								
+									<i class="fas fa-hotel"></i>
 								</button>
 								<p><strong>Hotels</strong></p>
 							</div>
 							<div class="cluster">
 								<button type="button" class="btn btn-secondary col-xs-2 map-marker" id="food-marker">
-									<i class="fas fa-utensils"></i>							
+									<i class="fas fa-utensils"></i>
 								</button>
 								<p><strong>Food</strong></p>
 							</div>
 							<div class="cluster">
 								<button type="button" class="btn btn-secondary col-xs-2 map-marker" id="pub-marker">
-									<i class="fas fa-glass-cheers"></i> 					
+									<i class="fas fa-glass-cheers"></i>
 								</button>
 								<p><strong>Pubs</strong></p>
 							</div>
 							<div class="cluster">
 								<button type="button" class="btn btn-secondary col-xs-2 map-marker" id="music-marker">
-									<i class="fas fa-music"></i>					
+									<i class="fas fa-music"></i>
 								</button>
 								<p><strong>Music</strong></p>
 							</div>
 						</div>
 						<div class="modal-body-end">
-							<h5 class="modal-title">ACTIVITIES</h5>				
+							<h5 class="modal-title text-center">ACTIVITIES</h5>
 							<div class="cluster">
 								<button type="button" class="btn btn-secondary col-xs-2 map-marker" id="culture-marker">
-									<i class="fas fa-theater-masks"></i>							
+									<i class="fas fa-theater-masks"></i>
 								</button>
 								<p><strong>Culture</strong></p>
 							</div>
 							<div class="cluster">
 								<button type="button" class="btn btn-secondary col-xs-2 map-marker" id="sports-marker">
-									<i class="fas fa-swimmer"></i>							
+									<i class="fas fa-swimmer"></i>
 								</button>
 								<p><strong>Sports</strong></p>
 							</div>
 							<div class="cluster">
-								<button type="button" class="btn btn-secondary col-xs-2 map-marker" id="adventure-marker">
-									<i class="fas fa-campground"></i>							
+								<button type="button" class="btn btn-secondary col-xs-2 map-marker"
+									id="adventure-marker">
+									<i class="fas fa-campground"></i>
 								</button>
 								<p><strong>Adventure</strong></p>
 							</div>
 							<div class="cluster">
-								<button type="button" class="btn btn-secondary col-xs-2 map-marker" id="relaxation-marker">
-									<i class="fas fa-spa"></i>							
+								<button type="button" class="btn btn-secondary col-xs-2 map-marker"
+									id="relaxation-marker">
+									<i class="fas fa-spa"></i>
 								</button>
 								<p><strong>Relax</strong></p>
-							</div>													
-						</div>						
-					</div>					
+							</div>
+						</div>
+						<div id="map-results-selections" class="row">
+							<div class="modal-body-results">
+								<!-- Marker selection results -->
+								<h5 class="modal-title text-center">YOUR RESULTS</h5>
+								<div id="results">Lorem ipsum dolor sit amet consectetur, adipisicing elit. Qui, facere enim ea, quod itaque aperiam nesciunt repellat, sunt error numquam eum obcaecati ducimus atque inventore sed quo id esse tenetur.
+								</div>								
+							</div>
+							<div class="modal-body-selections">
+								<!-- Marker selection results -->
+								<h5 class="modal-title text-center">YOUR TRIP SELECTIONS</h5>
+								<div id="selections">Lorem ipsum dolor sit amet consectetur, adipisicing elit. Qui, facere enim ea, quod itaque aperiam nesciunt repellat, sunt error numquam eum obcaecati ducimus atque inventore sed quo id esse tenetur.
+								</div>
+								<button type="button" class="btn btn-primary">Print results</button>
+							</div>
+						</div>
+					</div>
 				</div>
 				<div class="modal-footer">
 					<button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-					<!-- <button type="button" class="btn btn-primary">Save changes</button> -->
 				</div>
 			</div>
 		</div>
@@ -249,10 +251,10 @@
 	<script
 		src="https://developers.google.com/maps/documentation/javascript/examples/markerclusterer/markerclusterer.js">
 	</script>
-	
+
 	<!-- Link to get GoogleMaps API file to generate our maps. As not able to update Developer's APIKey 
 	on it,  used -->
-	
+
 	<!-- Developer's APIKey NOT WORKING! -->
 	<!-- <script async defer
 		src="https://maps.googleapis.com/maps/api/js?key=AIzaSyC47mfYKRHvHnXwqI2JH1sDRCn6At5b-wQ&callback=initMap&libraries=places">
