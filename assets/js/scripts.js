@@ -1,24 +1,22 @@
 // Define variables to be used in all functions
-let searchInput;
+var searchInput;
+var setPlacePosition;
 
 // Define map functionality
 function initMap() {
 
-  // To call back from googleMaps API for a new map and select the 
-  // identity of the HTML element to render it.
-  var map = new google.maps.Map(document.getElementById('map'),
-  
-    // Options to include in the future
-    { 
-      disableDefaultUI: true, // Remove controls from map
-      // mapTypeControl: false, // Remove controls from map
-      // center: {lat: 51.4934, lng: 0.0098}, // Greenwich coordinates,
-      // zoom: 17, // Zoom definition, far away at first...
-      // mapTypeId: 'roadmap' // Default 2D map
-    });
+  // To define the options to use with the map
+  var mapOptions={
+    disableDefaultUI: true,
+    mapTypeId: 'satellite'
+  }
+
+  // To call the constructor from googleMaps API and build a new map defining the 
+  // HTML element to render it and include the options stored in variable.
+  var map = new google.maps.Map(document.getElementById('map'), mapOptions);
 
   // To define which HTML element is the input search box.
-  searchInput = document.getElementById("search-input");
+  var searchInput = document.getElementById("search-input");
 
   // To help user to autocomplete the value typed into the searchInput HTML element, 
   // using google maps places library autocomplete functionality.
@@ -41,7 +39,7 @@ function initMap() {
         infowindow.setContent(infowindowContent);
 
         var marker = new google.maps.Marker({map: map});
-
+// To set an event listener when clicking the marker, opening the info window
         marker.addListener('click', function() {
           infowindow.open(map, marker);
         });
@@ -50,6 +48,7 @@ function initMap() {
           infowindow.close();
 
           var place = autocomplete.getPlace();
+          // var pos = map.getZoom();
 
           if (!place.geometry) {
             return;
@@ -58,8 +57,10 @@ function initMap() {
           if (place.geometry.viewport) {
             map.fitBounds(place.geometry.viewport);
           } else {
+            // map.setCenter(marker.getPosition());
+            // map.setZoom(pos);
             map.setCenter(place.geometry.location);
-            map.setZoom(17);
+            map.setZoom(17);        
           }
 
           // Set the position of the marker using the place ID and location.
@@ -78,15 +79,3 @@ function initMap() {
 
 };
 
-// function resetSeasrch(){
-//   document.getElementById("search-input").reset();
-// }
-
-// $('input').on('hidden.bs.modal', '.modal', function () {
-//   document.getElementById("search-input").reset();
-//   // $(this).removeData('bs.modal');
-// }
-
-$('#search-modal').on('hidden.bs.modal', function () {
-  $('#search-modal input')[0].reset();
-  });
