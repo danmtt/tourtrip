@@ -168,7 +168,7 @@ footer a {
     margin-top: 5%
 }
 
-.modal-body-end, .modal-body-results, .modal-body-selections {
+.modal-body-end {
     width: 100%;
     margin: 0 5%;
     display: flex;

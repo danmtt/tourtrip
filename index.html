@@ -37,15 +37,10 @@
 	<div id="navbarMenu" class="collapse">
 		<div class="bg-white text-dark">
 			<ul class="nav navbar-nav">
-				<li role="presentation"><button class="btn btn-default navbar-btn" data-toggle="modal"
-						data-target="#about-modal">About</a></li>
-				<li role="presentation"><button class="btn btn-default navbar-btn" data-toggle="modal"
-						data-target="#">Reset All</a></li>
-				<li class="visible-xs"><button class="btn btn-default navbar-btn" data-toggle="modal"
-						data-target="#">Sign In</a></li>
-				<li class="visible-xs"><button class="btn btn-default navbar-btn" data-toggle="modal"
-						data-target="#">Sign Up</a>
-				</li>
+					<li role="presentation"><button class="btn btn-default navbar-btn" data-toggle="modal"
+						data-target="#instructions-modal">Instructions</a></li>
+					<li role="presentation"><button class="btn btn-default navbar-btn" data-toggle="modal"
+						data-target="#about-modal">About Us</a></li>
 			</ul>
 		</div>
 	</div>
@@ -80,8 +75,54 @@
 			<img src="assets/images/icons/rubik-icon-23_trnsp_100x100.png" alt="Developer's info link"></img>
 		</a>
 	</footer>
+	<!-- Instructions Modal -->
+	<div class="modal fade ml-auto" id="instructions-modal" tabindex="-1" role="dialog" aria-labelledby="instructions-modal"
+		aria-hidden="true">
+		<div class="modal-dialog modal-dialog-centered" role="document">
+			<div class="modal-content">
+				<div class="modal-header">
+					<h5>About us</h5>
+					<button type="button" class="close" data-dismiss="modal" aria-label="Close">
+						<span aria-hidden="true">&times;</span>
+					</button>
+				</div>
+				<div class="modal-body">
+					<div class="container-fluid">
+						<div class="row">
+							<div class="col-xs-12 modal-how-to">
+								Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor
+								incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis
+								nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.
+								Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu
+								fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in
+								culpa qui officia deserunt mollit anim id est laborum
+							</div>
+						</div>
+						<div class="row">
+							<div class="col-xs-3 social-media">
+								<a href="" alt="facebook"></a>
+							</div>
+							<div class="col-xs-3 social-media">
+								<a href="" alt="twitter"></a>
+							</div>
+							<div class="col-xs-3 social-media">
+								<a href="" alt="instagram"></a>
+							</div>
+							<div class="col-xs-3 social-media">
+								<a href="" alt="youtube"></a>
+							</div>
+						</div>
+					</div>
+				</div>
+				<div class="modal-footer">
+					<button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+					<button type="button" class="btn btn-primary">Save changes</button>
+				</div>
+			</div>
+		</div>
+	</div>
 	<!-- About Modal -->
-	<div class="modal fade ml-auto" id="about-modal" tabindex="-1" role="dialog" aria-labelledby="about-modal"
+		<div class="modal fade ml-auto" id="about-modal" tabindex="-1" role="dialog" aria-labelledby="about-modal"
 		aria-hidden="true">
 		<div class="modal-dialog modal-dialog-centered" role="document">
 			<div class="modal-content">
@@ -137,90 +178,94 @@
 						<span aria-hidden="true">&times;</span>
 					</button>
 				</div>
-				<div class="modal-body">					
-					<div id="map-block" class="row">
-						<h5 class="modal-title text-center">YOUR MAP SELECTION</h5>
-						<div class="col-sm-12 modal-body-map">
-							<!-- GoogleMaps rendering -->
-							<div id="map"></div>
-							<div id="infowindow-content">
-								<span id="place-name" class="title"></span><br>
-								<strong>Place ID:</strong> <span id="place-id"></span><br>
-								<span id="place-address"></span>
+				<div class="modal-body">
+					<div class="container-fluid">
+						<div id="map-block" class="row">
+							<h5 class="modal-title text-center">YOUR MAP SELECTION</h5>
+							<div class="col-sm-12 modal-body-map">
+								<!-- GoogleMaps rendering -->
+								<div id="map"></div>
+								<div id="infowindow-content">
+									<span id="place-name" class="title"></span><br>
+									<strong>Place ID:</strong> <span id="place-id"></span><br>
+									<span id="place-address"></span>
+								</div>
 							</div>
 						</div>
-					</div>
-					<div id="map-markers" class="row map-markers">
-						<!-- Cluster selections -->
-						<div class="modal-body-end">
-							<h5 class="modal-title text-center">LODGING</h5>
-							<div class="cluster">
-								<button type="button" class="btn btn-secondary col-xs-2 map-marker" id="hotel-marker">
-									<i class="fas fa-hotel"></i>
-								</button>
-								<p><strong>Hotels</strong></p>
+						<div id="map-clusters" class="row">
+							<!-- Cluster selections -->
+							<div class="col-sm-12 modal-body-end">
+								<h5 class="modal-title text-center">LODGING</h5>
+								<div class="cluster">
+									<button type="button" class="btn btn-secondary col-xs-2 map-marker" id="hotel-marker">
+										<i class="fas fa-hotel"></i>
+									</button>
+									<p><strong>Hotels</strong></p>
+								</div>
+								<div class="cluster">
+									<button type="button" class="btn btn-secondary col-xs-2 map-marker" id="food-marker">
+										<i class="fas fa-utensils"></i>
+									</button>
+									<p><strong>Food</strong></p>
+								</div>
+								<div class="cluster">
+									<button type="button" class="btn btn-secondary col-xs-2 map-marker" id="pub-marker">
+										<i class="fas fa-glass-cheers"></i>
+									</button>
+									<p><strong>Pubs</strong></p>
+								</div>
+								<div class="cluster">
+									<button type="button" class="btn btn-secondary col-xs-2 map-marker" id="music-marker">
+										<i class="fas fa-music"></i>
+									</button>
+									<p><strong>Music</strong></p>
+								</div>
 							</div>
-							<div class="cluster">
-								<button type="button" class="btn btn-secondary col-xs-2 map-marker" id="food-marker">
-									<i class="fas fa-utensils"></i>
-								</button>
-								<p><strong>Food</strong></p>
+							<div class="col-sm-12 modal-body-end">
+								<h5 class="modal-title text-center">ACTIVITIES</h5>
+								<div class="cluster">
+									<button type="button" class="btn btn-secondary col-xs-2 map-marker" id="culture-marker">
+										<i class="fas fa-theater-masks"></i>
+									</button>
+									<p><strong>Culture</strong></p>
+								</div>
+								<div class="cluster">
+									<button type="button" class="btn btn-secondary col-xs-2 map-marker" id="sports-marker">
+										<i class="fas fa-swimmer"></i>
+									</button>
+									<p><strong>Sports</strong></p>
+								</div>
+								<div class="cluster">
+									<button type="button" class="btn btn-secondary col-xs-2 map-marker"
+										id="adventure-marker">
+										<i class="fas fa-campground"></i>
+									</button>
+									<p><strong>Adventure</strong></p>
+								</div>
+								<div class="cluster">
+									<button type="button" class="btn btn-secondary col-xs-2 map-marker"
+										id="relaxation-marker">
+										<i class="fas fa-spa"></i>
+									</button>
+									<p><strong>Relax</strong></p>
+								</div>
 							</div>
-							<div class="cluster">
-								<button type="button" class="btn btn-secondary col-xs-2 map-marker" id="pub-marker">
-									<i class="fas fa-glass-cheers"></i>
-								</button>
-								<p><strong>Pubs</strong></p>
-							</div>
-							<div class="cluster">
-								<button type="button" class="btn btn-secondary col-xs-2 map-marker" id="music-marker">
-									<i class="fas fa-music"></i>
-								</button>
-								<p><strong>Music</strong></p>
-							</div>
-						</div>
-						<div class="modal-body-end">
-							<h5 class="modal-title text-center">ACTIVITIES</h5>
-							<div class="cluster">
-								<button type="button" class="btn btn-secondary col-xs-2 map-marker" id="culture-marker">
-									<i class="fas fa-theater-masks"></i>
-								</button>
-								<p><strong>Culture</strong></p>
-							</div>
-							<div class="cluster">
-								<button type="button" class="btn btn-secondary col-xs-2 map-marker" id="sports-marker">
-									<i class="fas fa-swimmer"></i>
-								</button>
-								<p><strong>Sports</strong></p>
-							</div>
-							<div class="cluster">
-								<button type="button" class="btn btn-secondary col-xs-2 map-marker"
-									id="adventure-marker">
-									<i class="fas fa-campground"></i>
-								</button>
-								<p><strong>Adventure</strong></p>
-							</div>
-							<div class="cluster">
-								<button type="button" class="btn btn-secondary col-xs-2 map-marker"
-									id="relaxation-marker">
-									<i class="fas fa-spa"></i>
-								</button>
-								<p><strong>Relax</strong></p>
-							</div>
-						</div>
-						<div id="map-results-selections" class="row">
-							<div class="modal-body-results">
+						</div>	
+						<div id="map-markers" class="row">
+							<div class="col-sm-12 modal-body-end">
 								<!-- Marker selection results -->
 								<h5 class="modal-title text-center">YOUR RESULTS</h5>
-								<div id="results">Lorem ipsum dolor sit amet consectetur, adipisicing elit. Qui, facere enim ea, quod itaque aperiam nesciunt repellat, sunt error numquam eum obcaecati ducimus atque inventore sed quo id esse tenetur.
+								<div id="map-markersults">Lorem ipsum dolor sit amet consectetur, adipisicing elit. Qui, facere enim ea, quod itaque aperiam nesciunt repellat, sunt error numquam eum obcaecati ducimus atque inventore sed quo id esse tenetur.
 								</div>								
 							</div>
-							<div class="modal-body-selections">
+						</div>
+						<div id="map-selections" class="row">
+							<div class="col-sm-12 modal-body-end">
 								<!-- Marker selection results -->
 								<h5 class="modal-title text-center">YOUR TRIP SELECTIONS</h5>
-								<div id="selections">Lorem ipsum dolor sit amet consectetur, adipisicing elit. Qui, facere enim ea, quod itaque aperiam nesciunt repellat, sunt error numquam eum obcaecati ducimus atque inventore sed quo id esse tenetur.
+								<div id="map-selections">Lorem ipsum dolor sit amet consectetur, adipisicing elit. Qui, facere enim ea, quod itaque aperiam nesciunt repellat, sunt error numquam eum obcaecati ducimus atque inventore sed quo id esse tenetur.
 								</div>
-								<button type="button" class="btn btn-primary">Print results</button>
+								<button type="button" class="btn btn-primary">Save results</button>
 							</div>
 						</div>
 					</div>
