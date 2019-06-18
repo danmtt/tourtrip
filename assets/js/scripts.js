@@ -1,8 +1,4 @@
-// Define variables to be used in all functions
-var searchInput;
-var setPlacePosition;
-
-// Define variables to identify cluster buttons
+// Define variables to identify cluster buttons.
 var hotelMarker = getElementById('hotel-marker');
 var foodMarker = getElementById('food-marker');
 var pubMarker = getElementById('pub-marker');
@@ -11,27 +7,44 @@ var cultureMarker = getElementById('culture-marker');
 var sportsMarker = getElementById('sports-marker');
 var adventureMarker = getElementById('adventure-marker');
 var relaxMarker = getElementById('relax-marker');
-
-// Define map functionality
+  
+// Map functionality.
 function initMap() {
 
-  // To define the options to use with the map
+  // To define in which HTML element the map should be diplayed.
+  var mapCanvas = document.getElementById("map");
+    
+  // To define the options to use with the map.
   var mapOptions={
     disableDefaultUI: true,
     mapTypeId: 'satellite'
-  }
+  };
 
-  // To call the constructor from googleMaps API and build a new map defining the 
-  // HTML element to render it and include the options stored in variable.
-  var map = new google.maps.Map(document.getElementById('map'), mapOptions);
-
-  // To define which HTML element is the input search box.
+  // To define which HTML element is the input search box, 
+  // storing the value typed in a variable.
   var searchInput = document.getElementById("search-input");
+  
+  // To define the search options to use with autocomplete, restricting the 
+  // search to cities. This is to avoid street searches...
+  var searchOptions={
+    type: ['(cities)'],
+  };
 
-  // To help user to autocomplete the value typed into the searchInput HTML element, 
-  // using google maps places library autocomplete functionality.
-  autocomplete = new google.maps.places.Autocomplete(searchInput);
+  // To create the 'map' object,
+  // call the constructor from googleMaps API
+  // associating to it the mapCanvas and the mapOptions.
+  // https://developers.google.com/maps/documentation/javascript/examples/map-simple
+  map = new google.maps.Map(mapCanvas, mapOptions);
 
+  // To create the 'autocomplete' object,
+  // calling the constructor from googleMaps API
+  // and associating to it the searchInput and the searchOptions.
+  // https://developers.google.com/maps/documentation/javascript/examples/places-autocomplete
+  autocomplete = new google.maps.places.Autocomplete(searchInput, searchOptions); 
+ 
+  
+  // autocomplete.addListener('place_changed', onPlaceChanged);
+  
   // To link that place / set its limits into the map.
   autocomplete.bindTo('bounds', map);
 
@@ -46,10 +59,10 @@ function initMap() {
   var infowindowContent = document.getElementById('infowindow-content');
 
   // To send the information retrieved from googlemaps into a variable.
-        infowindow.setContent(infowindowContent);
+  infowindow.setContent(infowindowContent);
 
-        var marker = new google.maps.Marker({map: map});
-// To set an event listener when clicking the marker, opening the info window
+  var marker = new google.maps.Marker({map: map});
+  // To set an event listener when clicking the marker, opening the info window
         marker.addListener('click', function() {
           infowindow.open(map, marker);
         });
@@ -89,3 +102,77 @@ function initMap() {
 
 };
 
+// Cluster functionality
+
+// Add event listeners to every cluster in the modal form so when clicked ,
+// markers related are updated to map.
+
+// Hotel markers
+// https://developers.google.com/maps/documentation/javascript/examples/places-autocomplete-hotelsearch
+hotelMarker.addEventListener("click", function lookFor() {
+
+  var lookFor = {
+    bounds: map.getBounds(),
+    types: ["lodging"]
+  };
+ 
+  // To create the 'service' object,
+  // calling the constructor from googleMaps API,
+  // looking for all the services offered within the the map object.
+  // This should allow further selection clicking in cluster buttons...
+  // https://developers.google.com/maps/documentation/javascript/examples/place-details
+  services = new google.maps.places.PlaceService(map);
+
+  services.nearbySearch(lookFor, function(results, status) {
+    if (status === google.maps.places.PlacesServiceStatus.OK) {
+      clearResults();
+      clearMarkers();
+      // Create a marker for each hotel found, and
+      // assign a letter of the alphabetic to each marker icon.
+      for (var i = 0; i < results.length; i++) {
+        var markerLetter = String.fromCharCode('A'.charCodeAt(0) + (i % 26));
+        var markerIcon = MARKER_PATH + markerLetter + '.png';
+        // Use marker animation to drop the icons incrementally on the map.
+        markers[i] = new google.maps.Marker({
+          position: results[i].geometry.location,
+          animation: google.maps.Animation.DROP,
+          icon: markerIcon
+        });
+        // If the user clicks a hotel marker, show the details of that hotel
+        // in an info window.
+        markers[i].placeResult = results[i];
+        google.maps.event.addListener(markers[i], 'click', showInfoWindow);
+        setTimeout(dropMarker(i), i * 100);
+        addResult(results[i], i);
+      }
+    }
+  });
+});
+
+// Function to clear markers in map
+function clearMarkers() {
+  for (var i = 0; i < markers.length; i++) {
+    if (markers[i]) {
+      markers[i].setMap(null);
+    }
+  }
+  markers = [];
+};
+// Function to clear results in map
+function clearResults() {
+  var results = document.getElementById('results');
+  while (results.childNodes[0]) {
+    results.removeChild(results.childNodes[0]);
+  }
+};
+
+function onPlaceChanged() {
+  var place = autocomplete.getPlace();
+  if (place.geometry) {
+    map.panTo(place.geometry.location);
+    map.setZoom(15);
+    search();
+  } else {
+    document.getElementById('autocomplete').placeholder = 'Enter a city';
+  }
+}
