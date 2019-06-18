@@ -2,6 +2,16 @@
 var searchInput;
 var setPlacePosition;
 
+// Define variables to identify cluster buttons
+var hotelMarker = getElementById('hotel-marker');
+var foodMarker = getElementById('food-marker');
+var pubMarker = getElementById('pub-marker');
+var musicMarker = getElementById('music-marker');
+var cultureMarker = getElementById('culture-marker');
+var sportsMarker = getElementById('sports-marker');
+var adventureMarker = getElementById('adventure-marker');
+var relaxMarker = getElementById('relax-marker');
+
 // Define map functionality
 function initMap() {
 
