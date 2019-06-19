@@ -11,6 +11,8 @@ var relaxMarker = getElementById('relax-marker');
 // Map functionality.
 function initMap() {
 
+  // MAP
+  // ---
   // To define in which HTML element the map should be diplayed.
   var mapCanvas = document.getElementById("map");
     
@@ -20,8 +22,38 @@ function initMap() {
     mapTypeId: 'satellite'
   };
 
+  // To create the 'map' object,
+  // call the constructor from googleMaps API
+  // associating to it the mapCanvas and the mapOptions.
+  // https://developers.google.com/maps/documentation/javascript/examples/map-simple
+  map = new google.maps.Map(mapCanvas, mapOptions);
+
+  // INFO WINDOW
+  // -----------
+  // To define which HTML element is selected to release
+  // the 'infowindow' content, 
+  // storing that element in a variable.
+  var infowindowContent = document.getElementById('infowindow-content');
+
+  // To create the 'infowindow' object,
+  // calling the constructor from googleMaps API
+  // setting the content retrieved th the HTML element selected.
+  infowindow = new google.maps.InfoWindow(infowindowContent);
+   
+  // MARKER
+  // ------------
+  
+  marker = new google.maps.Marker({
+    map:map,
+    animation: google.maps.Animation.DROP,
+    title: "Your destination"
+    // icon: iconImage + 'parking_lot_maps.png',
+   });
+   
+   // AUTOCOMPLETE
+  // ------------
   // To define which HTML element is the input search box, 
-  // storing the value typed in a variable.
+  // storing that link in a variable.
   var searchInput = document.getElementById("search-input");
   
   // To define the search options to use with autocomplete, restricting the 
@@ -29,77 +61,62 @@ function initMap() {
   var searchOptions={
     type: ['(cities)'],
   };
-
-  // To create the 'map' object,
-  // call the constructor from googleMaps API
-  // associating to it the mapCanvas and the mapOptions.
-  // https://developers.google.com/maps/documentation/javascript/examples/map-simple
-  map = new google.maps.Map(mapCanvas, mapOptions);
-
+  
   // To create the 'autocomplete' object,
   // calling the constructor from googleMaps API
   // and associating to it the searchInput and the searchOptions.
   // https://developers.google.com/maps/documentation/javascript/examples/places-autocomplete
   autocomplete = new google.maps.places.Autocomplete(searchInput, searchOptions); 
  
-  
-  // autocomplete.addListener('place_changed', onPlaceChanged);
-  
-  // To link that place / set its limits into the map.
+  // To transfer from 'autocomplete' object,
+  // the area in which to search for the Place
+  // into the map created.
   autocomplete.bindTo('bounds', map);
 
-  // To select only the data fields needed.
+  // To select from 'autocomplete' object,
+  // only the data fields to be included for the Place in the details response,
+  // when the details are successfully retrieved
   autocomplete.setFields(['place_id', 'geometry', 'name']);
 
-  // To call back from googleMaps API for an information window 
-  // without setting the HTML element to render. 
-  var infowindow = new google.maps.InfoWindow();
+  // To add a method to the 'autocomplete' object,
+  // that will run a custom callback function in response to the media query status changing.  
+  autocomplete.addListener('place_changed', function() {
+    infowindow.close();
 
-  // To define the identity of the element that will contain the informationthe information retrieved from googlemaps into a variable.
-  var infowindowContent = document.getElementById('infowindow-content');
+    var place = autocomplete.getPlace();
+    
+    if (!place.geometry) {
+      return;
+    }
 
-  // To send the information retrieved from googlemaps into a variable.
-  infowindow.setContent(infowindowContent);
+    if (place.geometry.viewport) {
+      map.fitBounds(place.geometry.viewport);
+    } else {
+      // map.setCenter(marker.getPosition());
+      // map.setZoom(pos);
+      map.setCenter(place.geometry.location);
+      map.setZoom(17);        
+    }
+     
+     // Set the position of the marker using the place ID and location.
+    marker.setPlace({
+      placeId: place.place_id,
+      location: place.geometry.location,
+    });
 
-  var marker = new google.maps.Marker({map: map});
-  // To set an event listener when clicking the marker, opening the info window
-        marker.addListener('click', function() {
-          infowindow.open(map, marker);
-        });
+    marker.setVisible(true);
 
-        autocomplete.addListener('place_changed', function() {
-          infowindow.close();
+    infowindowContent.children['place-name'].textContent = place.name;
+    // infowindow.open(map, marker);
+  });
 
-          var place = autocomplete.getPlace();
-          // var pos = map.getZoom();
+  var iconImage = 'https://maps.google.com/mapfiles/kml/shapes/';
 
-          if (!place.geometry) {
-            return;
-          }
-
-          if (place.geometry.viewport) {
-            map.fitBounds(place.geometry.viewport);
-          } else {
-            // map.setCenter(marker.getPosition());
-            // map.setZoom(pos);
-            map.setCenter(place.geometry.location);
-            map.setZoom(17);        
-          }
-
-          // Set the position of the marker using the place ID and location.
-          marker.setPlace({
-            placeId: place.place_id,
-            location: place.geometry.location
-          });
-
-          marker.setVisible(true);
-
-          infowindowContent.children['place-name'].textContent = place.name;
-          infowindowContent.children['place-id'].textContent = place.place_id;
-          infowindowContent.children['place-address'].textContent = place.formatted_address;
-          infowindow.open(map, marker);
-        });
-
+  
+  //To set an event listener when clicking the marker, opening the info window
+       marker.addListener('click', function() {
+        //  infowindow.open(map, marker);
+       });
 };
 
 // Cluster functionality
