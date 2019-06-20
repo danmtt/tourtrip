@@ -30,15 +30,33 @@ function initMap() {
 
   // INFO WINDOW
   // -----------
-  // To define which HTML element is selected to release
+  // To define the infowindow content in a variable.
+  // creating an HTML Snippet in which to release 
   // the 'infowindow' content, 
-  // storing that element in a variable.
-  var infowindowContent = document.getElementById('infowindow-content');
-
+  // storing that element 
+    
+  var contentString = 
+  '<div id="infowindow-content">'+
+    '<h1 id="firstHeading" class="firstHeading"></h1>'+
+    '<div id="siteNotice">Your destination is a <b><span id="place-type"></span></b>' +
+    '</div>'+    
+    '<div id="bodyContent">'+
+      '<p><b>(Place name)</b>, (information retrived) about <b>(Place name)</b>, is...' +
+      'and also...'+  
+      'and...</p>'+
+      '<p>(Place name), <a href="https://en.wikipedia.org/w/index.php?title=Uluru&oldid=297882194">'+
+      'https://en.wikipedia.org/w/index.php?title=Uluru</a> '+
+    '</div>'+
+  '</div>';
+  
+ 
   // To create the 'infowindow' object,
   // calling the constructor from googleMaps API
-  // setting the content retrieved th the HTML element selected.
-  infowindow = new google.maps.InfoWindow(infowindowContent);
+  // setting the content retrieved using a variable previously defined.
+  var infowindow = new google.maps.InfoWindow({
+    content: contentString
+  });
+  
    
   // MARKER
   // ------------
@@ -84,18 +102,26 @@ function initMap() {
     infowindow.close();
 
     var place = autocomplete.getPlace();
+    // var placeImg = autocomplete.getUrl();
     
+    document.getElementById('destination').innerHTML = place.name;
+    
+    // This condition checks if the name of a Place introduced
+    // by the user after pressing the Enter key (not the Search button),
+    // hasn't been suggested, or if the Place Details request failed. 
     if (!place.geometry) {
+      window.alert("No details available for input: '" + place.name + "'");
       return;
     }
-
+  
+    // This condition checks if the place has a geometry, 
+    // then present it on a map. 
     if (place.geometry.viewport) {
       map.fitBounds(place.geometry.viewport);
+      map.setZoom(3);
     } else {
-      // map.setCenter(marker.getPosition());
-      // map.setZoom(pos);
       map.setCenter(place.geometry.location);
-      map.setZoom(17);        
+      map.setZoom(3);        
     }
      
      // Set the position of the marker using the place ID and location.
@@ -106,17 +132,27 @@ function initMap() {
 
     marker.setVisible(true);
 
-    infowindowContent.children['place-name'].textContent = place.name;
+    // To set an event listener when clicking the marker, opening the info window
+    // updating information about the place selected
+    // and zooming into the location.
+    marker.addListener('click', function() {
+    infowindow.open(map, marker);
+    map.setZoom(8);
+    var infowindowContent = document.getElementById('infowindow-content');
+    infowindowContent.children['firstHeading'].textContent = place.name;
+    // infowindowContent.children['bodyContent'].textContent = placeImg;
+  
+ });
+    
     // infowindow.open(map, marker);
+    // var infowindowContent = document.getElementById('infowindow-content');
+    // contentString.infowindowContent.children['firstHeading'].textContent = place.name;
   });
 
-  var iconImage = 'https://maps.google.com/mapfiles/kml/shapes/';
+  // var iconImage = 'https://maps.google.com/mapfiles/kml/shapes/';
 
   
-  //To set an event listener when clicking the marker, opening the info window
-       marker.addListener('click', function() {
-        //  infowindow.open(map, marker);
-       });
+  
 };
 
 // Cluster functionality
@@ -124,14 +160,22 @@ function initMap() {
 // Add event listeners to every cluster in the modal form so when clicked ,
 // markers related are updated to map.
 
+// function onClickClusterButton(){
+//   var lookFor = {
+//     bounds: map.getBounds(),
+//     types: ["lodging"]
+//   };
+//   window.alert("Hotels have been selected for : '" + place.name + "'");
+// };
+
 // Hotel markers
 // https://developers.google.com/maps/documentation/javascript/examples/places-autocomplete-hotelsearch
+
+
+
 hotelMarker.addEventListener("click", function lookFor() {
 
-  var lookFor = {
-    bounds: map.getBounds(),
-    types: ["lodging"]
-  };
+
  
   // To create the 'service' object,
   // calling the constructor from googleMaps API,
