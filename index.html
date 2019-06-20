@@ -49,7 +49,7 @@
 		<form id="search-form">
 			<div class="search-input-block">
 				<!-- Input holiday destiny -->
-				<input type="text" id="search-input" class="form-control" placeholder="Type your destiny here" />
+				<input type="text" id="search-input" class="form-control" placeholder="Type your destination here" />
 				<!-- Button search to trigger modal -->
 				<button type="button" id="search-btn" class="btn btn-primary" data-toggle="modal"
 					data-target="#search-modal">Search</button>
@@ -143,10 +143,8 @@
 		<div class="modal-dialog modal-dialog-centered" role="document">
 			<div class="modal-content">
 				<div class="modal-header">
-					<h5 class="modal-title text-center">YOUR TRIP INFO TO</h5>
-					<div id="infowindow-content">
-						<span id="place-name"></span>
-					</div>
+					<h5 class="modal-title text-center">YOUR TRIP INFO TO</h5>					
+					
 					<button type="button" class="close" data-dismiss="modal" aria-label="Close">
 						<span aria-hidden="true">&times;</span>
 					</button>
@@ -154,13 +152,10 @@
 				<div class="modal-body">
 					<div class="container-fluid">
 						<div id="map-block" class="row">
-							<h5 class="modal-title text-center">YOUR MAP SELECTION</h5>
+							<h5 id="destination" class="modal-title text-center"></h5>
 							<div class="col-sm-12 modal-body-map">
 								<!-- GoogleMaps rendering -->
-								<div id="map"></div>
-								<div id="infowindow-content">
-									<span id="place-name"></span>
-								</div>								
+								<div id="map"></div>				
 							</div>
 						</div>
 						<div id="map-clusters" class="row">
@@ -168,7 +163,7 @@
 							<div class="col-sm-12 modal-body-end">
 								<h5 class="modal-title text-center">LODGING</h5>
 								<div class="cluster">
-									<button type="button" class="btn btn-secondary col-xs-2 map-marker" id="hotel-marker">
+									<button type="button" class="btn btn-secondary col-xs-2 map-marker" id="hotel-marker" onclick="onClickClusterButton();">
 										<i class="fas fa-hotel"></i>
 									</button>
 									<p><strong>Hotels</strong></p>
