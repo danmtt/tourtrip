@@ -134,16 +134,16 @@ function initMap() {
     
       // To select the first image available using a call back function
       // as method to another previous function
+      // and store it into a variable.
       var placeImg = place.photos[0].getUrl({maxWidth: 300, maxHeight: 300});
     
-      // To create an img object and set its attribute 
+      // To create an img object and set its attributes using a variable
+      // and append its value to the infowindow HTML snippet element. 
       var img = document.createElement("img");    
       img.setAttribute('src', placeImg);
       document.getElementById('infowindow-image').appendChild(img);
     });
   });
-
-    // infowindow.open(map, marker);
 };
 
 // Cluster functionality
