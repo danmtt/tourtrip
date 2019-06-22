@@ -123,7 +123,8 @@ function initMap() {
     // updating information about the place selected
     // and zooming into the location.
     marker.addListener('click', function() {
-      infowindow.close();
+
+      // document.getElementById('infowindow-image').removeChild(img);
       infowindow.open(map, marker);
       map.setZoom(8);
     
@@ -135,13 +136,21 @@ function initMap() {
       // To select the first image available using a call back function
       // as method to another previous function
       // and store it into a variable.
+
       var placeImg = place.photos[0].getUrl({maxWidth: 300, maxHeight: 300});
     
       // To create an img object and set its attributes using a variable
       // and append its value to the infowindow HTML snippet element. 
       var img = document.createElement("img");    
       img.setAttribute('src', placeImg);
-      document.getElementById('infowindow-image').appendChild(img);
+      
+      // To avoid the appending of more than one picture when click on marker several times
+      var infowindowImageCount = document.getElementById('infowindow-image').childElementCount;
+      if (infowindowImageCount >0) {
+        document.getElementById('infowindow-image').removeChild(img);
+        } else {
+          document.getElementById('infowindow-image').appendChild(img); 
+      }   
     });
   });
 };
@@ -165,8 +174,6 @@ function initMap() {
 
 
 hotelMarker.addEventListener("click", function lookFor() {
-
-
 
   // To create the 'service' object,
   // calling the constructor from googleMaps API,
