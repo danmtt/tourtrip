@@ -36,11 +36,11 @@ function initMap() {
   // storing that element
 
   var contentString =
-  '<div id="infowindow-content" class="justify-content-center">'+
-    '<h1 id="infowindow-heading" class="justify-content-center"></h1>'+
-    '<div id="bodyContent" class="justify-content-center">'+
-      '<div id="infowindow-description">Your destination is a <b><span id="place-type"></span></b></div>'+
-      '<div id="infowindow-image" class="justify-content-center media-middle"></div>' +
+  '<div id="infowindow-content" class="d-flex flex-column justify-content-center ">'+
+    '<h1 id="infowindow-heading" class="justify-content-center text-center"></h1>'+
+    '<div id="bodyContent">'+
+      '<div id="infowindow-description" class="text-center">Your destination is in <b><span id="place-type">(country)</span></b></div>'+
+      '<div id="infowindow-image" class="justify-content-center img-responsive center-block"></div>' +
     '</div>'+
   '</div>';
 
@@ -49,7 +49,8 @@ function initMap() {
   // calling the constructor from googleMaps API
   // setting the content retrieved using a variable previously defined.
   var infowindow = new google.maps.InfoWindow({
-    content: contentString
+    content: contentString,
+    // pixelOffset: new google.maps.Size(150,275)
   });
 
 

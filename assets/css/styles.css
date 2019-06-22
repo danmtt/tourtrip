@@ -196,9 +196,26 @@ footer a {
     /* border: 1px solid red; */
 }
 
-#infowindow-image{
-    width: auto;
+/* Infowindow style */
+.gm-style-iw {
+    /* background-color: #3C61AD !important; */
+    top: 0 !important;
+    left: 0 !important;
+    /* width: 100% !important; */
+    /* height: 100% !important; */
+    min-height: 325px !important;
+    padding-top: 10px;
+    /* display: block !important; */
+ }
+ .gm-style img {
+    width: 215px;
+    height:215px;
 }
+ 
+.gm-style-iw-d{
+    max-height: 300px !important;
+}
+
 
 .cluster p {
     padding-top: 8px;
