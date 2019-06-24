@@ -3,9 +3,9 @@ var hotelMarker = getElementById('hotel-marker');
 var foodMarker = getElementById('food-marker');
 var pubMarker = getElementById('pub-marker');
 var musicMarker = getElementById('music-marker');
-var cultureMarker = getElementById('culture-marker');
+var artsMarker = getElementById('arts-marker');
 var sportsMarker = getElementById('sports-marker');
-var adventureMarker = getElementById('adventure-marker');
+var outingMarker = getElementById('outing-marker');
 var relaxMarker = getElementById('relax-marker');
 
 // Map functionality.
@@ -82,6 +82,7 @@ function initMap() {
   // https://developers.google.com/maps/documentation/javascript/examples/places-autocomplete
   autocomplete = new google.maps.places.Autocomplete(searchInput, searchOptions);
 
+
   // To transfer from 'autocomplete' object,
   // the area in which to search for the Place
   // into the map created.
@@ -93,6 +94,7 @@ function initMap() {
     infowindow.close();
 
     var place = autocomplete.getPlace();
+    document.getElementById('destination').innerHTML = place.name;
     
     // This condition checks if the name of a Place introduced
     // by the user after pressing the Enter key (not the Search button),
@@ -131,7 +133,7 @@ function initMap() {
     
       // To set the values retrieved from the calllback function
       // to different HTML elements in the modal form.
-      document.getElementById('destination').innerHTML = place.name;
+      
       document.getElementById('infowindow-heading').innerHTML = place.name;
     
       // To select the first image available using a call back function
@@ -152,9 +154,21 @@ function initMap() {
         } else {
           document.getElementById('infowindow-image').appendChild(img); 
       }   
-    });
+    }); 
   });
 };
+
+    // Hotel markers
+    // https://developers.google.com/maps/documentation/javascript/examples/places-autocomplete-hotelsearch
+
+
+    hotelMarker.addListener("click", function() {
+      map.setZoom(3);
+      // window.alert("Hotels have been selected for");
+    });
+
+
+
 
 // Cluster functionality
 
@@ -169,70 +183,6 @@ function initMap() {
 //   window.alert("Hotels have been selected for : '" + place.name + "'");
 // };
 
-// Hotel markers
-// https://developers.google.com/maps/documentation/javascript/examples/places-autocomplete-hotelsearch
 
 
-
-hotelMarker.addEventListener("click", function lookFor() {
-
-  // To create the 'service' object,
-  // calling the constructor from googleMaps API,
-  // looking for all the services offered within the the map object.
-  // This should allow further selection clicking in cluster buttons...
-  // https://developers.google.com/maps/documentation/javascript/examples/place-details
-  services = new google.maps.places.PlaceService(map);
-
-  services.nearbySearch(lookFor, function(results, status) {
-    if (status === google.maps.places.PlacesServiceStatus.OK) {
-      clearResults();
-      clearMarkers();
-      // Create a marker for each hotel found, and
-      // assign a letter of the alphabetic to each marker icon.
-      for (var i = 0; i < results.length; i++) {
-        var markerLetter = String.fromCharCode('A'.charCodeAt(0) + (i % 26));
-        var markerIcon = MARKER_PATH + markerLetter + '.png';
-        // Use marker animation to drop the icons incrementally on the map.
-        markers[i] = new google.maps.Marker({
-          position: results[i].geometry.location,
-          animation: google.maps.Animation.DROP,
-          icon: markerIcon
-        });
-        // If the user clicks a hotel marker, show the details of that hotel
-        // in an info window.
-        markers[i].placeResult = results[i];
-        google.maps.event.addListener(markers[i], 'click', showInfoWindow);
-        setTimeout(dropMarker(i), i * 100);
-        addResult(results[i], i);
-      }
-    }
-  });
-});
-
-// Function to clear markers in map
-function clearMarkers() {
-  for (var i = 0; i < markers.length; i++) {
-    if (markers[i]) {
-      markers[i].setMap(null);
-    }
-  }
-  markers = [];
-};
-// Function to clear results in map
-function clearResults() {
-  var results = document.getElementById('results');
-  while (results.childNodes[0]) {
-    results.removeChild(results.childNodes[0]);
-  }
-};
-
-function onPlaceChanged() {
-  var place = autocomplete.getPlace();
-  if (place.geometry) {
-    map.panTo(place.geometry.location);
-    map.setZoom(15);
-    search();
-  } else {
-    document.getElementById('autocomplete').placeholder = 'Enter a city';
-  }
-}
+  
