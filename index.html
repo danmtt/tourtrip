@@ -76,7 +76,7 @@
 		</a>
 	</footer>
 	<!-- Instructions Modal -->
-	<div class="modal fade ml-auto" id="instructions-modal" tabindex="-1" role="dialog" aria-labelledby="instructions-modal"
+	<div class="modal fade ml-auto m-2" id="instructions-modal" tabindex="-1" role="dialog" aria-labelledby="instructions-modal"
 		aria-hidden="true">
 		<div class="modal-dialog modal-dialog-centered" role="document">
 			<div class="modal-content">
@@ -107,7 +107,7 @@
 		</div>
 	</div>
 	<!-- About Modal -->
-		<div class="modal fade ml-auto" id="about-modal" tabindex="-1" role="dialog" aria-labelledby="about-modal"
+		<div class="modal fade ml-auto m-2" id="about-modal" tabindex="-1" role="dialog" aria-labelledby="about-modal"
 		aria-hidden="true">
 		<div class="modal-dialog modal-dialog-centered" role="document">
 			<div class="modal-content">
@@ -138,105 +138,139 @@
 		</div>
 	</div>
 	<!-- Search Modal -->
-	<div class="modal fade ml-auto" id="search-modal" tabindex="-1" role="dialog" aria-labelledby="search-modal"
-		aria-hidden="true">
-		<div class="modal-dialog modal-dialog-centered" role="document">
+	<div class="modal fade ml-auto m-2" id="search-modal" tabindex="-1" role="dialog" aria-labelledby="search-modal" aria-hidden="true">
+		<div class="modal-dialog modal-xl modal-dialog-centered" role="document">
 			<div class="modal-content">
-				<div class="modal-header">
-					<h5 class="modal-title text-center">YOUR TRIP INFO TO</h5>					
-					
+				<div class="modal-header p-0">
+					<h5 class="modal-title text-center">YOUR TRIP INFORMATION</h5>				
 					<button type="button" class="close" data-dismiss="modal" aria-label="Close">
 						<span aria-hidden="true">&times;</span>
 					</button>
 				</div>
-				<div class="modal-body">
-					<div class="container-fluid">
+				<div class="modal-body p-0">
+					<div id="modal-block-left" class="container-fluid p-2">
 						<div id="map-block" class="row">
 							<h5 id="destination" class="modal-title text-center"></h5>
-							<div class="col-sm-12 modal-body-map">
+							<div class="col-12 modal-body-map">
 								<!-- GoogleMaps rendering -->
 								<div id="map"></div>				
 							</div>
 						</div>
+					</div>
+					<div id="modal-block-center" class="container-fluid p-2">
 						<div id="map-clusters" class="row">
 							<!-- Cluster selections -->
-							<div class="col-sm-12 modal-body-end">
+							<div class="modal-body-end m-2">
 								<h5 class="modal-title text-center">LODGING</h5>
-								<div class="cluster">
-									<button type="button" class="btn btn-secondary col-xs-2 map-marker" id="hotel-marker" onclick="onClickClusterButton();">
-										<i class="fas fa-hotel"></i>
-									</button>
-									<p><strong>Hotels</strong></p>
-								</div>
-								<div class="cluster">
-									<button type="button" class="btn btn-secondary col-xs-2 map-marker" id="food-marker">
-										<i class="fas fa-utensils"></i>
-									</button>
-									<p><strong>Food</strong></p>
-								</div>
-								<div class="cluster">
-									<button type="button" class="btn btn-secondary col-xs-2 map-marker" id="pub-marker">
-										<i class="fas fa-glass-cheers"></i>
-									</button>
-									<p><strong>Pubs</strong></p>
-								</div>
-								<div class="cluster">
-									<button type="button" class="btn btn-secondary col-xs-2 map-marker" id="music-marker">
-										<i class="fas fa-music"></i>
-									</button>
-									<p><strong>Music</strong></p>
+								<div class="d-flex .flex-row justify-content-between">
+									<div class="cluster">
+										<button type="button" class="btn btn-secondary col-xs-2 map-marker rounded-circle" id="hotel-marker">
+											<i class="fas fa-hotel"></i>
+										</button>
+										<p><strong>Hotels</strong></p>
+									</div>
+									<div class="cluster">
+										<button type="button" class="btn btn-secondary col-xs-2 map-marker rounded-circle" id="food-marker">
+											<i class="fas fa-utensils"></i>
+										</button>
+										<p><strong>Food</strong></p>
+									</div>
+									<div class="cluster">
+										<button type="button" class="btn btn-secondary col-xs-2 map-marker rounded-circle" id="pub-marker">
+											<i class="fas fa-glass-cheers"></i>
+										</button>
+										<p><strong>Pubs</strong></p>
+									</div>
+									<div class="cluster">
+										<button type="button" class="btn btn-secondary col-xs-2 map-marker rounded-circle" id="music-marker">
+											<i class="fas fa-music"></i>
+										</button>
+										<p><strong>Music</strong></p>
+									</div>	
+								</div>									
+							</div>
+							<div class="modal-body-end m-2">
+								<h5 class="modal-title text-center">ACTIVITIES</h5>
+								<div class="d-flex .flex-row justify-content-between">
+									<div class="cluster">
+										<button type="button" class="btn btn-secondary col-xs-2 map-marker rounded-circle" id="art-marker">
+											<i class="fas fa-theater-masks"></i>
+										</button>
+										<p><strong>Art</strong></p>
+									</div>
+									<div class="cluster">
+										<button type="button" class="btn btn-secondary col-xs-2 map-marker rounded-circle" id="sports-marker">
+											<i class="fas fa-swimmer"></i>
+										</button>
+										<p><strong>Sports</strong></p>
+									</div>
+									<div class="cluster">
+										<button type="button" class="btn btn-secondary col-xs-2 map-marker rounded-circle" id="outing-marker">
+											<i class="fas fa-campground"></i>
+										</button>
+										<p><strong>Outing</strong></p>
+									</div>
+									<div class="cluster">
+										<button type="button" class="btn btn-secondary col-xs-2 map-marker rounded-circle" id="relax-marker">
+											<i class="fas fa-spa"></i>
+										</button>
+										<p><strong>Relax</strong></p>
+									</div>									
 								</div>
 							</div>
-							<div class="col-sm-12 modal-body-end">
-								<h5 class="modal-title text-center">ACTIVITIES</h5>
-								<div class="cluster">
-									<button type="button" class="btn btn-secondary col-xs-2 map-marker" id="culture-marker">
-										<i class="fas fa-theater-masks"></i>
-									</button>
-									<p><strong>Culture</strong></p>
-								</div>
-								<div class="cluster">
-									<button type="button" class="btn btn-secondary col-xs-2 map-marker" id="sports-marker">
-										<i class="fas fa-swimmer"></i>
-									</button>
-									<p><strong>Sports</strong></p>
-								</div>
-								<div class="cluster">
-									<button type="button" class="btn btn-secondary col-xs-2 map-marker" id="adventure-marker">
-										id="adventure-marker">
-										<i class="fas fa-campground"></i>
-									</button>
-									<p><strong>Adventure</strong></p>
-								</div>
-								<div class="cluster">
-									<button type="button" class="btn btn-secondary col-xs-2 map-marker" id="relax-marker">
-										id="relaxation-marker">
-										<i class="fas fa-spa"></i>
-									</button>
-									<p><strong>Relax</strong></p>
+							<div class="modal-body-end m-2">
+								<h5 class="modal-title text-center">OTHER</h5>
+								<div class="d-flex .flex-row justify-content-between">
+									<div class="cluster">
+										<button type="button" class="btn btn-secondary map-marker rounded-circle" id="arts-marker">
+											<i class="fas fa-theater-masks"></i>
+										</button>
+										<p><strong>Arts</strong></p>
+									</div>
+									<div class="cluster">
+										<button type="button" class="btn btn-secondary map-marker rounded-circle" id="sports-marker">
+											<i class="fas fa-swimmer"></i>
+										</button>
+										<p><strong>Sports</strong></p>
+									</div>
+									<div class="cluster">
+										<button type="button" class="btn btn-secondary map-marker rounded-circle" id="outing-marker">
+											<i class="fas fa-campground"></i>
+										</button>
+										<p><strong>Outing</strong></p>
+									</div>
+									<div class="cluster">
+										<button type="button" class="btn btn-secondary map-marker rounded-circle" id="relax-marker">
+											<i class="fas fa-spa"></i>
+										</button>
+										<p><strong>Relax</strong></p>
+									</div>
 								</div>
 							</div>
 						</div>	
+						
+					</div>
+					<div id="modal-block-right" class="container-fluid p-2">
 						<div id="map-markers" class="row">
-							<div class="col-sm-12 modal-body-end">
+							<div class="modal-body-end m-2">
 								<!-- Marker selection results -->
 								<h5 class="modal-title text-center">YOUR RESULTS</h5>
-								<div id="map-markersults">Lorem ipsum dolor sit amet consectetur, adipisicing elit. Qui, facere enim ea, quod itaque aperiam nesciunt repellat, sunt error numquam eum obcaecati ducimus atque inventore sed quo id esse tenetur.
+								<div id="map-displayed-markers">Lorem ipsum dolor sit amet consectetur, adipisicing elit. Qui, facere enim ea, quod itaque aperiam nesciunt repellat, sunt error numquam eum obcaecati ducimus atque inventore sed quo id esse tenetur.
 								</div>								
 							</div>
-						</div>
+						</div>							
 						<div id="map-selections" class="row">
-							<div class="col-sm-12 modal-body-end">
+							<div class="modal-body-end m-2">
 								<!-- Marker selection results -->
-								<h5 class="modal-title text-center">YOUR TRIP SELECTIONS</h5>
-								<div id="map-selections">Lorem ipsum dolor sit amet consectetur, adipisicing elit. Qui, facere enim ea, quod itaque aperiam nesciunt repellat, sunt error numquam eum obcaecati ducimus atque inventore sed quo id esse tenetur.
-								</div>
-								<button type="button" class="btn btn-primary">Save results</button>
+								<h5 class="modal-title text-center">YOUR SELECTIONS</h5>
+								<div id="map-user-selections">Lorem ipsum dolor sit amet consectetur, adipisicing elit. Qui, facere enim ea, quod itaque aperiam nesciunt repellat, sunt error numquam eum obcaecati ducimus atque inventore sed quo id esse tenetur.
+								</div>								
 							</div>
 						</div>
 					</div>
 				</div>
-				<div class="modal-footer">
+				<div class="modal-footer p-0">
+					<button type="button" class="btn btn-primary">Save results</button>
 					<button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
 				</div>
 			</div>

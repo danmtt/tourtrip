@@ -140,11 +140,11 @@ footer a {
 
 .modal {
     width: 95%;
-    height: 95%;
+    /* height: 95%; */
 }
 
 .modal-header {
-    border: 1px solid #0f0f0f
+    /* border: 1px solid #0f0f0f */
 }
 
 .modal-title {
@@ -153,7 +153,7 @@ footer a {
 }
 
 .modal-body-map {
-    border: 1px solid #ff0000
+    /* border: 1px solid #ff0000 */
 }
 
 .modal-dialog {
@@ -161,21 +161,26 @@ footer a {
     margin: 0 2.5%;
     width: 95%;
 }
+/* #modal-block-left, .modal-block-center, .modal-block-right */
+
+.container-fluid{
+    border: 1px solid #fffb00; 
+}
 
 #map {
     width: 100%;
     height: 400px;
-    border: 1px solid #00fc22;
-    margin-top: 5%
+    /* border: 1px solid #00fc22; */
+    /* margin-top: 5% */
 }
 
 .modal-body-end {
     width: 100%;
-    margin: 0 5%;
-    display: flex;
-    flex-flow: wrap;
-    justify-content: space-evenly;
-    border: 1px solid #fffb00;
+    /* margin: 0 5%; */
+    /* display: flex; */
+    /* flex-flow: wrap; */
+    /* justify-content: space-evenly; */
+    /* border: 1px solid #fffb00; */
 }
 
 .modal-body-end h5 {
@@ -186,6 +191,10 @@ footer a {
     margin: 5%;
     text-align: center;
     line-height: 0.5;
+}
+
+.cluster p{
+    font-size: medium
 }
 
 .map-marker {
@@ -233,8 +242,14 @@ footer a {
         display: inline-flex;
         font-size: 3vh;
         font-style: italic;
-        text-transform: capitalize
-    }
+        text-transform: capitalize;}
+        .modal-dialog {
+            width: 90%
+        }
+        .modal-body{
+            display:flex;
+            flex-flow: row nowrap
+        }
 }
 
 /* Medium devices (tablets, 768px and up)================================*/
