@@ -8,13 +8,13 @@ var sportsMarker = getElementById('sports-marker');
 var outingMarker = getElementById('outing-marker');
 var relaxMarker = getElementById('relax-marker');
 
+hotelMarkers = new google.maps.places;
+hotelMarkers.addEventListener("click", function() {
+  // map.setZoom(3);
+  window.alert("Hotels have been selected for");
+});
 
-    hotelMarkers.addEventListener("click", function() {
-      // map.setZoom(3);
-      window.alert("Hotels have been selected for");
-    });
-
-
+var service = new google.maps.places.PlacesService(map);
 
 
 // Cluster functionality
