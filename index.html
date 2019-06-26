@@ -163,7 +163,7 @@
 							<!-- Cluster selections -->
 							<div class="modal-body-end m-2">
 								<h5 class="modal-title text-center">LODGING</h5>
-								<div class="d-flex .flex-row justify-content-between">
+								<div class="d-flex flex-row justify-content-between">
 									<div class="cluster">
 										<button type="button" id="hotel-markers" class="btn btn-secondary col-xs-2 map-marker rounded-circle">
 											<i class="fas fa-hotel"></i>
@@ -192,7 +192,7 @@
 							</div>
 							<div class="modal-body-end m-2">
 								<h5 class="modal-title text-center">ACTIVITIES</h5>
-								<div class="d-flex .flex-row justify-content-between">
+								<div class="d-flex flex-row justify-content-between">
 									<div class="cluster">
 										<button type="button" class="btn btn-secondary col-xs-2 map-marker rounded-circle" id="art-marker">
 											<i class="fas fa-theater-masks"></i>
@@ -221,7 +221,7 @@
 							</div>
 							<div class="modal-body-end m-2">
 								<h5 class="modal-title text-center">OTHER</h5>
-								<div class="d-flex .flex-row justify-content-between">
+								<div class="d-flex flex-row justify-content-between">
 									<div class="cluster">
 										<button type="button" class="btn btn-secondary map-marker rounded-circle" id="arts-marker">
 											<i class="fas fa-theater-masks"></i>
@@ -252,16 +252,18 @@
 						
 					</div>
 					<div id="modal-block-right" class="container-fluid p-2">
-						<div id="map-markers" class="row">
-							<div class="modal-body-end m-2">
+						<div id="map-markers">
+							<div class="modal-body-end mb-2">
 								<!-- Marker selection results -->
-								<h5 class="modal-title text-center">YOUR RESULTS</h5>
-								<ul id="map-displayed-markers"></ul>
-								<button id="more">More results</button>																		</div>								
+								<!-- <div class="d-flex flex-column justify-content-between"> -->
+									<h5 class="modal-title text-center">YOUR RESULTS</h5>
+									<ul id="map-displayed-markers"></ul>
+									<button id="more">More results</button>
+								<!-- </div>																	</div>								 -->
 							</div>
 						</div>							
-						<div id="map-selections" class="row">
-							<div class="modal-body-end m-2">
+						<div id="map-selections">
+							<div class="modal-body-end">
 								<!-- Marker selection results -->
 								<h5 class="modal-title text-center">YOUR SELECTIONS</h5>
 								<div id="map-user-selections">Lorem ipsum dolor sit amet consectetur, adipisicing elit. Qui, facere enim ea, quod itaque aperiam nesciunt repellat, sunt error numquam eum obcaecati ducimus atque inventore sed quo id esse tenetur.

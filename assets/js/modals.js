@@ -1,20 +1,20 @@
 // Define variables to identify cluster buttons.
-var hotelMarkers = getElementById('hotel-markers');
-var foodMarker = getElementById('food-marker');
-var pubMarker = getElementById('pub-marker');
-var musicMarker = getElementById('music-marker');
-var artsMarker = getElementById('arts-marker');
-var sportsMarker = getElementById('sports-marker');
-var outingMarker = getElementById('outing-marker');
-var relaxMarker = getElementById('relax-marker');
+// var hotelMarkers = getElementById('hotel-markers');
+// var foodMarker = getElementById('food-marker');
+// var pubMarker = getElementById('pub-marker');
+// var musicMarker = getElementById('music-marker');
+// var artsMarker = getElementById('arts-marker');
+// var sportsMarker = getElementById('sports-marker');
+// var outingMarker = getElementById('outing-marker');
+// var relaxMarker = getElementById('relax-marker');
 
-hotelMarkers = new google.maps.places;
-hotelMarkers.addEventListener("click", function() {
-  // map.setZoom(3);
-  window.alert("Hotels have been selected for");
-});
+// hotelMarkers = new google.maps.places;
+// hotelMarkers.addEventListener("click", function() {
+//   // map.setZoom(3);
+//   window.alert("Hotels have been selected for");
+// });
 
-var service = new google.maps.places.PlacesService(map);
+// var service = new google.maps.places.PlacesService(map);
 
 
 // Cluster functionality
