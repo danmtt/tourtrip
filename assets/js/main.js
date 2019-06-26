@@ -1,32 +1,23 @@
 
 
+let map, autocomplete, infowindow, service; // objects
+var mapCanvas, mapOptions; // map variables
+var contentString; // infowindow content
+var markerMapOptions // 
+
 // Map functionality.
 function initMap() {
 
-  // MAP
-  // ---
-  // To define in which HTML element the map should be diplayed.
+  // VARIABLES UPDATE
+  // ----------------
+  // To define into a variable in which HTML element the map should be diplayed.
   var mapCanvas = document.getElementById("map");
-
-  // To define the options to use with the map.
+  // To define into a variable the options to use with the map.  
   var mapOptions={
     disableDefaultUI: true,
     mapTypeId: 'satellite'
   };
-
-  // To create the 'map' object,
-  // call the constructor from googleMaps API
-  // associating to it the mapCanvas and the mapOptions.
-  // https://developers.google.com/maps/documentation/javascript/examples/map-simple
-  map = new google.maps.Map(mapCanvas, mapOptions);
-
-  // INFO WINDOW
-  // -----------
-  // To define the infowindow content in a variable.
-  // creating an HTML Snippet in which to release
-  // the 'infowindow' content,
-  // storing that element
-
+  // To define into a variable the infowindow structure, storing inside an HTML Snippet in which to release the content retrieved
   var contentString =
   '<div id="infowindow-content" class="d-flex flex-column justify-content-center ">'+
     '<h1 id="infowindow-heading" class="justify-content-center text-center"></h1>'+
@@ -35,50 +26,58 @@ function initMap() {
       '<div id="infowindow-image" class="justify-content-center img-responsive center-block"></div>' +
     '</div>'+
   '</div>';
-
-
-  // To create the 'infowindow' object,
-  // calling the constructor from googleMaps API
-  // setting the content retrieved using a variable previously defined.
-  infowindow = new google.maps.InfoWindow({
-    content: contentString,
-    // pixelOffset: new google.maps.Size(150,275)
-  });
-
-
-  // MARKER
-  // ------------
-
-  marker = new google.maps.Marker({
-    map:map,
-    animation: google.maps.Animation.DROP,
-    title: "Your destination"
+  
+  var markerMapOptions = {
+    // https://developers.google.com/maps/documentation/javascript/examples/marker-animations
+    animation: google.maps.Animation.BOUNCE,
+    label: "Your destination",
+    // content: markerLabel,
+    // label: markerLabel,
+    title: "Click to zoom"
+    // https://developers.google.com/maps/documentation/javascript/examples/overlay-popup
     // icon: iconImage + 'parking_lot_maps.png',
-   });
-
-  // AUTOCOMPLETE
-  // ------------
-  // To define which HTML element is the input search box,
-  // storing that link in a variable.
+   };
+  // To define which HTML element is the input search box, setting that info in a variable.
   var searchInput = document.getElementById("search-input");
 
-  // To define the search options to use with autocomplete, restricting the
-  // search to cities. This is to avoid street searches...
+  // To define the search options to use with autocomplete, restricting the search to cities. This is to avoid street searches...
   var searchOptions={
     type: ['(cities)'],
   };
 
-  // To create the 'autocomplete' object,
-  // calling the constructor from googleMaps API
-  // and associating to it the searchInput and the searchOptions.
+  // OBJECTS UPDATE
+  // --------------
+  
+  // To create the 'map' object, updating the values defined in a variable.
+  // https://developers.google.com/maps/documentation/javascript/examples/map-simple
+  map = new google.maps.Map(mapCanvas, mapOptions);
+
+  // To create the 'infowindow' object, setting the content retrieved using a variable previously defined.
+  // https://developers.google.com/maps/documentation/javascript/infowindows
+  infowindow = new google.maps.InfoWindow({content: contentString});
+
+  // To create the 'marker' object, setting the options usig a variable previously defined.
+  // https://developers.google.com/maps/documentation/javascript/markers
+  marker = new google.maps.Marker(markerMapOptions)
+  // To add the marker created into the map.
+  marker.setMap(map);
+ 
+
+  // To create the 'autocomplete' object, updating the values defined in two variables.
   // https://developers.google.com/maps/documentation/javascript/examples/places-autocomplete
   autocomplete = new google.maps.places.Autocomplete(searchInput, searchOptions);
 
-
-  // To transfer from 'autocomplete' object,
-  // the area in which to search for the Place
+  // To transfer from 'autocomplete' object,  // the area in which to search for the Place
   // into the map created.
-  autocomplete.bindTo('bounds', map);  
+  autocomplete.bindTo('bounds', map); 
+  
+  // SERVICES
+  // --------
+  // To create the 'service' object,
+  // calling the constructor from googleMaps API
+  // and associating to it the current map.
+  //https://developers.google.com/maps/documentation/javascript/examples/place-search-pagination
+  service = new google.maps.places.PlacesService(map); 
 
   // To add a listening method to the 'autocomplete' object,
   // that will run a custom callback function in response to the media query status changing.
@@ -112,7 +111,6 @@ function initMap() {
       placeId: place.place_id,
       location: place.geometry.location,
     });
-
     marker.setVisible(true);
       
     // To set an event listener when clicking the marker, opening the info window
@@ -123,10 +121,12 @@ function initMap() {
       // document.getElementById('infowindow-image').removeChild(img);
       infowindow.open(map, marker);
       map.setZoom(8);
-    
-      // To set the values retrieved from the calllback function
-      // to different HTML elements in the modal form.
       
+      // To stop the marker bouncing when clicking on it.
+      // https://developers.google.com/maps/documentation/javascript/examples/marker-animations
+      marker.setAnimation(google.maps.Animation.DROP);
+      
+      // To set the values retrieved from the calllback function to different HTML elements in the modal form.      
       document.getElementById('infowindow-heading').innerHTML = place.name;
     
       // To select the first image available using a call back function
@@ -150,12 +150,9 @@ function initMap() {
     }); 
   });
 
-
-  //https://developers.google.com/maps/documentation/javascript/examples/place-search-pagination
-  // Create the places service.
-  var service = new google.maps.places.PlacesService(map);
-  
-  var pyrmont = {lat: -33.866, lng: 151.196};
+ 
+  var servicePlace = {location: place.geometry.location, radius: 500, type: ['lodging']}
+  // var pyrmont = {lat: -33.866, lng: 151.196};
   // var place = autocomplete.getPlace();
 
   // Define variables to identify cluster buttons.
@@ -176,8 +173,7 @@ function initMap() {
         };
   
   // Perform a nearby search.
-  service.nearbySearch(  {location: pyrmont, radius: 500, type: ['lodging']},
-      function(results, status, pagination) {
+  service.nearbySearch( servicePlace, function(results, status, pagination) {
         if (status !== 'OK') return;
 
         createMarkers(results);
