@@ -2,15 +2,13 @@
 
 let map, autocomplete, infowindow, service; // objects
 var mapCanvas, mapOptions; // map variables
-var contentString; // infowindow content
-var markerMapOptions; //
-var place, servicePlace,bounds; 
+var contentString; // Infowindow content
+var markerMapOptions; // Main marker in map options(place)
+var place,bounds; 
 
-// Map functionality.
+// Map function.
 function initMap() {
-
   // VARIABLES UPDATE
-  // ----------------
   // To define into a variable in which HTML element the map should be diplayed.
   var mapCanvas = document.getElementById("map");
   // To define into a variable the options to use with the map.  
@@ -27,9 +25,9 @@ function initMap() {
       '<div id="infowindow-image" class="justify-content-center img-responsive center-block"></div>' +
     '</div>'+
   '</div>';
-  
+  // To define into a variable the options selected to modify the marker vehabiour an its style.
+  // https://developers.google.com/maps/documentation/javascript/examples/marker-animations 
   var markerMapOptions = {
-    // https://developers.google.com/maps/documentation/javascript/examples/marker-animations
     animation: google.maps.Animation.BOUNCE,
     label: "Your destination",
     // content: markerLabel,
@@ -92,7 +90,7 @@ function initMap() {
     }
 
     // This condition checks if the place has a geometry,
-    // then present it on a map.
+    // then present the place zoomed in the map.
     if (place.geometry.viewport) {
       map.fitBounds(place.geometry.viewport);
       map.setZoom(3);
@@ -145,6 +143,7 @@ function initMap() {
     }); 
  
   // Perform a nearby search.
+  // https://developers.google.com/maps/documentation/javascript/places
   service.nearbySearch( {location: place.geometry.location, radius: 500, type: ['lodging']},
     function(results, status, pagination) {
       if (status !== 'OK') return;
@@ -157,7 +156,7 @@ function initMap() {
       });
 
   // RESULTS PAGINATION
-  // ----------
+  // ------------------
   // https://developers.google.com/maps/documentation/javascript/examples/place-search-pagination
   var getNextPage = null;
   var moreButton = document.getElementById('more');
@@ -197,39 +196,11 @@ function initMap() {
   }
 
 
-});   
+}); 
 
-  // https://developers.google.com/maps/documentation/javascript/places#place_details_requests
-  // var request = {
-  //   placeId: 'ChIJN1t_tDeuEmsRUsoyG83frY4',
-  //   fields: ['name', 'rating', 'formatted_phone_number', 'geometry']
-  // };
-  
-  // https://developers.google.com/maps/documentation/javascript/places#placeid
-  // service.textSearch(request, callback);
-  // var request = {
-  //   location: map.getCenter(),
-      // radius: '500',
-      // query: 'Google Sydney'
-  // };
-    
-  // function callback(results, status) {
-  //   if (status == google.maps.places.PlacesServiceStatus.OK) {
-  //     var marker = new google.maps.Marker({
-  //       map: map,
-  //       place: {
-  //         placeId: results[0].place_id,
-  //         location: results[0].geometry.location
-  //       }
-  //     });
-  //   }
-  // }
- 
-  // service.getDetails(request, callback);
-
-
-  
+  // NEXT STEP 
   // Define variables to identify cluster buttons.
+
   // var hotelMarkers = getElementById('hotel-markers');
   // var foodMarker = getElementById('food-marker');
   // var pubMarker = getElementById('pub-marker');
@@ -238,8 +209,6 @@ function initMap() {
   // var sportsMarker = getElementById('sports-marker');
   // var outingMarker = getElementById('outing-marker');
   // var relaxMarker = getElementById('relax-marker');
-  
-
 };
 
 
