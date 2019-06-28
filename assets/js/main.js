@@ -3,7 +3,8 @@
 let map, autocomplete, infowindow, service; // objects
 var mapCanvas, mapOptions; // map variables
 var contentString; // infowindow content
-var markerMapOptions // 
+var markerMapOptions; //
+var place, servicePlace,bounds; 
 
 // Map functionality.
 function initMap() {
@@ -62,23 +63,17 @@ function initMap() {
   // To add the marker created into the map.
   marker.setMap(map);
  
-
   // To create the 'autocomplete' object, updating the values defined in two variables.
   // https://developers.google.com/maps/documentation/javascript/examples/places-autocomplete
   autocomplete = new google.maps.places.Autocomplete(searchInput, searchOptions);
 
-  // To transfer from 'autocomplete' object,  // the area in which to search for the Place
-  // into the map created.
+  // To set 'bounds' values into map created.
   autocomplete.bindTo('bounds', map); 
   
-  // SERVICES
-  // --------
-  // To create the 'service' object,
-  // calling the constructor from googleMaps API
-  // and associating to it the current map.
+  // To create the 'service' object, relating the information to map created.
   //https://developers.google.com/maps/documentation/javascript/examples/place-search-pagination
   service = new google.maps.places.PlacesService(map); 
-
+  
   // To add a listening method to the 'autocomplete' object,
   // that will run a custom callback function in response to the media query status changing.
   autocomplete.addListener('place_changed', function() {
@@ -148,33 +143,11 @@ function initMap() {
           document.getElementById('infowindow-image').appendChild(img); 
       }   
     }); 
-  });
-
  
-  var servicePlace = {location: place.geometry.location, radius: 500, type: ['lodging']}
-  // var pyrmont = {lat: -33.866, lng: 151.196};
-  // var place = autocomplete.getPlace();
-
-  // Define variables to identify cluster buttons.
-  // var hotelMarkers = getElementById('hotel-markers');
-  // var foodMarker = getElementById('food-marker');
-  // var pubMarker = getElementById('pub-marker');
-  // var musicMarker = getElementById('music-marker');
-  // var artsMarker = getElementById('arts-marker');
-  // var sportsMarker = getElementById('sports-marker');
-  // var outingMarker = getElementById('outing-marker');
-  // var relaxMarker = getElementById('relax-marker');
-  
-  var getNextPage = null;
-  var moreButton = document.getElementById('more');
-        moreButton.onclick = function() {
-          moreButton.disabled = true;
-          if (getNextPage) getNextPage();
-        };
-  
   // Perform a nearby search.
-  service.nearbySearch( servicePlace, function(results, status, pagination) {
-        if (status !== 'OK') return;
+  service.nearbySearch( {location: place.geometry.location, radius: 500, type: ['lodging']},
+    function(results, status, pagination) {
+      if (status !== 'OK') return;
 
         createMarkers(results);
         moreButton.disabled = !pagination.hasNextPage;
@@ -182,10 +155,21 @@ function initMap() {
           pagination.nextPage();
         };
       });
+
+  // RESULTS PAGINATION
+  // ----------
+  // https://developers.google.com/maps/documentation/javascript/examples/place-search-pagination
+  var getNextPage = null;
+  var moreButton = document.getElementById('more');
+        
+  moreButton.onclick = function() {
+      moreButton.disabled = true;
+      if (getNextPage) getNextPage();
+    }; 
       
   function createMarkers(places) {
     var bounds = new google.maps.LatLngBounds();
-    var placesList = document.getElementById('map-displayed-markers');
+    var serviceList = document.getElementById('map-displayed-markers');
 
     for (var i = 0, place; place = places[i]; i++) {
       var image = {
@@ -205,12 +189,56 @@ function initMap() {
 
       var li = document.createElement('li');
       li.textContent = place.name;
-      placesList.appendChild(li);
+      serviceList.appendChild(li);
 
       bounds.extend(place.geometry.location);
     }
-    map.fitBounds(bounds);
-  }    
+    map.fitBounds(bounds);    
+  }
+
+
+});   
+
+  // https://developers.google.com/maps/documentation/javascript/places#place_details_requests
+  // var request = {
+  //   placeId: 'ChIJN1t_tDeuEmsRUsoyG83frY4',
+  //   fields: ['name', 'rating', 'formatted_phone_number', 'geometry']
+  // };
+  
+  // https://developers.google.com/maps/documentation/javascript/places#placeid
+  // service.textSearch(request, callback);
+  // var request = {
+  //   location: map.getCenter(),
+      // radius: '500',
+      // query: 'Google Sydney'
+  // };
+    
+  // function callback(results, status) {
+  //   if (status == google.maps.places.PlacesServiceStatus.OK) {
+  //     var marker = new google.maps.Marker({
+  //       map: map,
+  //       place: {
+  //         placeId: results[0].place_id,
+  //         location: results[0].geometry.location
+  //       }
+  //     });
+  //   }
+  // }
+ 
+  // service.getDetails(request, callback);
+
+
+  
+  // Define variables to identify cluster buttons.
+  // var hotelMarkers = getElementById('hotel-markers');
+  // var foodMarker = getElementById('food-marker');
+  // var pubMarker = getElementById('pub-marker');
+  // var musicMarker = getElementById('music-marker');
+  // var artsMarker = getElementById('arts-marker');
+  // var sportsMarker = getElementById('sports-marker');
+  // var outingMarker = getElementById('outing-marker');
+  // var relaxMarker = getElementById('relax-marker');
+  
 
 };
 
