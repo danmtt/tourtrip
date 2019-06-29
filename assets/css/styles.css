@@ -236,7 +236,20 @@ footer a {
 }
 
 /* Infowindow style */
-.gm-style-iw {
+/* http://en.marnoto.com/2014/09/5-formas-de-personalizar-infowindow.html */
+
+#infowindow-heading {
+/* #iw-container  .iw-title { */
+    font-family: 'Open Sans Condensed', sans-serif;
+    font-size: 22px;
+    font-weight: 400;
+    padding: 10px;
+    background-color: #48b5e9;
+    color: white;
+    margin: 1px;
+    border-radius: 2px 2px 0 0; /* In accordance with the rounding of the default infowindow corners. */
+ }
+ .gm-style-iw {
     /* background-color: #3C61AD !important; */
     top: 0 !important;
     left: 0 !important;
