@@ -92,11 +92,11 @@ function initMap() {
     // This condition checks if the place has a geometry,
     // then present the place zoomed in the map.
     if (place.geometry.viewport) {
-      map.fitBounds(place.geometry.viewport);
-      map.setZoom(3);
+      // map.fitBounds(place.geometry.viewport);
+      map.setZoom(1);
     } else {
-      map.setCenter(place.geometry.location);
-      map.setZoom(3);
+      // map.setCenter(place.geometry.location);
+      // map.setZoom(1);
     }    
 
     // Set the position of the marker using the place ID and location.
@@ -111,21 +111,28 @@ function initMap() {
     // and zooming into the location.
     marker.addListener('click', function() {
 
-      // document.getElementById('infowindow-image').removeChild(img);
       infowindow.open(map, marker);
-      map.setZoom(8);
-      
+      infowindow.addListener('close',function(){
+        map.setCenter(latitude, longitude);
+      });
       // To stop the marker bouncing when clicking on it.
       // https://developers.google.com/maps/documentation/javascript/examples/marker-animations
       marker.setAnimation(google.maps.Animation.DROP);
       
+      // To update map options when clicking on bouncing marker
+      // https://developers.google.com/maps/documentation/javascript/reference/map#MapOptions
+      // https://www.w3schools.com/graphics/google_maps_types.asp
+      // https://ourcodeworld.com/articles/read/831/how-to-change-and-preview-map-type-in-google-maps-dinamically-with-javascript
+      map.setZoom(15); // Zoom
+      map.setMapTypeId("roadmap"); // TypeId
+      // map.setMapTypeId(google.maps.MapTypeId.ROADMAP); 
+      // map.setOptions()
+      
       // To set the values retrieved from the calllback function to different HTML elements in the modal form.      
       document.getElementById('infowindow-heading').innerHTML = place.name;
     
-      // To select the first image available using a call back function
-      // as method to another previous function
+      // To select the first image available using a call back function as method to another previous function
       // and store it into a variable.
-
       var placeImg = place.photos[0].getUrl({maxWidth: 300, maxHeight: 300});
     
       // To create an img object and set its attributes using a variable
