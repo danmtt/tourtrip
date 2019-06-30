@@ -50,7 +50,7 @@ function initMap() {
   // To create the 'map' object, updating the values defined in a variable.
   // https://developers.google.com/maps/documentation/javascript/examples/map-simple
   map = new google.maps.Map(mapCanvas, mapOptions);
-
+   
   // To create the 'infowindow' object, setting the content retrieved using a variable previously defined.
   // https://developers.google.com/maps/documentation/javascript/infowindows
   infowindow = new google.maps.InfoWindow({content: contentString});
@@ -105,16 +105,8 @@ function initMap() {
       location: place.geometry.location,
     });
     marker.setVisible(true);
-      
-    // To set an event listener when clicking the marker, opening the info window
-    // updating information about the place selected
-    // and zooming into the location.
-    google.maps.event.addListener(map, 'click', function() {
-      infowindow.close();
-      map.setCenter(place.geometry.location);
-    });
-      
-      marker.addListener('click', function() {
+ 
+    marker.addListener('click', function() {
 
       infowindow.open(map, marker);
       infowindow.addListener('close',function(){
@@ -152,7 +144,15 @@ function initMap() {
         } else {
           document.getElementById('infowindow-image').appendChild(img); 
       }   
-    }); 
+    });
+
+    // To set an event listener when clicking the marker, opening the info window
+    // updating information about the place selected
+    // and zooming into the location.
+    google.maps.event.addListener(map, 'click', function() {
+      infowindow.close();
+      map.setCenter(place.geometry.location);
+    });
  
   // Perform a nearby search.
   // https://developers.google.com/maps/documentation/javascript/places
