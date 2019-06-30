@@ -95,8 +95,8 @@ function initMap() {
       // map.fitBounds(place.geometry.viewport);
       map.setZoom(1);
     } else {
-      // map.setCenter(place.geometry.location);
-      // map.setZoom(1);
+      map.setCenter(place.geometry.location);
+      map.setZoom(1);
     }    
 
     // Set the position of the marker using the place ID and location.
@@ -109,11 +109,16 @@ function initMap() {
     // To set an event listener when clicking the marker, opening the info window
     // updating information about the place selected
     // and zooming into the location.
-    marker.addListener('click', function() {
+    google.maps.event.addListener(map, 'click', function() {
+      infowindow.close();
+      map.setCenter(place.geometry.location);
+    });
+      
+      marker.addListener('click', function() {
 
       infowindow.open(map, marker);
       infowindow.addListener('close',function(){
-        map.setCenter(latitude, longitude);
+        map.setCenter(place.geometry.location);
       });
       // To stop the marker bouncing when clicking on it.
       // https://developers.google.com/maps/documentation/javascript/examples/marker-animations
