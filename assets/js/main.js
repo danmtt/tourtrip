@@ -207,20 +207,17 @@ function initMap() {
     map.fitBounds(bounds);    
   }
 
-
-}); 
-
   // NEXT STEP 
   // Define variables to identify cluster buttons.
 
-  // var hotelMarkers = getElementById('hotel-markers');
-  // var foodMarker = getElementById('food-marker');
-  // var pubMarker = getElementById('pub-marker');
-  // var musicMarker = getElementById('music-marker');
-  // var artsMarker = getElementById('arts-marker');
-  // var sportsMarker = getElementById('sports-marker');
-  // var outingMarker = getElementById('outing-marker');
-  // var relaxMarker = getElementById('relax-marker');
+  document.getElementById('hotel-markers').onclick = function() {
+  alert('button clicked ID:'+this.id  );}
+
+  
+}); 
+
+
+
 };
 
 
