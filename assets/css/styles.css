@@ -268,9 +268,12 @@ footer a {
     max-height: 300px !important;
 }
 
-
+.cluster{
+    width: 25%;
+}
 .cluster p {
     padding-top: 8px;
+    font-size: 14px;
 }
 
 /* .container-fluid{
