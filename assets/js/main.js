@@ -156,7 +156,10 @@ function initMap() {
  
   // Perform a nearby search.
   // https://developers.google.com/maps/documentation/javascript/places
+
   service.nearbySearch( {location: place.geometry.location, radius: 500, type: ['lodging']},
+  // service.nearbySearch( {location: onClickClusterButton, radius: 500, type: ['lodging']},
+   
     function(results, status, pagination) {
       if (status !== 'OK') return;
 
@@ -208,12 +211,52 @@ function initMap() {
   }
 
   // NEXT STEP 
-  // Define variables to identify cluster buttons.
+
+  // Test to check that click on button works ok!
+  // https://stackoverflow.com/questions/4825295/javascript-onclick-to-get-the-id-of-the-clicked-button
+  // https://stackoverflow.com/questions/2788191/how-to-check-whether-a-button-is-clicked-by-using-javascript
 
   document.getElementById('hotel-markers').onclick = function() {
-  alert('button clicked ID:'+this.id  );}
+  alert('button clicked ID:'+ this.id);}
 
-  
+  // To assign the right value to a variable on different clicks
+  // https://stackoverflow.com/questions/7132547/set-a-variable-value-on-click-display-the-value
+
+  // $("input[type='button']").click(function() {
+
+  //   var onClickClusterButton = ''; // or add a default in the switch
+
+  //   switch(this.id) {
+  //     case 'hotel-markers': onClickClusterButton = 'lodging'; break;
+  //     case 'food-markers': onClickClusterButton = 'museum'; break;
+  //     case 'pub-markers': onClickClusterButton = 'nigth_club'; break;
+  //     case 'atm-markers': onClickClusterButton = 'atm'; break;
+
+  //     case 'museum-markers': onClickClusterButton = 'museum'; break;
+  //     case 'art-markers': onClickClusterButton = 'art_gallery'; break;
+  //     case 'zoo-markers': onClickClusterButton = 'zoo'; break;
+  //     case 'stadium-markers': onClickClusterButton = 'stadium'; break;
+     
+  //     case 'bus-markers': onClickClusterButton = 'bus_station'; break;
+  //     case 'subway-markers': onClickClusterButton = 'subway_station'; break;
+  //     case 'taxi-markers': onClickClusterButton = 'taxi_stand'; break;
+  //     case 'airport-markers': onClickClusterButton = 'airport'; break;
+  //   }
+
+  //  $('.the-element-you-want-to-add-it-to').html(onClickClusterButton);
+
+  // });
+
+  // Cluster buttons id list
+  // hotel-markers, food-markers, pub-markers, atm-markers, 
+  // museum-markers, art-markers, zoo-markers, stadium-markers,
+  // bus-markers,  subway-markers, taxi-markers, airport-markers
+
+  // Google maps search types values to assign to variable when onclick over an
+  // specific button with defined id. 
+  // https://developers.google.com/places/web-service/supported_types
+  // lodging, restaurant,
+
 }); 
 
 
