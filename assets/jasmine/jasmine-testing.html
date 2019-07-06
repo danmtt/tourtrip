@@ -33,34 +33,37 @@
 
 </head>
 <body>
-    <!-- TEST 01 -->
-    <!-- onClickButton functionality. To change value of variable when clicking on specific button -->
-        <div class="d-flex flex-row justify-content-between">
+    <!-- TEST 01, TEST 02 -->
+    <!-- Tests designed to check on this HTML elements the 'onclick' functionality. -->
+    <!-- The HTML snippets are copies of the ones used in index.html, making easy for me to check  -->
+    <!-- if this work correctly. The final aim of this tests is to check if the value of a variable  -->
+    <!-- changes when clicking on an specific button (id) -->
+        <div class="d-flex flex-row justify-content-around m-2">
             <div class="cluster">
-                <button type="button" id="museum-markers" class="btn btn-secondary col-xs-2 map-marker rounded-circle">
-                    <i class="fas fa-archway"></i>
+                <button type="button" id="button1" class="btn btn-secondary col-xs-2 map-marker rounded-circle" oncontextmenu="event.preventDefault();">1
                 </button>
-                <p><strong>Museum</strong></p>
+                <p><strong>Button 1</strong></p>
             </div>
             <div class="cluster">
-                <button type="button" id="gallery-markers" class="btn btn-secondary col-xs-2 map-marker rounded-circle">
-                    <i class="fas fa-theater-masks"></i>
+                <button type="button" id="button2" class="btn btn-secondary col-xs-2 map-marker rounded-circle" oncontextmenu="event.preventDefault();">2
                 </button>
-                <p><strong>Gallery</strong></p>
+                <p><strong>Button 2</strong></p>
             </div>
             <div class="cluster">
-                <button type="button" id="zoo-markers" class="btn btn-secondary col-xs-2 map-marker rounded-circle">
-                    <i class="fas fa-paw"></i>
+                <button type="button" id="button3" class="btn btn-secondary col-xs-2 map-marker rounded-circle" oncontextmenu="event.preventDefault();">3
                 </button>
-                <p><strong>Zoo</strong></p>
+                <p><strong>Button 3</strong></p>
             </div>
             <div class="cluster">
-                <button type="button" id="stadium-markers" class="btn btn-secondary col-xs-2 map-marker rounded-circle">
-                    <i class="fas fa-ring"></i>
+                <button type="button" id="button4" class="btn btn-secondary col-xs-2 map-marker rounded-circle" oncontextmenu="event.preventDefault();">4
                 </button>
-                <p><strong>Arena</strong></p>
-            </div>									
+                <p><strong>Button 4</strong></p>
+            </div>            									
         </div>
+        <div class="d-flex flex-row justify-content-around m-2">
+            <p id="log"></p>
+        </div>
+    
 </body>
 
 </html>
