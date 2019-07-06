@@ -1,0 +1,66 @@
+<html>
+
+<head>
+    <meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<meta http-equiv="X-UA-Compatible" content="ie=edge">
+	<meta name="description" content="Tourtrip Jasmine Test">
+    <meta name="author" content="Dmtt">
+    <title>Jasmine Testing</title>
+
+    <!-- Load Jasmine Framework -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jasmine/2.7.0/jasmine.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jasmine/2.7.0/jasmine-html.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jasmine/2.7.0/boot.js"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/jasmine/2.7.0/jasmine.css">
+
+    <!-- Load scripts -->
+    <script type="text/javascript" src="scripts/calc.js"></script>
+
+    <!-- Load Tests -->
+    <script type="text/javascript" src="spec/calcSpec.js"></script>
+
+    <!--CSS Sources-->
+	<!--Local CSS integration-->
+    <link rel="stylesheet" href="assets/css/styles.css" type="text/css" />
+    <!-- Fontawesome css integration -->
+	<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.2/css/all.css"
+    integrity="sha384-oS3vJWv+0UjzBfQzYUhtDYW+Pj2yciDJxpsK1OYPAYjqT085Qq/1cq5FLXAZQ7Ay" crossorigin="anonymous">
+    <!--Bootstrap 4.3.1 CSS library-->
+	<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
+    integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+
+
+</head>
+<body>
+    <!-- TEST 01 -->
+    <!-- onClickButton functionality. To change value of variable when clicking on specific button -->
+        <div class="d-flex flex-row justify-content-between">
+            <div class="cluster">
+                <button type="button" id="museum-markers" class="btn btn-secondary col-xs-2 map-marker rounded-circle">
+                    <i class="fas fa-archway"></i>
+                </button>
+                <p><strong>Museum</strong></p>
+            </div>
+            <div class="cluster">
+                <button type="button" id="gallery-markers" class="btn btn-secondary col-xs-2 map-marker rounded-circle">
+                    <i class="fas fa-theater-masks"></i>
+                </button>
+                <p><strong>Gallery</strong></p>
+            </div>
+            <div class="cluster">
+                <button type="button" id="zoo-markers" class="btn btn-secondary col-xs-2 map-marker rounded-circle">
+                    <i class="fas fa-paw"></i>
+                </button>
+                <p><strong>Zoo</strong></p>
+            </div>
+            <div class="cluster">
+                <button type="button" id="stadium-markers" class="btn btn-secondary col-xs-2 map-marker rounded-circle">
+                    <i class="fas fa-ring"></i>
+                </button>
+                <p><strong>Arena</strong></p>
+            </div>									
+        </div>
+</body>
+
+</html>
