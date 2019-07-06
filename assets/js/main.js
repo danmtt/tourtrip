@@ -210,52 +210,77 @@ function initMap() {
     map.fitBounds(bounds);    
   }
 
-  // NEXT STEP 
+// NEXT STEP 
 
-  // Test to check that click on button works ok!
-  // https://stackoverflow.com/questions/4825295/javascript-onclick-to-get-the-id-of-the-clicked-button
-  // https://stackoverflow.com/questions/2788191/how-to-check-whether-a-button-is-clicked-by-using-javascript
+// To assign the right value to a variable on different clicks
+// https://stackoverflow.com/questions/7132547/set-a-variable-value-on-click-display-the-value
 
-  document.getElementById('hotel-markers').onclick = function() {
-  alert('button clicked ID:'+ this.id);}
 
-  // To assign the right value to a variable on different clicks
-  // https://stackoverflow.com/questions/7132547/set-a-variable-value-on-click-display-the-value
+var onClickClusterButton = ''; // or add a default in the switch
 
-  // $("input[type='button']").click(function() {
+// $("input[type='button']").click(function() {
 
-  //   var onClickClusterButton = ''; // or add a default in the switch
 
-  //   switch(this.id) {
-  //     case 'hotel-markers': onClickClusterButton = 'lodging'; break;
-  //     case 'food-markers': onClickClusterButton = 'museum'; break;
-  //     case 'pub-markers': onClickClusterButton = 'nigth_club'; break;
-  //     case 'atm-markers': onClickClusterButton = 'atm'; break;
+//   switch(this.id) {
+//     case 'hotel-markers': onClickClusterButton = 'lodging'; break;
+//     case 'food-markers': onClickClusterButton = 'restaurant'; break;
+//     case 'pub-markers': onClickClusterButton = 'nigth_club'; break;
+//     case 'atm-markers': onClickClusterButton = 'atm'; break;
 
-  //     case 'museum-markers': onClickClusterButton = 'museum'; break;
-  //     case 'art-markers': onClickClusterButton = 'art_gallery'; break;
-  //     case 'zoo-markers': onClickClusterButton = 'zoo'; break;
-  //     case 'stadium-markers': onClickClusterButton = 'stadium'; break;
-     
-  //     case 'bus-markers': onClickClusterButton = 'bus_station'; break;
-  //     case 'subway-markers': onClickClusterButton = 'subway_station'; break;
-  //     case 'taxi-markers': onClickClusterButton = 'taxi_stand'; break;
-  //     case 'airport-markers': onClickClusterButton = 'airport'; break;
-  //   }
+//     case 'museum-markers': onClickClusterButton = 'museum'; break;
+//     case 'gallery-markers': onClickClusterButton = 'art_gallery'; break;
+//     case 'zoo-markers': onClickClusterButton = 'zoo'; break;
+//     case 'stadium-markers': onClickClusterButton = 'stadium'; break;
+  
+//     case 'bus-markers': onClickClusterButton = 'bus_station'; break;
+//     case 'subway-markers': onClickClusterButton = 'subway_station'; break;
+//     case 'taxi-markers': onClickClusterButton = 'taxi_stand'; break;
+//     case 'airport-markers': onClickClusterButton = 'airport'; break;
+//   }
 
-  //  $('.the-element-you-want-to-add-it-to').html(onClickClusterButton);
+//  $('.the-element-you-want-to-add-it-to').html(onClickClusterButton);
 
-  // });
+// });
 
-  // Cluster buttons id list
-  // hotel-markers, food-markers, pub-markers, atm-markers, 
-  // museum-markers, art-markers, zoo-markers, stadium-markers,
-  // bus-markers,  subway-markers, taxi-markers, airport-markers
+// Test to check that click on button works ok and the right value is set to the variable!
+// https://stackoverflow.com/questions/4825295/javascript-onclick-to-get-the-id-of-the-clicked-button
+// https://stackoverflow.com/questions/2788191/how-to-check-whether-a-button-is-clicked-by-using-javascript
 
-  // Google maps search types values to assign to variable when onclick over an
-  // specific button with defined id. 
-  // https://developers.google.com/places/web-service/supported_types
-  // lodging, restaurant,
+document.getElementById('hotel-markers').onclick = function() {
+alert('Button clicked ID: '+ this.id + ' Value: '+ onClickClusterButton );}
+document.getElementById('food-markers').onclick = function() {
+alert('Button clicked ID:'+ this.id + ' Value: '+ onClickClusterButton );}
+document.getElementById('pub-markers').onclick = function() {
+alert('Button clicked ID:'+ this.id + ' Value: '+ onClickClusterButton );}
+document.getElementById('atm-markers').onclick = function() {
+alert('Button clicked ID:'+ this.id + ' Value: '+ onClickClusterButton );}
+document.getElementById('museum-markers').onclick = function() {
+alert('Button clicked ID:'+ this.id + ' Value: '+ onClickClusterButton );}
+document.getElementById('gallery-markers').onclick = function() {
+alert('Button clicked ID:'+ this.id + ' Value: '+ onClickClusterButton );}
+document.getElementById('zoo-markers').onclick = function() {
+alert('Button clicked ID:'+ this.id + ' Value: '+ onClickClusterButton );}
+document.getElementById('stadium-markers').onclick = function() {
+alert('Button clicked ID:'+ this.id + ' Value: '+ onClickClusterButton );}
+document.getElementById('bus-markers').onclick = function() {
+alert('Button clicked ID:'+ this.id + ' Value: '+ onClickClusterButton );}
+document.getElementById('subway-markers').onclick = function() {
+alert('Button clicked ID:'+ this.id + ' Value: '+ onClickClusterButton );}
+document.getElementById('taxi-markers').onclick = function() {
+alert('Button clicked ID:'+ this.id + ' Value: '+ onClickClusterButton );}
+document.getElementById('airport-markers').onclick = function() {
+alert('Button clicked ID:'+ this.id + ' Value: '+ onClickClusterButton );}
+
+// Cluster buttons id list
+// hotel-markers, food-markers, pub-markers, atm-markers, 
+// museum-markers, gallery-markers, zoo-markers, stadium-markers,
+// bus-markers,  subway-markers, taxi-markers, airport-markers
+
+// Google maps search types values to assign to variable when onclick over an
+// specific button with defined id. 
+// https://developers.google.com/places/web-service/supported_types
+// lodging, restaurant, nigth_club, atm, museum, art_gallery, zoo, stadium,
+// bus_station, subway_station, taxi_stand, airport
 
 }); 
 
