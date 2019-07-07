@@ -12,9 +12,6 @@ body {
 
 header {
     height: 15vh;
-    display: flex;
-    flex-flow: row nowrap;
-    justify-content: flex-start;
 }
 
 section {
