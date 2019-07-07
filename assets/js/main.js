@@ -4,7 +4,8 @@ var map, autocomplete, infowindow, service; // OBJECTS
 var mapCanvas, mapOptions; // map variables
 var contentString; // Infowindow content
 var markerMapOptions; // To set the style of the main marker in map (place)
-var place,bounds; 
+var place,bounds;
+var onClickClusterButton;
 
 // Map function.
 function initMap() {
@@ -44,7 +45,7 @@ function initMap() {
   // To create the 'map' object, updating the values defined in a variable.
   // https://developers.google.com/maps/documentation/javascript/examples/map-simple
   map = new google.maps.Map(mapCanvas, mapOptions);
-   
+  
   // MARKER Object  -------------------------------------------------------------------------------
   // To define into a variable the options selected to modify the marker vehabiour an its style.
   // https://developers.google.com/maps/documentation/javascript/examples/marker-animations 
@@ -102,6 +103,7 @@ function initMap() {
   autocomplete.addListener('place_changed', function() {
     infowindow.close();
     
+    
     // To add the marker created into the map.
     marker.setMap(map);
 
@@ -116,17 +118,21 @@ function initMap() {
     if (!place.geometry) {
       window.alert("No details available for input: '" + place.name + "'");
       return;
-    }
+    };
+    
+    map.setCenter(place.geometry.location);
+    map.setZoom(3); 
 
     // This condition checks if the place has a geometry,
     // then present the place zoomed in the map.
-    if (place.geometry.viewport) {
-      // map.fitBounds(place.geometry.viewport);
-      map.setZoom(1);
-    } else {
-      map.setCenter(place.geometry.location);
-      map.setZoom(1);
-    }    
+    // if (place.geometry.viewport) {
+    //   map.setCenter(place.geometry.location);
+    //   map.fitBounds(place.geometry.viewport);
+    //   map.setZoom(10);
+    // } else {
+    //   map.setCenter(place.geometry.location);
+    //   map.setZoom(10);
+    // }    
 
     // Set the position of the marker using the place ID and location.
     marker.setPlace({
@@ -208,8 +214,20 @@ function initMap() {
   let subwayMarkers = document.querySelector('#subway-markers');
   let taxiMarkers = document.querySelector('#taxi-markers');
   let airportMarkers = document.querySelector('#airport-markers');
-
- 
+  
+  hotelMarkers.onclick = function() {
+    onClickClusterButton ='lodging';
+    // test onClickClusterButton value change
+    document.getElementById('map-user-selections').innerHTML = onClickClusterButton;
+    infowindow.close();
+    map.setCenter(place.geometry.location);
+  };
+  
+  foodMarkers.onclick = function() {
+    onClickClusterButton ='restaurant';
+    // test onClickClusterButton value change
+    document.getElementById('map-user-selections').innerHTML = onClickClusterButton;
+  };
 
   // Perform a nearby search.
   // https://developers.google.com/maps/documentation/javascript/places
@@ -240,11 +258,37 @@ function initMap() {
   
   function createMarkers(places) {
     
-    hotelMarkers.onclick = function() {
-      onClickClusterButton ='lodging';
-    };
+
+
+// Cluster buttons id list
+// hotel-markers, food-markers, pub-markers, atm-markers, 
+// museum-markers, gallery-markers, zoo-markers, stadium-markers,
+// bus-markers,  subway-markers, taxi-markers, airport-markers
+
+// Google maps search types values to assign to variable when onclick over an
+// specific button with defined id. 
+// https://developers.google.com/places/web-service/supported_types
+// lodging, restaurant, nigth_club, atm, museum, art_gallery, zoo, stadium,
+// bus_station, subway_station, taxi_stand, airport
+
+    //     case 'hotel-markers': onClickClusterButton = 'lodging'; break;
+//     case 'food-markers': onClickClusterButton = 'restaurant'; break;
+//     case 'pub-markers': onClickClusterButton = 'nigth_club'; break;
+//     case 'atm-markers': onClickClusterButton = 'atm'; break;
+
+//     case 'museum-markers': onClickClusterButton = 'museum'; break;
+//     case 'gallery-markers': onClickClusterButton = 'art_gallery'; break;
+//     case 'zoo-markers': onClickClusterButton = 'zoo'; break;
+//     case 'stadium-markers': onClickClusterButton = 'stadium'; break;
+  
+//     case 'bus-markers': onClickClusterButton = 'bus_station'; break;
+//     case 'subway-markers': onClickClusterButton = 'subway_station'; break;
+//     case 'taxi-markers': onClickClusterButton = 'taxi_stand'; break;
+//     case 'airport-markers': onClickClusterButton = 'airport'; break;
     // service = new google.maps.places.PlacesService(map); 
     // service.nearbySearch({location: place.geometry.location, radius: 500, type: onClickClusterButton},)
+      
+
 
     var bounds = new google.maps.LatLngBounds();
     var serviceList = document.getElementById('map-displayed-markers');
@@ -385,16 +429,7 @@ function initMap() {
 // document.getElementById('airport-markers').onclick = function() {
 // alert('Button clicked ID:'+ this.id + ' Value: '+ onClickClusterButton );}
 
-// Cluster buttons id list
-// hotel-markers, food-markers, pub-markers, atm-markers, 
-// museum-markers, gallery-markers, zoo-markers, stadium-markers,
-// bus-markers,  subway-markers, taxi-markers, airport-markers
 
-// Google maps search types values to assign to variable when onclick over an
-// specific button with defined id. 
-// https://developers.google.com/places/web-service/supported_types
-// lodging, restaurant, nigth_club, atm, museum, art_gallery, zoo, stadium,
-// bus_station, subway_station, taxi_stand, airport
 
 };
 
