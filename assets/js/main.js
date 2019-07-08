@@ -6,6 +6,7 @@ var contentString; // Infowindow content
 var markerMapOptions; // To set the style of the main marker in map (place)
 var place,bounds;
 var onClickClusterButton;
+var service;
 
 // Map function.
 function initMap() {
@@ -52,8 +53,6 @@ function initMap() {
   var markerOptions = {
     animation: google.maps.Animation.BOUNCE,
     label: "Your destination",
-    // content: markerLabel,
-    // label: markerLabel,
     title: "Click to zoom"
     // https://developers.google.com/maps/documentation/javascript/examples/overlay-popup
     // icon: iconImage + 'parking_lot_maps.png',
@@ -102,8 +101,7 @@ function initMap() {
   // that will run a custom callback function in response to the media query status changing.
   autocomplete.addListener('place_changed', function() {
     infowindow.close();
-    
-    
+
     // To add the marker created into the map.
     marker.setMap(map);
 
@@ -175,18 +173,6 @@ function initMap() {
           document.getElementById('infowindow-image').appendChild(img); 
       }   
     });
-
-    // infowindow.addListener('close',function(){
-    //   map.setCenter(place.geometry.location);
-    // });
-
-    // To set an event listener to 'infowindow' when closing it,
-    // the map is centered to the marker position  
-    
-    // infowindow.addListener('click', function() {
-    //   infowindow.close();
-    //   map.setCenter(place.geometry.location);
-    // });
     
     // To set an event listener to 'map' when clicking out of infowindow,
     // this one dissapears and the map is centered to the marker position  
@@ -310,15 +296,16 @@ function initMap() {
     infowindow.close();
     map.setCenter(place.geometry.location);
   };
+  // Autotrick to get the right size of map, defining a variable thet doesnt exist ,
+  // so JS doesnt carry on and zoom is set to 3.
   airport.onclick = function() {
+  // airportMarkers.onclick = function() {
     onClickClusterButton ='airport';
     // test onClickClusterButton value change
     document.getElementById('map-user-selections').innerHTML = onClickClusterButton;
     infowindow.close();
     map.setCenter(place.geometry.location);
   };
-
-
 
   // Perform a nearby search.
   // https://developers.google.com/maps/documentation/javascript/places
@@ -377,116 +364,10 @@ function initMap() {
     }
     map.fitBounds(bounds);    
   }
-}); 
+}); // End of autocomplete.addListener()
   
-// NEXT STEP 
 
-
-
-
-
-
-// $("input[type='button']").click(function() {
-
-
-//   switch(this.id) {
-//     case 'hotel-markers': onClickClusterButton = 'lodging'; break;
-//     case 'food-markers': onClickClusterButton = 'restaurant'; break;
-//     case 'pub-markers': onClickClusterButton = 'nigth_club'; break;
-//     case 'atm-markers': onClickClusterButton = 'atm'; break;
-
-//     case 'museum-markers': onClickClusterButton = 'museum'; break;
-//     case 'gallery-markers': onClickClusterButton = 'art_gallery'; break;
-//     case 'zoo-markers': onClickClusterButton = 'zoo'; break;
-//     case 'stadium-markers': onClickClusterButton = 'stadium'; break;
-  
-//     case 'bus-markers': onClickClusterButton = 'bus_station'; break;
-//     case 'subway-markers': onClickClusterButton = 'subway_station'; break;
-//     case 'taxi-markers': onClickClusterButton = 'taxi_stand'; break;
-//     case 'airport-markers': onClickClusterButton = 'airport'; break;
-//   }
-
-//  $('.the-element-you-want-to-add-it-to').html(onClickClusterButton);
-
-// });
-
-
-
-
-
-// hotelMarkers.addEventListener('mouseup', logMouseHotelMarkers);
-// foodMarkers.addEventListener('mouseup', logMouseFoodMarkers);
-// pubMarkers.addEventListener('mouseup', logMousePubMarkers);
-// atmMarkers.addEventListener('mouseup', logMouseAtmMarkers);
-// museumMarkers.addEventListener('mouseup', logMouseMuseumMarkers);
-// galleryMarkers.addEventListener('mouseup', logMouseGalleryMarkers);
-// zooMarkers.addEventListener('mouseup', logMouseZooMarkers);
-// stadiumMarkers.addEventListener('mouseup', logMouseStadiumMarkers);
-// busMarkers.addEventListener('mouseup', logMouseBusMarkers);
-// subwayMarkers.addEventListener('mouseup', logMouseSubwayMarkers);
-// taxiMarkers.addEventListener('mouseup', logMouseTaxiMarkers);
-// airportMarkers.addEventListener('mouseup', logMouseAirportMarkers);
-
-// function logMouseHotelMarkers(e) {
-//   if (typeof e === 'object') {
-//     switch (e.button) {
-//     case 0:
-//         onClickClusterButton ='lodging';
-//         // alert('Button clicked ID: '+ this.id + ' Value: '+ onClickClusterButton);
-//         // test onClickClusterButton value change
-//         document.getElementById('map-user-selections').innerHTML = onClickClusterButton;
-
-
-//         break;
-//     default:
-//         alert = `Unknown button code: ${btnCode}`;
-//     }
-//   }
-//   else onClickClusterButton =''
-// };
-// function logMouseFoodMarkers(e) {
-//   if (typeof e === 'object') {
-//     switch (e.button) {
-//     case 0:
-//         onClickClusterButton ='restaurant';
-//         alert('Button clicked ID: '+ this.id + ' Value: '+ onClickClusterButton);;
-//         break;
-//     default:
-//         alert = `Unknown button code: ${btnCode}`;
-//     }
-   
-//   }
-//   else onClickClusterButton =''
-// };
-
-// document.getElementById('hotel-markers').onclick = function() {
-// alert('Button clicked ID: '+ this.id + ' Value: '+ onClickClusterButton );}
-// document.getElementById('food-markers').onclick = function() {
-// alert('Button clicked ID:'+ this.id + ' Value: '+ onClickClusterButton );}
-// document.getElementById('pub-markers').onclick = function() {
-// alert('Button clicked ID:'+ this.id + ' Value: '+ onClickClusterButton );}
-// document.getElementById('atm-markers').onclick = function() {
-// alert('Button clicked ID:'+ this.id + ' Value: '+ onClickClusterButton );}
-// document.getElementById('museum-markers').onclick = function() {
-// alert('Button clicked ID:'+ this.id + ' Value: '+ onClickClusterButton );}
-// document.getElementById('gallery-markers').onclick = function() {
-// alert('Button clicked ID:'+ this.id + ' Value: '+ onClickClusterButton );}
-// document.getElementById('zoo-markers').onclick = function() {
-// alert('Button clicked ID:'+ this.id + ' Value: '+ onClickClusterButton );}
-// document.getElementById('stadium-markers').onclick = function() {
-// alert('Button clicked ID:'+ this.id + ' Value: '+ onClickClusterButton );}
-// document.getElementById('bus-markers').onclick = function() {
-// alert('Button clicked ID:'+ this.id + ' Value: '+ onClickClusterButton );}
-// document.getElementById('subway-markers').onclick = function() {
-// alert('Button clicked ID:'+ this.id + ' Value: '+ onClickClusterButton );}
-// document.getElementById('taxi-markers').onclick = function() {
-// alert('Button clicked ID:'+ this.id + ' Value: '+ onClickClusterButton );}
-// document.getElementById('airport-markers').onclick = function() {
-// alert('Button clicked ID:'+ this.id + ' Value: '+ onClickClusterButton );}
-
-
-
-};
+}; // End of initMap()
 
 
 
