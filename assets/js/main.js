@@ -105,7 +105,7 @@ function initMap() {
     // To add the marker created into the map.
     marker.setMap(map);
 
-    var place = autocomplete.getPlace();
+    place = autocomplete.getPlace();
     // To add the name of the place searched into one of the HTML modal's elements
     document.getElementById('destination').innerHTML = place.name;
 
@@ -296,10 +296,7 @@ function initMap() {
     infowindow.close();
     map.setCenter(place.geometry.location);
   };
-  // Autotrick to get the right size of map, defining a variable thet doesnt exist ,
-  // so JS doesnt carry on and zoom is set to 3.
-  airport.onclick = function() {
-  // airportMarkers.onclick = function() {
+  airportMarkers.onclick = function() {
     onClickClusterButton ='airport';
     // test onClickClusterButton value change
     document.getElementById('map-user-selections').innerHTML = onClickClusterButton;
@@ -307,6 +304,11 @@ function initMap() {
     map.setCenter(place.geometry.location);
   };
 
+  // NEXT STEP
+  // ---------
+  // Trying to define a global function for ervice.nearbySearch
+  // including the results and the markers pagination. 
+  
   // Perform a nearby search.
   // https://developers.google.com/maps/documentation/javascript/places
 
@@ -317,7 +319,7 @@ function initMap() {
     if (status !== 'OK') return;
 
       createMarkers(results);
-      moreButton.disabled = !pagination.hasNextPage;
+      // moreButton.disabled = !pagination.hasNextPage;
       getNextPage = pagination.hasNextPage && function() {
         pagination.nextPage();
       };
@@ -327,12 +329,12 @@ function initMap() {
   // ------------------
   // https://developers.google.com/maps/documentation/javascript/examples/place-search-pagination
   var getNextPage = null;
-  var moreButton = document.getElementById('more');
+  // var moreButton = document.getElementById('more');
         
-  moreButton.onclick = function() {
-      moreButton.disabled = true;
-      if (getNextPage) getNextPage();
-    }; 
+  // moreButton.onclick = function() {
+  //     moreButton.disabled = true;
+  //     if (getNextPage) getNextPage();
+  //   }; 
   
   function createMarkers(places) {
 
@@ -362,7 +364,7 @@ function initMap() {
 
       // bounds.extend(place.geometry.location);
     }
-    map.fitBounds(bounds);    
+    // map.fitBounds(bounds);    
   }
 }); // End of autocomplete.addListener()
   
