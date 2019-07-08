@@ -185,187 +185,192 @@ function initMap() {
  
   // display onClickClusterButton into an html element
    
-  var onClickClusterButton = '';
+    var onClickClusterButton = '';
 
-  // Cluster buttons id list
-  // hotel-markers, food-markers, pub-markers, atm-markers, 
-  // museum-markers, gallery-markers, zoo-markers, stadium-markers,
-  // bus-markers,  subway-markers, taxi-markers, airport-markers
+    // Cluster buttons id list
+    // hotel-markers, food-markers, pub-markers, atm-markers, 
+    // museum-markers, gallery-markers, zoo-markers, stadium-markers,
+    // bus-markers,  subway-markers, taxi-markers, airport-markers
 
-  // Google maps search types values to assign to variable when onclick over an
-  // specific button with defined id. 
-  // https://developers.google.com/places/web-service/supported_types
-  // lodging, restaurant, nigth_club, atm, museum, art_gallery, zoo, stadium,
-  // bus_station, subway_station, taxi_stand, airport
+    // Google maps search types values to assign to variable when onclick over an
+    // specific button with defined id. 
+    // https://developers.google.com/places/web-service/supported_types
+    // lodging, restaurant, nigth_club, atm, museum, art_gallery, zoo, stadium,
+    // bus_station, subway_station, taxi_stand, airport
 
-// To assign the right value to a variable on different clicks
-// https://stackoverflow.com/questions/7132547/set-a-variable-value-on-click-display-the-value
-// Test to check that click on button works ok and the right value is set to the variable!
-// https://stackoverflow.com/questions/4825295/javascript-onclick-to-get-the-id-of-the-clicked-button
-// https://stackoverflow.com/questions/2788191/how-to-check-whether-a-button-is-clicked-by-using-javascript
-// https://developer.mozilla.org/en-US/docs/Web/API/MouseEvent/button
+    // To assign the right value to a variable on different clicks
+    // https://stackoverflow.com/questions/7132547/set-a-variable-value-on-click-display-the-value
+    // Test to check that click on button works ok and the right value is set to the variable!
+    // https://stackoverflow.com/questions/4825295/javascript-onclick-to-get-the-id-of-the-clicked-button
+    // https://stackoverflow.com/questions/2788191/how-to-check-whether-a-button-is-clicked-by-using-javascript
+    // https://developer.mozilla.org/en-US/docs/Web/API/MouseEvent/button
 
-  // Set variables for specific buttons id´s to check onClick events
-  let hotelMarkers = document.querySelector('#hotel-markers');
-  let foodMarkers = document.querySelector('#food-markers');
-  let pubMarkers = document.querySelector('#pub-markers');
-  let atmMarkers = document.querySelector('#atm-markers');
-  let museumMarkers = document.querySelector('#museum-markers');
-  let galleryMarkers = document.querySelector('#gallery-markers');
-  let zooMarkers = document.querySelector('#zoo-markers');
-  let stadiumMarkers = document.querySelector('#stadium-markers');
-  let busMarkers = document.querySelector('#bus-markers');
-  let subwayMarkers = document.querySelector('#subway-markers');
-  let taxiMarkers = document.querySelector('#taxi-markers');
-  let airportMarkers = document.querySelector('#airport-markers');
+    // Set variables for specific buttons id´s to check onClick events
+    let hotelMarkers = document.querySelector('#hotel-markers');
+    let foodMarkers = document.querySelector('#food-markers');
+    let pubMarkers = document.querySelector('#pub-markers');
+    let atmMarkers = document.querySelector('#atm-markers');
+    let museumMarkers = document.querySelector('#museum-markers');
+    let galleryMarkers = document.querySelector('#gallery-markers');
+    let zooMarkers = document.querySelector('#zoo-markers');
+    let stadiumMarkers = document.querySelector('#stadium-markers');
+    let busMarkers = document.querySelector('#bus-markers');
+    let subwayMarkers = document.querySelector('#subway-markers');
+    let taxiMarkers = document.querySelector('#taxi-markers');
+    let airportMarkers = document.querySelector('#airport-markers');
+    
+    // document.getElementById('map-user-selections').innerHTML = service.type;
+
+    hotelMarkers.onclick = function() {      
+      infowindow.close();
+      map.setCenter(place.geometry.location);
+      map.setZoom(15); // Zoom
+      map.setMapTypeId("roadmap"); // TypeId
+      onClickClusterButton ='lodging';
+
+      // including the service into the .onclick event functionality make it works as desired, but...
+            
+      // Perform a nearby search.
+      // https://developers.google.com/maps/documentation/javascript/places
+
+      service.nearbySearch({location: place.geometry.location, radius: 500, type: onClickClusterButton},
   
-  hotelMarkers.onclick = function() {
-    onClickClusterButton ='lodging';
-    // test onClickClusterButton value change
-    document.getElementById('map-user-selections').innerHTML = onClickClusterButton;
-    infowindow.close();
-    map.setCenter(place.geometry.location);
-  };  
-  foodMarkers.onclick = function() {
-    onClickClusterButton ='restaurant';
-    // test onClickClusterButton value change
-    document.getElementById('map-user-selections').innerHTML = onClickClusterButton;
-    infowindow.close();
-    map.setCenter(place.geometry.location);
-  };
-  pubMarkers.onclick = function() {
-    onClickClusterButton ='nigth_club';
-    // test onClickClusterButton value change
-    document.getElementById('map-user-selections').innerHTML = onClickClusterButton;
-    infowindow.close();
-    map.setCenter(place.geometry.location);
-  };
-  atmMarkers.onclick = function() {
-    onClickClusterButton ='atm';
-    // test onClickClusterButton value change
-    document.getElementById('map-user-selections').innerHTML = onClickClusterButton;
-    infowindow.close();
-    map.setCenter(place.geometry.location);
-  };
-  museumMarkers.onclick = function() {
-    onClickClusterButton ='museum';
-    // test onClickClusterButton value change
-    document.getElementById('map-user-selections').innerHTML = onClickClusterButton;
-    infowindow.close();
-    map.setCenter(place.geometry.location);
-  };
-  galleryMarkers.onclick = function() {
-    onClickClusterButton ='art_gallery';
-    // test onClickClusterButton value change
-    document.getElementById('map-user-selections').innerHTML = onClickClusterButton;
-    infowindow.close();
-    map.setCenter(place.geometry.location);
-  };
-  zooMarkers.onclick = function() {
-    onClickClusterButton ='zoo';
-    // test onClickClusterButton value change
-    document.getElementById('map-user-selections').innerHTML = onClickClusterButton;
-    infowindow.close();
-    map.setCenter(place.geometry.location);
-  };
-  stadiumMarkers.onclick = function() {
-    onClickClusterButton ='stadium';
-    // test onClickClusterButton value change
-    document.getElementById('map-user-selections').innerHTML = onClickClusterButton;
-    infowindow.close();
-    map.setCenter(place.geometry.location);
-  };
-  busMarkers.onclick = function() {
-    onClickClusterButton ='bus_station';
-    // test onClickClusterButton value change
-    document.getElementById('map-user-selections').innerHTML = onClickClusterButton;
-    infowindow.close();
-    map.setCenter(place.geometry.location);
-  };
-  subwayMarkers.onclick = function() {
-    onClickClusterButton ='subway_station';
-    // test onClickClusterButton value change
-    document.getElementById('map-user-selections').innerHTML = onClickClusterButton;
-    infowindow.close();
-    map.setCenter(place.geometry.location);
-  };
-  taxiMarkers.onclick = function() {
-    onClickClusterButton ='taxi_stand';
-    // test onClickClusterButton value change
-    document.getElementById('map-user-selections').innerHTML = onClickClusterButton;
-    infowindow.close();
-    map.setCenter(place.geometry.location);
-  };
-  airportMarkers.onclick = function() {
-    onClickClusterButton ='airport';
-    // test onClickClusterButton value change
-    document.getElementById('map-user-selections').innerHTML = onClickClusterButton;
-    infowindow.close();
-    map.setCenter(place.geometry.location);
-  };
+        function(results, status, pagination) {
+          if (status !== 'OK') return;
 
-  // NEXT STEP
-  // ---------
-  // Trying to define a global function for ervice.nearbySearch
-  // including the results and the markers pagination. 
-  
-  // Perform a nearby search.
-  // https://developers.google.com/maps/documentation/javascript/places
+          createMarkers(results);
+          // moreButton.disabled = !pagination.hasNextPage;
+          getNextPage = pagination.hasNextPage && function() {
+              pagination.nextPage();
+          };
+        }
+      );
+      function createMarkers(places) {
 
-  // service.nearbySearch( {location: place.geometry.location, radius: 500, type: ['lodging']},
-  service.nearbySearch({location: place.geometry.location, radius: 500, type: onClickClusterButton},
- 
-  function(results, status, pagination) {
-    if (status !== 'OK') return;
+        // var bounds = new google.maps.LatLngBounds();
+        var serviceList = document.getElementById('map-displayed-markers');
 
-      createMarkers(results);
-      // moreButton.disabled = !pagination.hasNextPage;
-      getNextPage = pagination.hasNextPage && function() {
-        pagination.nextPage();
-      };
-    });
+        for (var i = 0, place; place = places[i]; i++) {
+          var image = {
+            url: place.icon,
+            size: new google.maps.Size(71, 71),
+            origin: new google.maps.Point(0, 0),
+            anchor: new google.maps.Point(17, 34),
+            scaledSize: new google.maps.Size(25, 25)
+          };
 
-  // RESULTS PAGINATION
-  // ------------------
-  // https://developers.google.com/maps/documentation/javascript/examples/place-search-pagination
-  var getNextPage = null;
-  // var moreButton = document.getElementById('more');
-        
-  // moreButton.onclick = function() {
-  //     moreButton.disabled = true;
-  //     if (getNextPage) getNextPage();
-  //   }; 
-  
-  function createMarkers(places) {
+          var marker = new google.maps.Marker({
+            map: map,
+            icon: image,
+            title: place.name,
+            position: place.geometry.location
+          });
+          
 
-    // var bounds = new google.maps.LatLngBounds();
-    var serviceList = document.getElementById('map-displayed-markers');
+          var li = document.createElement('li');
+          li.textContent = place.name;
+          serviceList.appendChild(li);
+        }          
+      }
+    }; 
+     
+    foodMarkers.onclick = function() {
+      onClickClusterButton ='restaurant';
+      // test onClickClusterButton value change
+      document.getElementById('map-user-selections').innerHTML = onClickClusterButton;
+      infowindow.close();
+      map.setCenter(place.geometry.location);
+    };
+    pubMarkers.onclick = function() {
+      onClickClusterButton ='nigth_club';
+      // test onClickClusterButton value change
+      document.getElementById('map-user-selections').innerHTML = onClickClusterButton;
+      infowindow.close();
+      map.setCenter(place.geometry.location);
+    };
+    atmMarkers.onclick = function() {
+      onClickClusterButton ='atm';
+      // test onClickClusterButton value change
+      document.getElementById('map-user-selections').innerHTML = onClickClusterButton;
+      infowindow.close();
+      map.setCenter(place.geometry.location);
+    };
+    museumMarkers.onclick = function() {
+      onClickClusterButton ='museum';
+      // test onClickClusterButton value change
+      document.getElementById('map-user-selections').innerHTML = onClickClusterButton;
+      infowindow.close();
+      map.setCenter(place.geometry.location);
+    };
+    galleryMarkers.onclick = function() {
+      onClickClusterButton ='art_gallery';
+      // test onClickClusterButton value change
+      document.getElementById('map-user-selections').innerHTML = onClickClusterButton;
+      infowindow.close();
+      map.setCenter(place.geometry.location);
+    };
+    zooMarkers.onclick = function() {
+      onClickClusterButton ='zoo';
+      // test onClickClusterButton value change
+      document.getElementById('map-user-selections').innerHTML = onClickClusterButton;
+      infowindow.close();
+      map.setCenter(place.geometry.location);
+    };
+    stadiumMarkers.onclick = function() {
+      onClickClusterButton ='stadium';
+      // test onClickClusterButton value change
+      document.getElementById('map-user-selections').innerHTML = onClickClusterButton;
+      infowindow.close();
+      map.setCenter(place.geometry.location);
+    };
+    busMarkers.onclick = function() {
+      onClickClusterButton ='bus_station';
+      // test onClickClusterButton value change
+      document.getElementById('map-user-selections').innerHTML = onClickClusterButton;
+      infowindow.close();
+      map.setCenter(place.geometry.location);
+    };
+    subwayMarkers.onclick = function() {
+      onClickClusterButton ='subway_station';
+      // test onClickClusterButton value change
+      document.getElementById('map-user-selections').innerHTML = onClickClusterButton;
+      infowindow.close();
+      map.setCenter(place.geometry.location);
+    };
+    taxiMarkers.onclick = function() {
+      onClickClusterButton ='taxi_stand';
+      // test onClickClusterButton value change
+      document.getElementById('map-user-selections').innerHTML = onClickClusterButton;
+      infowindow.close();
+      map.setCenter(place.geometry.location);
+    };
+    airportMarkers.onclick = function() {
+      onClickClusterButton ='airport';
+      // test onClickClusterButton value change
+      document.getElementById('map-user-selections').innerHTML = onClickClusterButton;
+      infowindow.close();
+      map.setCenter(place.geometry.location);
+    };
 
-    for (var i = 0, place; place = places[i]; i++) {
-      var image = {
-        url: place.icon,
-        size: new google.maps.Size(71, 71),
-        origin: new google.maps.Point(0, 0),
-        anchor: new google.maps.Point(17, 34),
-        scaledSize: new google.maps.Size(25, 25)
-      };
+    // NEXT STEP
+    // ---------
+    // Trying to define a global function for ervice.nearbySearch
+    // including the results and the markers pagination. 
+    
 
-      // var marker = new google.maps.Marker({
-      //   map: map,
-      //   icon: image,
-      //   title: place.name,
-      //   position: place.geometry.location
-      // });
-      
 
-      var li = document.createElement('li');
-      li.textContent = place.name;
-      serviceList.appendChild(li);
+    // RESULTS PAGINATION
+    // ------------------
+    // https://developers.google.com/maps/documentation/javascript/examples/place-search-pagination
+    var getNextPage = null;
+    // var moreButton = document.getElementById('more');
+          
+    // moreButton.onclick = function() {
+    //     moreButton.disabled = true;
+    //     if (getNextPage) getNextPage();
+    //   }; 
+    
 
-      // bounds.extend(place.geometry.location);
-    }
-    // map.fitBounds(bounds);    
-  }
 }); // End of autocomplete.addListener()
   
 
