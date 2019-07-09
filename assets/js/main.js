@@ -280,7 +280,7 @@ function initMap() {
             // anchor: new google.maps.Point(17, 34),
             scaledSize: new google.maps.Size(25, 25),
             // https://stackoverflow.com/questions/37441729/google-maps-custom-label-x-and-y-position
-            labelOrigin: new google.maps.Point(10,0),
+            labelOrigin: new google.maps.Point(12,0),
           };
 
 
@@ -298,9 +298,28 @@ function initMap() {
           });
           
           serviceMarker.addListener('click', function(){
-                serviceInfowindow = new google.maps.InfoWindow(),//{content: contentString}
-                serviceInfowindow.open()
-                });
+            serviceInfowindow = new google.maps.InfoWindow();//{content: contentString}
+            serviceInfowindow.open(map, serviceMarker);
+            // To set the values retrieved from the calllback function to different HTML elements in the modal form.      
+            document.getElementById('infowindow-heading').innerHTML = place.name; 
+
+            // To select the first image available using a call back function as method to another previous function
+            // and store it into a variable.
+            var placeImg = place.photos[0].getUrl({maxWidth: 300, maxHeight: 300});
+          
+            // To create an img object and set its attributes using a variable
+            // and append its value to the infowindow HTML snippet element. 
+            var img = document.createElement("img");    
+            img.setAttribute('src', placeImg);
+            
+            // To avoid the appending of more than one picture when click on marker several times
+            var infowindowImageCount = document.getElementById('infowindow-image').childElementCount;
+            if (infowindowImageCount >0) {
+              document.getElementById('infowindow-image').removeChild(img);
+              } else {
+                document.getElementById('infowindow-image').appendChild(img); 
+            }   
+            });
           
 
           var li = document.createElement('li');
