@@ -1,0 +1,17 @@
+
+// To create the 'map' object, updating the values defined in a variable.
+// https://developers.google.com/maps/documentation/javascript/examples/map-simple
+
+// To hide all labels from map
+// https://mapstyle.withgoogle.com/
+
+// To create the 'marker' object, setting the options usig a variable previously defined.
+// https://developers.google.com/maps/documentation/javascript/markers
+
+// To define into a variable the options selected to modify the marker behaviour an its style.
+// https://developers.google.com/maps/documentation/javascript/examples/marker-animations
+
+// https://developers.google.com/maps/documentation/javascript/examples/overlay-popup
+
+// To create the 'infowindow' object, setting the content retrieved using a variable previously defined.
+// https://developers.google.com/maps/documentation/javascript/infowindows

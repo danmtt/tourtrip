@@ -1,9 +1,7 @@
-
-// Global variables
-var map, autocomplete, placeInfowindow,serviceInfowindow, service; // OBJECTS
-var mapCanvas, mapOptions; // map variables
+var map, marker;
+var autocomplete, placeInfowindow,serviceInfowindow, service; // OBJECTS
 var contentString; // Infowindow content
-var markerMapOptions; // To set the style of the main marker in map (place)
+
 
 var markers = [];
 var place,bounds;
@@ -13,18 +11,14 @@ var service;
 // Map function.
 function initMap() {
 
-  // OBJECTS UPDATE
-  // --------------
-
-  // MAP Object -----------------------------------------------------------------------------------
-  // To define into a variable in which HTML element the map should be diplayed.
-  var mapCanvas = document.getElementById("map");
-  // To define into a variable the options to use with the map.  
-  var mapOptions = {
+  // map Object ("HTML element", {options})
+  map = new google.maps.Map(document.getElementById("map"),{
+    // To disable all map controls
     disableDefaultUI: true,
+    // To display an specific type of map
     mapTypeId: 'satellite',
-    // to hide all labels from map
-    // https://mapstyle.withgoogle.com/
+    zoom:5,
+    // To empty map completely
     styles: [
       {
         "elementType": "labels",
@@ -43,29 +37,16 @@ function initMap() {
         ]
       }
     ]
-    
-  };
-  // To create the 'map' object, updating the values defined in a variable.
-  // https://developers.google.com/maps/documentation/javascript/examples/map-simple
-  map = new google.maps.Map(mapCanvas, mapOptions);
-  
-  // MARKER Object  -------------------------------------------------------------------------------
-  // To define into a variable the options selected to modify the marker vehabiour an its style.
-  // https://developers.google.com/maps/documentation/javascript/examples/marker-animations 
-  var markerOptions = {
-    animation: google.maps.Animation.BOUNCE,
+  });
+
+   // marker Object ({options})
+  marker = new google.maps.Marker({
     label: "Your destination",
-    title: "Click to zoom"
-    // https://developers.google.com/maps/documentation/javascript/examples/overlay-popup
-    // icon: iconImage + 'parking_lot_maps.png',
-  };
-  // To create the 'marker' object, setting the options usig a variable previously defined.
-  // https://developers.google.com/maps/documentation/javascript/markers
-  marker = new google.maps.Marker(markerOptions)
+    title: "Click to zoom",
+    animation: google.maps.Animation.BOUNCE
+  });
   
-  // INFOWINDOW Object  ---------------------------------------------------------------------------
-  // To define into a variable the infowindow structure, storing inside an HTML Snippet 
-  // in which to release the content retrieved
+  // infoiwindow Object + {content}
   contentString =
   '<div id="infowindow-content" class="d-flex flex-column justify-content-center ">'+
     '<h1 id="infowindow-heading" class="justify-content-center text-center"></h1>'+
@@ -74,10 +55,7 @@ function initMap() {
       '<div id="infowindow-image" class="justify-content-center img-responsive center-block"></div>' +
     '</div>'+
   '</div>';
-  // To create the 'infowindow' object, setting the content retrieved using a variable 
-  // previously defined.
-  // https://developers.google.com/maps/documentation/javascript/infowindows
-  placeInfowindow = new google.maps.InfoWindow({content: contentString});
+  infowindow = new google.maps.InfoWindow({content: contentString});
  
   // AUTOCOMPLETE Object  -------------------------------------------------------------------------
   // To define which HTML element is the input search box, setting that info in a variable.
@@ -102,7 +80,7 @@ function initMap() {
   // To add a listening method to the 'autocomplete' object,
   // that will run a custom callback function in response to the media query status changing.
   autocomplete.addListener('place_changed', function() {
-    placeInfowindow.close();
+    infowindow.close();
 
     // To add the marker created into the map.
     marker.setMap(map);
@@ -154,7 +132,7 @@ function initMap() {
       map.setZoom(15); // Zoom
       map.setMapTypeId("roadmap"); // TypeId
       
-      placeInfowindow.open(map, marker);
+      infowindow.open(map, marker);
       // To set the values retrieved from the calllback function to different HTML elements in the modal form.      
       document.getElementById('infowindow-heading').innerHTML = place.name; 
 
@@ -180,7 +158,7 @@ function initMap() {
     // this one dissapears and the map is centered to the marker position  
     
     map.addListener('click', function() {
-      placeInfowindow.close();
+      infowindow.close();
       map.setCenter(place.geometry.location);
     });
     
@@ -232,7 +210,7 @@ function initMap() {
     // };
 
     hotelMarkers.onclick = function() {      
-      placeInfowindow.close();
+      infowindow.close();
       map.setCenter(place.geometry.location);
       map.setZoom(15); // Zoom
       map.setMapTypeId("roadmap"); // TypeId
