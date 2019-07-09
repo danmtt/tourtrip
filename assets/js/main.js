@@ -4,6 +4,8 @@ var map, autocomplete, infowindow, service; // OBJECTS
 var mapCanvas, mapOptions; // map variables
 var contentString; // Infowindow content
 var markerMapOptions; // To set the style of the main marker in map (place)
+
+var markers = [];
 var place,bounds;
 var onClickClusterButton;
 var service;
@@ -221,6 +223,14 @@ function initMap() {
     
     // document.getElementById('map-user-selections').innerHTML = service.type;
 
+    
+    // function clearMarkers() {
+    //   for (var i = 0; i < markers.length; i++) {
+    //     markers[i].setMap(null);
+    //   }
+    //   markers = [];
+    // };
+
     hotelMarkers.onclick = function() {      
       infowindow.close();
       map.setCenter(place.geometry.location);
@@ -229,28 +239,38 @@ function initMap() {
       onClickClusterButton ='lodging';
 
       // including the service into the .onclick event functionality make it works as desired, but...
-            
+      
+                // To clear previous services existing markers
+                // clearMarkers();
+                // markers.setMap(null);
+
       // Perform a nearby search.
       // https://developers.google.com/maps/documentation/javascript/places
 
       service.nearbySearch({location: place.geometry.location, radius: 500, type: onClickClusterButton},
   
-        function(results, status, pagination) {
-          if (status !== 'OK') return;
+      function(results, status, pagination) {
+        if (status !== 'OK') return;
 
-          createMarkers(results);
-          // moreButton.disabled = !pagination.hasNextPage;
-          getNextPage = pagination.hasNextPage && function() {
-              pagination.nextPage();
-          };
-        }
+        createMarkers(results);
+        // moreButton.disabled = !pagination.hasNextPage;
+        getNextPage = pagination.hasNextPage && function() {
+            pagination.nextPage();
+        };
+      }
       );
+
       function createMarkers(places) {
+        if (marker && marker.setMap) {
+          marker.setMap(null);
+        }
 
         // var bounds = new google.maps.LatLngBounds();
         var serviceList = document.getElementById('map-displayed-markers');
 
         for (var i = 0, place; place = places[i]; i++) {
+          // marker.setAnimation(google.maps.Animation.DROP);
+
           var image = {
             url: place.icon,
             size: new google.maps.Size(71, 71),
@@ -263,7 +283,9 @@ function initMap() {
             map: map,
             icon: image,
             title: place.name,
-            position: place.geometry.location
+            // label: place.name,
+            position: place.geometry.location,
+            animation: google.maps.Animation.DROP,
           });
           
 
@@ -281,28 +303,38 @@ function initMap() {
       onClickClusterButton ='restaurant';
 
       // including the service into the .onclick event functionality make it works as desired, but...
-            
+      
+                // To clear previous services existing markers
+                // clearMarkers();
+                // markers.setMap(null);
+
       // Perform a nearby search.
       // https://developers.google.com/maps/documentation/javascript/places
 
       service.nearbySearch({location: place.geometry.location, radius: 500, type: onClickClusterButton},
   
-        function(results, status, pagination) {
-          if (status !== 'OK') return;
+      function(results, status, pagination) {
+        if (status !== 'OK') return;
 
-          createMarkers(results);
-          // moreButton.disabled = !pagination.hasNextPage;
-          getNextPage = pagination.hasNextPage && function() {
-              pagination.nextPage();
-          };
-        }
+        createMarkers(results);
+        // moreButton.disabled = !pagination.hasNextPage;
+        getNextPage = pagination.hasNextPage && function() {
+            pagination.nextPage();
+        };
+      }
       );
+
       function createMarkers(places) {
+        if (marker && marker.setMap) {
+          marker.setMap(null);
+        }
 
         // var bounds = new google.maps.LatLngBounds();
         var serviceList = document.getElementById('map-displayed-markers');
 
         for (var i = 0, place; place = places[i]; i++) {
+          // marker.setAnimation(google.maps.Animation.DROP);
+
           var image = {
             url: place.icon,
             size: new google.maps.Size(71, 71),
@@ -315,7 +347,9 @@ function initMap() {
             map: map,
             icon: image,
             title: place.name,
-            position: place.geometry.location
+            // label: place.name,
+            position: place.geometry.location,
+            animation: google.maps.Animation.DROP,
           });
           
 
@@ -324,8 +358,8 @@ function initMap() {
           serviceList.appendChild(li);
         }          
       }
-    };  
-
-    
+    };
+  
+  
   }); // End of autocomplete.addListener()
 }; // End of initMap()
