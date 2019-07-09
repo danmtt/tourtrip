@@ -1,6 +1,6 @@
 
 // Global variables
-var map, autocomplete, infowindow, service; // OBJECTS
+var map, autocomplete, placeInfowindow,serviceInfowindow, service; // OBJECTS
 var mapCanvas, mapOptions; // map variables
 var contentString; // Infowindow content
 var markerMapOptions; // To set the style of the main marker in map (place)
@@ -77,7 +77,7 @@ function initMap() {
   // To create the 'infowindow' object, setting the content retrieved using a variable 
   // previously defined.
   // https://developers.google.com/maps/documentation/javascript/infowindows
-  infowindow = new google.maps.InfoWindow({content: contentString});
+  placeInfowindow = new google.maps.InfoWindow({content: contentString});
  
   // AUTOCOMPLETE Object  -------------------------------------------------------------------------
   // To define which HTML element is the input search box, setting that info in a variable.
@@ -102,7 +102,7 @@ function initMap() {
   // To add a listening method to the 'autocomplete' object,
   // that will run a custom callback function in response to the media query status changing.
   autocomplete.addListener('place_changed', function() {
-    infowindow.close();
+    placeInfowindow.close();
 
     // To add the marker created into the map.
     marker.setMap(map);
@@ -154,7 +154,7 @@ function initMap() {
       map.setZoom(15); // Zoom
       map.setMapTypeId("roadmap"); // TypeId
       
-      infowindow.open(map, marker);
+      placeInfowindow.open(map, marker);
       // To set the values retrieved from the calllback function to different HTML elements in the modal form.      
       document.getElementById('infowindow-heading').innerHTML = place.name; 
 
@@ -180,7 +180,7 @@ function initMap() {
     // this one dissapears and the map is centered to the marker position  
     
     map.addListener('click', function() {
-      infowindow.close();
+      placeInfowindow.close();
       map.setCenter(place.geometry.location);
     });
     
@@ -232,7 +232,7 @@ function initMap() {
     // };
 
     hotelMarkers.onclick = function() {      
-      infowindow.close();
+      placeInfowindow.close();
       map.setCenter(place.geometry.location);
       map.setZoom(15); // Zoom
       map.setMapTypeId("roadmap"); // TypeId
@@ -261,32 +261,46 @@ function initMap() {
       );
 
       function createMarkers(places) {
-        if (marker && marker.setMap) {
+        if (serviceMarker && serviceMarker.setMap) {
           marker.setMap(null);
         }
-
+        
         // var bounds = new google.maps.LatLngBounds();
         var serviceList = document.getElementById('map-displayed-markers');
+        
+        var labels = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ';
+        var labelIndex = 0;
 
-        for (var i = 0, place; place = places[i]; i++) {
-          // marker.setAnimation(google.maps.Animation.DROP);
+        for (var i = 0, place; place = places[i]; i++) {  
 
-          var image = {
+          var serviceImage = {
             url: place.icon,
-            size: new google.maps.Size(71, 71),
+            size: new google.maps.Size(60, 60),
             origin: new google.maps.Point(0, 0),
-            anchor: new google.maps.Point(17, 34),
-            scaledSize: new google.maps.Size(25, 25)
+            // anchor: new google.maps.Point(17, 34),
+            scaledSize: new google.maps.Size(25, 25),
+            // https://stackoverflow.com/questions/37441729/google-maps-custom-label-x-and-y-position
+            labelOrigin: new google.maps.Point(10,0),
           };
 
-          var marker = new google.maps.Marker({
+
+          var serviceMarker = new google.maps.Marker({
             map: map,
-            icon: image,
+            icon: serviceImage,
             title: place.name,
+            // https://developers.google.com/maps/documentation/javascript/examples/marker-labels
+            // https://github.com/jesstelford/node-MarkerWithLabel
+            label: labels[labelIndex++ % labels.length],
+            
             // label: place.name,
             position: place.geometry.location,
             animation: google.maps.Animation.DROP,
           });
+          
+          serviceMarker.addListener('click', function(){
+                serviceInfowindow = new google.maps.InfoWindow(),//{content: contentString}
+                serviceInfowindow.open()
+                });
           
 
           var li = document.createElement('li');
@@ -298,7 +312,7 @@ function initMap() {
     foodMarkers.onclick = function() {      
       infowindow.close();
       map.setCenter(place.geometry.location);
-      map.setZoom(15); // Zoom
+      map.setZoom(20); // Zoom
       map.setMapTypeId("roadmap"); // TypeId
       onClickClusterButton ='restaurant';
 
@@ -362,4 +376,10 @@ function initMap() {
   
   
   }); // End of autocomplete.addListener()
+
+  var centerControlDiv = document.createElement('div');
+  var centerControl = new CenterControl(centerControlDiv, map);
+
+  centerControlDiv.index = 1;
+  map.controls[google.maps.ControlPosition.TOP_CENTER].push(centerControlDiv);
 }; // End of initMap()
