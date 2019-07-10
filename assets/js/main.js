@@ -1,7 +1,8 @@
-var map, marker,infowindow; // map objects declaration
-var autocomplete, placeInfowindow,serviceInfowindow, service; // OBJECTS
-var contentString; // Infowindow content
+// Global scope declarations
+var map, marker, infowindow, autocomplete, service; // map objects declaration
 
+var placeInfowindow,serviceInfowindow, service; // OBJECTS
+var contentString; // Infowindow content
 
 var markers = [];
 var place,bounds;
@@ -11,6 +12,7 @@ var service;
 // map function
 function initMap() {
 
+  // Objects' Definitions
   // map Object ("HTML element", {options})
   map = new google.maps.Map(document.getElementById("map"),{
     // To disable all map controls
@@ -38,14 +40,12 @@ function initMap() {
       }
     ]
   });
-
-   // marker Object ({options})
+  // marker Object ({options})
   marker = new google.maps.Marker({
     label: "Your destination",
     title: "Click to zoom",
     animation: google.maps.Animation.BOUNCE
-  });
-  
+  });  
   // infowindow Object + {content: HTML snippet}
   infowindow = new google.maps.InfoWindow({content: 
     '<div id="infowindow-content" class="d-flex flex-column justify-content-center ">'+
@@ -56,31 +56,21 @@ function initMap() {
     '</div>'+
   '</div>'
   });
- 
-  // AUTOCOMPLETE Object  -------------------------------------------------------------------------
-  // To define which HTML element is the input search box, setting that info in a variable.
-  var searchInput = document.getElementById("search-input");
-  // To define the search options to use with autocomplete, restricting the search to cities. 
-  // This is to avoid street searches...
-  var searchOptions = {
-    type: ['(cities)'],
-  };
-  // To create the 'autocomplete' object, updating the values defined in two variables.
-  // https://developers.google.com/maps/documentation/javascript/examples/places-autocomplete
-  autocomplete = new google.maps.places.Autocomplete(searchInput, searchOptions);
-
-  // To set 'bounds' values into map created.
-  autocomplete.bindTo('bounds', map); 
-   
-  // SERVICE Object  ----------------------------------------------------------------------------- 
-  // To create the 'service' object, relating the information to map created.
-  //https://developers.google.com/maps/documentation/javascript/examples/place-search-pagination
+  // autocomplete Object ("HTML element", {options})
+  autocomplete = new google.maps.places.Autocomplete(document.getElementById("search-input"), {
+     // Places type specification to avoid street searches
+     type: ['(cities)']
+  });
+  // service Object (object referral) ----------------------------------------------------------------------------- 
   service = new google.maps.places.PlacesService(map); 
   
-  // To add a listening method to the 'autocomplete' object,
-  // that will run a custom callback function in response to the media query status changing.
+  // Objects' Methods
+  // autocomplete Methods
+  // To set 'bounds' values into map created.
+  autocomplete.bindTo('bounds', map);  
+  // To add a listening method to return a response due to the media query status changing.
   autocomplete.addListener('place_changed', function() {
-    infowindow.close();
+    // To close and reset any previous value set to this object.
 
     // To add the marker created into the map.
     marker.setMap(map);
