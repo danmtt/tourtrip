@@ -1,4 +1,4 @@
-var map, marker;
+var map, marker,infowindow; // map objects declaration
 var autocomplete, placeInfowindow,serviceInfowindow, service; // OBJECTS
 var contentString; // Infowindow content
 
@@ -8,7 +8,7 @@ var place,bounds;
 var onClickClusterButton;
 var service;
 
-// Map function.
+// map function
 function initMap() {
 
   // map Object ("HTML element", {options})
@@ -46,16 +46,16 @@ function initMap() {
     animation: google.maps.Animation.BOUNCE
   });
   
-  // infoiwindow Object + {content}
-  contentString =
-  '<div id="infowindow-content" class="d-flex flex-column justify-content-center ">'+
+  // infowindow Object + {content: HTML snippet}
+  infowindow = new google.maps.InfoWindow({content: 
+    '<div id="infowindow-content" class="d-flex flex-column justify-content-center ">'+
     '<h1 id="infowindow-heading" class="justify-content-center text-center"></h1>'+
     '<div id="bodyContent">'+
       '<div id="infowindow-description" class="text-center">Your destination is in <b><span id="place-type">(country)</span></b></div>'+
       '<div id="infowindow-image" class="justify-content-center img-responsive center-block"></div>' +
     '</div>'+
-  '</div>';
-  infowindow = new google.maps.InfoWindow({content: contentString});
+  '</div>'
+  });
  
   // AUTOCOMPLETE Object  -------------------------------------------------------------------------
   // To define which HTML element is the input search box, setting that info in a variable.
