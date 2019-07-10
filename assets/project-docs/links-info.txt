@@ -15,3 +15,10 @@
 
 // To create the 'infowindow' object, setting the content retrieved using a variable previously defined.
 // https://developers.google.com/maps/documentation/javascript/infowindows
+
+// To create the 'autocomplete' object, updating the values defined in two variables.
+// https://developers.google.com/maps/documentation/javascript/examples/places-autocomplete
+
+// To create the 'service' object, relating the information to map created.
+//https://developers.google.com/maps/documentation/javascript/examples/place-search-pagination
+

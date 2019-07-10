@@ -1,6 +1,6 @@
 // Global scope declarations
 var map, marker, infowindow, autocomplete, service; // map objects declaration
-
+var place; // autocomplete objects declaration
 var placeInfowindow,serviceInfowindow, service; // OBJECTS
 var contentString; // Infowindow content
 
@@ -70,12 +70,20 @@ function initMap() {
   autocomplete.bindTo('bounds', map);  
   // To add a listening method to return a response due to the media query status changing.
   autocomplete.addListener('place_changed', function() {
-    // To close and reset any previous value set to this object.
+    
+    // Objects' Definition
+    // place Object()
+    place = autocomplete.getPlace(); // This callback should return all places features to an array, inside a variabke
+    // console.log (place); // Object check purposes only
 
-    // To add the marker created into the map.
-    marker.setMap(map);
+    // Objects' Methods called inside autocomplete (related to its results)
+    infowindow.close(); // To close and reset any previous value set to this object    
+    marker.setMap(map); // To add the marker (related to autocomplete results) into the map.  
+    map.setCenter(place.geometry.location); // To set the center of the map referred to the place searched 
+    map.setZoom(3); 
 
-    place = autocomplete.getPlace();
+
+    // Document statements
     // To add the name of the place searched into one of the HTML modal's elements
     document.getElementById('destination').innerHTML = place.name;
 
@@ -88,8 +96,7 @@ function initMap() {
       return;
     };
     
-    map.setCenter(place.geometry.location);
-    map.setZoom(3); 
+
 
     // This condition checks if the place has a geometry,
     // then present the place zoomed in the map.
