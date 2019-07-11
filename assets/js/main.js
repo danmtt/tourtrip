@@ -1,11 +1,12 @@
 // Global scope declarations
 var map, marker, infowindow, autocomplete, service; // map objects declaration
-var place; // autocomplete objects declaration
+var searchInput; // autocomplete search box
+// var place; // autocomplete objects declaration
 var placeInfowindow,serviceInfowindow, service; // OBJECTS
 var contentString; // Infowindow content
 
 var markers = [];
-var place,bounds;
+// var place,bounds;
 var onClickClusterButton;
 var service;
 
@@ -56,58 +57,51 @@ function initMap() {
     '</div>'+
   '</div>'
   });
-  // autocomplete Object ("HTML element", {options})
-  autocomplete = new google.maps.places.Autocomplete(document.getElementById("search-input"), {
+  // autocomplete Object ("HTML element"set into a variable, {options})
+  var searchInput = document.getElementById("search-input"); 
+  autocomplete = new google.maps.places.Autocomplete(searchInput, {
      // Places type specification to avoid street searches
      type: ['(cities)']
   });
-  // service Object (object referral) ----------------------------------------------------------------------------- 
+  // service Object (object referral)
   service = new google.maps.places.PlacesService(map); 
   
   // Objects' Methods
   // autocomplete Methods
-  // To set 'bounds' values into map created.
-  autocomplete.bindTo('bounds', map);  
+ 
+  autocomplete.bindTo('bounds', map);   // To set 'bounds' values into map created.
   // To add a listening method to return a response due to the media query status changing.
   autocomplete.addListener('place_changed', function() {
     
     // Objects' Definition
     // place Object()
-    place = autocomplete.getPlace(); // This callback should return all places features to an array, inside a variabke
+    var place = autocomplete.getPlace(); // This callback should return all places features to an array, inside a variabke
     // console.log (place); // Object check purposes only
 
     // Objects' Methods called inside autocomplete (related to its results)
-    infowindow.close(); // To close and reset any previous value set to this object    
-    marker.setMap(map); // To add the marker (related to autocomplete results) into the map.  
-    map.setCenter(place.geometry.location); // To set the center of the map referred to the place searched 
-    map.setZoom(3); 
+    infowindow.close(); // To close and reset any previous value set to this object 
 
-
-    // Document statements
-    // To add the name of the place searched into one of the HTML modal's elements
-    document.getElementById('destination').innerHTML = place.name;
-
-    
-    // This condition checks if the name of a Place introduced
-    // by the user after pressing the Enter key (not the Search button),
-    // hasn't been suggested, or if the Place Details request failed.
-    if (!place.geometry) {
-      window.alert("No details available for input: '" + place.name + "'");
+    // Condition to cheeck if the name of a place typed in searchInput is empty
+    // or hasn't been suggested, or if the Place Details request failed.
+    if (!place.geometry || searchInput ==='') {
+      window.alert("Please, select one of the suggested places and click on 'Search'. There are no current details available for your selection : '" + place.name + "'");
       return;
     };
-    
 
+  // Execute a function when the user releases a key on the keyboard
+    searchInput.addEventListener("keyup", function(event) {
+      // Number 13 is the "Enter" key on the keyboard
+      if (event.keyCode === 13 ) {
+        // Cancel the default action, if needed
+          event.preventDefault();
+        // Trigger the button element with a click
+        document.getElementById("search-btn").click();
+  
+      }
+      });
 
-    // This condition checks if the place has a geometry,
-    // then present the place zoomed in the map.
-    // if (place.geometry.viewport) {
-    //   map.setCenter(place.geometry.location);
-    //   map.fitBounds(place.geometry.viewport);
-    //   map.setZoom(10);
-    // } else {
-    //   map.setCenter(place.geometry.location);
-    //   map.setZoom(10);
-    // }    
+    map.setCenter(place.geometry.location);
+    map.setZoom(3);        
 
     // Set the position of the marker using the place ID and location.
     marker.setPlace({
@@ -377,3 +371,12 @@ function initMap() {
   centerControlDiv.index = 1;
   map.controls[google.maps.ControlPosition.TOP_CENTER].push(centerControlDiv);
 }; // End of initMap()
+
+
+// DUSTBIN ------------------------------------------------------------------------------------
+
+    // Object definition to use in event listener, looking for an 'Enter' key stroke in the keyboard
+    // after autocomplete and user has done the writing in to search-Box
+    // var searchInput = document.getElementById("search-input");
+    
+  

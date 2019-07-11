@@ -10,7 +10,6 @@
 
 // To define into a variable the options selected to modify the marker behaviour an its style.
 // https://developers.google.com/maps/documentation/javascript/examples/marker-animations
-
 // https://developers.google.com/maps/documentation/javascript/examples/overlay-popup
 
 // To create the 'infowindow' object, setting the content retrieved using a variable previously defined.
@@ -21,4 +20,7 @@
 
 // To create the 'service' object, relating the information to map created.
 //https://developers.google.com/maps/documentation/javascript/examples/place-search-pagination
+
+// Link to info about 'if' statements
+// https://stackoverflow.com/questions/2363840/how-to-use-or-condition-in-a-javascript-if-statement
 
