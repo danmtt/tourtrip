@@ -5,7 +5,7 @@ var searchInput; // autocomplete search box
 var placeInfowindow,serviceInfowindow; // OBJECTS
 var contentString; // Infowindow content
 
-var markers = [];
+var markers;
 var place,bounds;
 var onClickClusterButton;
 // var service;
