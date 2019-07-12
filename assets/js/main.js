@@ -153,30 +153,8 @@ function initMap() {
       infowindow.close();
       map.setCenter(place.geometry.location);
     });
-    
- 
-  // display onClickClusterButton into an html element
-   
+
     var onClickClusterButton = '';
-
-    // Cluster buttons id list
-    // hotel-markers, food-markers, pub-markers, atm-markers, 
-    // museum-markers, gallery-markers, zoo-markers, stadium-markers,
-    // bus-markers,  subway-markers, taxi-markers, airport-markers
-
-    // Google maps search types values to assign to variable when onclick over an
-    // specific button with defined id. 
-    // https://developers.google.com/places/web-service/supported_types
-    // lodging, restaurant, nigth_club, atm, museum, art_gallery, zoo, stadium,
-    // bus_station, subway_station, taxi_stand, airport
-
-    // To assign the right value to a variable on different clicks
-    // https://stackoverflow.com/questions/7132547/set-a-variable-value-on-click-display-the-value
-    // Test to check that click on button works ok and the right value is set to the variable!
-    // https://stackoverflow.com/questions/4825295/javascript-onclick-to-get-the-id-of-the-clicked-button
-    // https://stackoverflow.com/questions/2788191/how-to-check-whether-a-button-is-clicked-by-using-javascript
-    // https://developer.mozilla.org/en-US/docs/Web/API/MouseEvent/button
-
     // Set variables for specific buttons id´s to check onClick events
     let hotelMarkers = document.querySelector('#hotel-markers');
     let foodMarkers = document.querySelector('#food-markers');
@@ -191,28 +169,27 @@ function initMap() {
     let taxiMarkers = document.querySelector('#taxi-markers');
     let airportMarkers = document.querySelector('#airport-markers');
     
-    // document.getElementById('map-user-selections').innerHTML = service.type;
 
-    
-    // function clearMarkers() {
-    //   for (var i = 0; i < markers.length; i++) {
-    //     markers[i].setMap(null);
-    //   }
-    //   markers = [];
-    // };
 
-    hotelMarkers.onclick = function() {      
+    hotelMarkers.onclick = function() {
+      // clearMarkers();    
       infowindow.close();
       map.setCenter(place.geometry.location);
       map.setZoom(15); // Zoom
       map.setMapTypeId("roadmap"); // TypeId
       onClickClusterButton ='lodging';
 
+      // function clearMarkers() {
+      //   for (var i = 0; i < erviceMmarkers.length; i++) {
+      //   serviceMarkers[i].setMap(null);
+      //   }
+      //   serviceMarkers = [];
+      // };
+
+      // Check display onClickClusterButton into an html element
+      document.getElementById('map-user-selections').innerHTML = onClickClusterButton;
+
       // including the service into the .onclick event functionality make it works as desired, but...
-      
-                // To clear previous services existing markers
-                // clearMarkers();
-                // markers.setMap(null);
 
       // Perform a nearby search.
       // https://developers.google.com/maps/documentation/javascript/places
@@ -230,8 +207,8 @@ function initMap() {
       );
 
       function createMarkers(places) {
-        if (serviceMarker && serviceMarker.setMap) {
-          // marker.setMap(null);
+        if (serviceMarkers && serviceMarkers.setMap) {
+          serviceMarkers.setMap(null);
         }
         
         // var bounds = new google.maps.LatLngBounds();
@@ -253,7 +230,7 @@ function initMap() {
           };
 
 
-          var serviceMarker = new google.maps.Marker({
+          var serviceMarkers = new google.maps.Marker({
             map: map,
             icon: serviceImage,
             title: place.name,
@@ -266,9 +243,9 @@ function initMap() {
             animation: google.maps.Animation.DROP,
           });
           
-          serviceMarker.addListener('click', function(){
+          serviceMarkers.addListener('click', function(){
             serviceInfowindow = new google.maps.InfoWindow();//{content: contentString}
-            serviceInfowindow.open(map, serviceMarker);
+            serviceInfowindow.open(map, serviceMarkers);
             // To set the values retrieved from the calllback function to different HTML elements in the modal form.      
             document.getElementById('infowindow-heading').innerHTML = place.name; 
 
@@ -289,9 +266,110 @@ function initMap() {
                 document.getElementById('infowindow-image').appendChild(img); 
             }   
             });
-          
 
-          var li = document.createElement('li');
+            var li = document.createElement('li');
+          li.textContent = place.name;
+          serviceList.appendChild(li);
+        }          
+      }
+    };
+
+    
+    foodMarkers.onclick = function() {
+      // clearMarkers();    
+      infowindow.close();
+      map.setCenter(place.geometry.location);
+      map.setZoom(15); // Zoom
+      map.setMapTypeId("roadmap"); // TypeId
+      onClickClusterButton ='restaurant';
+
+      // function clearMarkers() {
+      //   for (var i = 0; i < serviceMarkers.length; i++) {
+      //   serviceMarkers[i].setMap(null);
+      //   }
+      //   serviceMarkers = [];
+      // };
+
+      // Check display onClickClusterButton into an html element
+      document.getElementById('map-user-selections').innerHTML = onClickClusterButton;
+
+      // Perform a nearby search.
+      // https://developers.google.com/maps/documentation/javascript/places
+
+      service.nearbySearch({location: place.geometry.location, radius: 500, type: onClickClusterButton},  
+      function(results, status, pagination) {
+        if (status !== 'OK') return;
+
+        createMarkers(results);
+        // moreButton.disabled = !pagination.hasNextPage;
+        getNextPage = pagination.hasNextPage && function() {
+            pagination.nextPage();
+        };
+      }
+      );
+
+      function createMarkers(places) {
+        if (serviceMarkers && serviceMarkers.setMap) {
+          serviceMarkers.setMap(null);
+        }
+        
+        // var bounds = new google.maps.LatLngBounds();
+        var serviceList = document.getElementById('map-displayed-markers');
+        
+        var labels = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ';
+        var labelIndex = 0;
+
+        for (var i = 0, place; place = places[i]; i++) {  
+
+          var serviceImage = {
+            url: place.icon,
+            size: new google.maps.Size(60, 60),
+            origin: new google.maps.Point(0, 0),
+            // anchor: new google.maps.Point(17, 34),
+            scaledSize: new google.maps.Size(25, 25),
+            // https://stackoverflow.com/questions/37441729/google-maps-custom-label-x-and-y-position
+            labelOrigin: new google.maps.Point(12,0),
+          };
+
+
+          var serviceMarkers = new google.maps.Marker({
+            map: map,
+            icon: serviceImage,
+            title: place.name,
+            // https://developers.google.com/maps/documentation/javascript/examples/marker-labels
+            // https://github.com/jesstelford/node-MarkerWithLabel
+            label: labels[labelIndex++ % labels.length],
+            
+            // label: place.name,
+            position: place.geometry.location,
+            animation: google.maps.Animation.DROP,
+          });
+          
+          serviceMarkers.addListener('click', function(){
+            serviceInfowindow = new google.maps.InfoWindow();//{content: contentString}
+            serviceInfowindow.open(map, serviceMarkers);
+            // To set the values retrieved from the calllback function to different HTML elements in the modal form.      
+            document.getElementById('infowindow-heading').innerHTML = place.name; 
+
+            // To select the first image available using a call back function as method to another previous function
+            // and store it into a variable.
+            var placeImg = place.photos[0].getUrl({maxWidth: 300, maxHeight: 300});
+          
+            // To create an img object and set its attributes using a variable
+            // and append its value to the infowindow HTML snippet element. 
+            var img = document.createElement("img");    
+            img.setAttribute('src', placeImg);
+            
+            // To avoid the appending of more than one picture when click on marker several times
+            var infowindowImageCount = document.getElementById('infowindow-image').childElementCount;
+            if (infowindowImageCount >0) {
+              document.getElementById('infowindow-image').removeChild(img);
+              } else {
+                document.getElementById('infowindow-image').appendChild(img); 
+            }   
+            });
+
+            var li = document.createElement('li');
           li.textContent = place.name;
           serviceList.appendChild(li);
         }          
@@ -313,4 +391,21 @@ function initMap() {
     // after autocomplete and user has done the writing in to search-Box
     // var searchInput = document.getElementById("search-input");
     
-  
+    // Cluster buttons id list
+    // hotel-markers, food-markers, pub-markers, atm-markers, 
+    // museum-markers, gallery-markers, zoo-markers, stadium-markers,
+    // bus-markers,  subway-markers, taxi-markers, airport-markers
+
+        // Google maps search types values to assign to variable when onclick over an
+    // specific button with defined id. 
+    // https://developers.google.com/places/web-service/supported_types
+    // lodging, restaurant, nigth_club, atm, museum, art_gallery, zoo, stadium,
+    // bus_station, subway_station, taxi_stand, airport
+
+    
+    // To assign the right value to a variable on different clicks
+    // https://stackoverflow.com/questions/7132547/set-a-variable-value-on-click-display-the-value
+    // Test to check that click on button works ok and the right value is set to the variable!
+    // https://stackoverflow.com/questions/4825295/javascript-onclick-to-get-the-id-of-the-clicked-button
+    // https://stackoverflow.com/questions/2788191/how-to-check-whether-a-button-is-clicked-by-using-javascript
+    // https://developer.mozilla.org/en-US/docs/Web/API/MouseEvent/button
