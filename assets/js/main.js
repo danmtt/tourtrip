@@ -2,13 +2,13 @@
 var map, marker, infowindow, autocomplete, service; // map objects declaration
 var searchInput; // autocomplete search box
 // var place; // autocomplete objects declaration
-var placeInfowindow,serviceInfowindow, service; // OBJECTS
+var placeInfowindow,serviceInfowindow; // OBJECTS
 var contentString; // Infowindow content
 
 var markers = [];
-// var place,bounds;
+var place,bounds;
 var onClickClusterButton;
-var service;
+// var service;
 
 // map function
 function initMap() {
@@ -79,8 +79,9 @@ function initMap() {
     // console.log (place); // Object check purposes only
 
     // Objects' Methods called inside autocomplete (related to its results)
-    infowindow.close(); // To close and reset any previous value set to this object 
-
+    infowindow.close(); // To close and reset any previous value set to this object   
+    marker.setMap(map); // To add the marker created into the map
+    
     // Condition to cheeck if the name of a place typed in searchInput is empty
     // or hasn't been suggested, or if the Place Details request failed.
     if (!place.geometry || searchInput ==='') {
@@ -88,17 +89,17 @@ function initMap() {
       return;
     };
 
-  // Execute a function when the user releases a key on the keyboard
-    searchInput.addEventListener("keyup", function(event) {
-      // Number 13 is the "Enter" key on the keyboard
-      if (event.keyCode === 13 ) {
-        // Cancel the default action, if needed
-          event.preventDefault();
-        // Trigger the button element with a click
-        document.getElementById("search-btn").click();
+  // // Execute a function when the user releases a key on the keyboard
+  //   searchInput.addEventListener("keyup", function(event) {
+  //     // Number 13 is the "Enter" key on the keyboard
+  //     if (event.keyCode === 13 ) {
+  //       // Cancel the default action, if needed
+  //         event.preventDefault();
+  //       // Trigger the button element with a click
+  //       document.getElementById("search-btn").click();
   
-      }
-      });
+  //     }
+  //     });
 
     map.setCenter(place.geometry.location);
     map.setZoom(3);        
@@ -216,8 +217,7 @@ function initMap() {
       // Perform a nearby search.
       // https://developers.google.com/maps/documentation/javascript/places
 
-      service.nearbySearch({location: place.geometry.location, radius: 500, type: onClickClusterButton},
-  
+      service.nearbySearch({location: place.geometry.location, radius: 500, type: onClickClusterButton},  
       function(results, status, pagination) {
         if (status !== 'OK') return;
 
@@ -231,7 +231,7 @@ function initMap() {
 
       function createMarkers(places) {
         if (serviceMarker && serviceMarker.setMap) {
-          marker.setMap(null);
+          // marker.setMap(null);
         }
         
         // var bounds = new google.maps.LatLngBounds();
@@ -297,79 +297,13 @@ function initMap() {
         }          
       }
     };
-    foodMarkers.onclick = function() {      
-      infowindow.close();
-      map.setCenter(place.geometry.location);
-      map.setZoom(20); // Zoom
-      map.setMapTypeId("roadmap"); // TypeId
-      onClickClusterButton ='restaurant';
 
-      // including the service into the .onclick event functionality make it works as desired, but...
-      
-                // To clear previous services existing markers
-                // clearMarkers();
-                // markers.setMap(null);
-
-      // Perform a nearby search.
-      // https://developers.google.com/maps/documentation/javascript/places
-
-      service.nearbySearch({location: place.geometry.location, radius: 500, type: onClickClusterButton},
-  
-      function(results, status, pagination) {
-        if (status !== 'OK') return;
-
-        createMarkers(results);
-        // moreButton.disabled = !pagination.hasNextPage;
-        getNextPage = pagination.hasNextPage && function() {
-            pagination.nextPage();
-        };
-      }
-      );
-
-      function createMarkers(places) {
-        if (marker && marker.setMap) {
-          marker.setMap(null);
-        }
-
-        // var bounds = new google.maps.LatLngBounds();
-        var serviceList = document.getElementById('map-displayed-markers');
-
-        for (var i = 0, place; place = places[i]; i++) {
-          // marker.setAnimation(google.maps.Animation.DROP);
-
-          var image = {
-            url: place.icon,
-            size: new google.maps.Size(71, 71),
-            origin: new google.maps.Point(0, 0),
-            anchor: new google.maps.Point(17, 34),
-            scaledSize: new google.maps.Size(25, 25)
-          };
-
-          var marker = new google.maps.Marker({
-            map: map,
-            icon: image,
-            title: place.name,
-            // label: place.name,
-            position: place.geometry.location,
-            animation: google.maps.Animation.DROP,
-          });
-          
-
-          var li = document.createElement('li');
-          li.textContent = place.name;
-          serviceList.appendChild(li);
-        }          
-      }
-    };
-  
+    // foodMarkers.onclick = function() {      
+    //   } 
   
   }); // End of autocomplete.addListener()
 
-  var centerControlDiv = document.createElement('div');
-  var centerControl = new CenterControl(centerControlDiv, map);
 
-  centerControlDiv.index = 1;
-  map.controls[google.maps.ControlPosition.TOP_CENTER].push(centerControlDiv);
 }; // End of initMap()
 
 
