@@ -44,6 +44,7 @@ function initMap() {
   });
   // marker Object ({options})
   marker = new google.maps.Marker({
+    map: map,
     label: "Your destination",
     title: "Click to zoom",
     animation: google.maps.Animation.BOUNCE
@@ -163,8 +164,6 @@ function initMap() {
     let taxiMarkers = document.querySelector('#taxi-markers');
     let airportMarkers = document.querySelector('#airport-markers');
     
-
-
     hotelMarkers.onclick = function() {
       // clearMarkers();    
       infowindow.close();
@@ -181,7 +180,7 @@ function initMap() {
       // };
 
       // Check display onClickClusterButton into an html element
-      document.getElementById('map-user-selections').innerHTML = onClickClusterButton;
+      // document.getElementById('map-user-selections').innerHTML = onClickClusterButton;
 
       // including the service into the .onclick event functionality make it works as desired, but...
 
@@ -198,14 +197,12 @@ function initMap() {
             pagination.nextPage();
           };
         }
-      );
-
-      
+      );      
 
       function createMarkers(places) {
         if (serviceMarkers && serviceMarkers.setMap) {
           serviceMarkers.setMap(null);
-        }
+        };
         
         var serviceList = document.getElementById('map-displayed-markers');
         
@@ -223,7 +220,7 @@ function initMap() {
             // https://stackoverflow.com/questions/37441729/google-maps-custom-label-x-and-y-position
             labelOrigin: new google.maps.Point(12,0),
           };
-
+          
           var serviceMarkers = new google.maps.Marker({
             map: map,
             icon: serviceImage,
@@ -231,55 +228,65 @@ function initMap() {
             // https://developers.google.com/maps/documentation/javascript/examples/marker-labels
             // https://github.com/jesstelford/node-MarkerWithLabel
             label: labels[labelIndex++ % labels.length],
-            
             // label: place.name,
             position: place.geometry.location,
             animation: google.maps.Animation.DROP,
-          });
-
+            placeId: results[0].place_id,
+            location: results[0].geometry.location
+          }, 
 
           serviceMarkers.setPlace({
-            placeId: place.place_id,
-            location: place.geometry.location,
-            });
+            position: place.geometry.location,
+          }),
 
-          var li = document.createElement('li');
-          li.textContent = place.name + " "+labels[i];
-          serviceList.appendChild(li);
-        }
-        
-        serviceMarkers.addListener('click', function(){
-          // var serviceInfo  = autocomplete.getPlace();
-          // service = new google.maps.places.PlacesService(map);
-          place.getDetails({placeId: serviceMarkers.placeId});
-          // var place = autocomplete.getPlace();
-          // service.getDetails(place.placeId);
-          // var serviceInfo = service.getDetails();
-          console.log (serviceMarkers); // Object check purposes only 
-          // infowindow = new google.maps.InfoWindow({content: contentString});
-          infowindow.open(map, place);
-          // To set the values retrieved from the calllback function to different HTML elements in the modal form.      
-          document.getElementById('infowindow-heading').innerHTML = place.name; 
-
-          // To select the first image available using a call back function as method to another previous function
-          // and store it into a variable.
-          var placeImg = place.photos[0].getUrl({maxWidth: 300, maxHeight: 300});
-        
-          // To create an img object and set its attributes using a variable
-          // and append its value to the infowindow HTML snippet element. 
-          var serviceImg = document.createElement("img");    
-          img.setAttribute('src', placeImg);
+          serviceMarkers.setVisible(true),
           
-          // To avoid the appending of more than one picture when click on marker several times
-          var infowindowImageCount = document.getElementById('infowindow-image').childElementCount;
-          if (infowindowImageCount >0) {
-            document.getElementById('infowindow-image').removeChild(serviceImg);
-            } else {
-              document.getElementById('infowindow-image').appendChild(serviceImg); 
-            }   
-          });
+          request = {
+            location: places.place_id,
+          },
 
-      }
+          // console.log(serviceMarkers.placeId);
+
+          service.getDetails(request, function(place, status) {
+            // console.log();
+            // console.log():
+            if (status == google.maps.places.PlacesServiceStatus.OK) {
+              // console.log();              
+
+            };
+          }), 
+          
+          serviceMarkers.addListener('click', function(){                         
+
+            infowindow.open(map, serviceMarkers);
+            // infowindow.setContent(infowindowContent);
+            // To set the values retrieved from the calllback function to different HTML elements in the modal form.      
+            document.getElementById('infowindow-heading').innerHTML = serviceMarkers.place.name; 
+  
+            // To select the first image available using a call back function as method to another previous function
+            // and store it into a variable.
+            var placeImg = service.photos[0].getUrl({maxWidth: 300, maxHeight: 300});
+          
+            // To create an img object and set its attributes using a variable
+            // and append its value to the infowindow HTML snippet element. 
+            var serviceImg = document.createElement("img");    
+            img.setAttribute('src', placeImg);
+            
+            // To avoid the appending of more than one picture when click on marker several times
+            var infowindowImageCount = document.getElementById('infowindow-image').childElementCount;
+            if (infowindowImageCount >0) {
+              document.getElementById('infowindow-image').removeChild(serviceImg);
+              } else {
+                document.getElementById('infowindow-image').appendChild(serviceImg); 
+              }   
+          }),
+
+          li = document.createElement('li'),
+          li.textContent = place.name + " "+labels[i],
+          serviceList.appendChild(li),   
+        
+        } 
+      };
     };
   }); // End of autocomplete.addListener()
 
