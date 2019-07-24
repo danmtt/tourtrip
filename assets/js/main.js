@@ -1,18 +1,51 @@
 // Global scope declarations
 var map, marker, infowindow, autocomplete, service; // map objects declaration
 var searchInput; // autocomplete search box
-// var place; // autocomplete objects declaration
-// var placeInfowindow,serviceInfowindow; // OBJECTS
-var contentString; // Infowindow content
+var place, bounds; // autocomplete objects declaration
 
-var markers;
-var place, bounds;
+// var placeInfowindow,serviceInfowindow; // OBJECTS
+var iwSearch_contentString; // Infowindow content HTML Snippet
+
+// buttons declaration
+var hotelMarkers, foodMarkers, pubMarkers, atmMarkers; 
+var museumMarkers, galleryMarkers, zooMarkers, stadiumMarkers;
+var busMarkers,  subwayMarkers, taxiMarkers, airportMarkers;
 var onClickClusterButton;
+
+// var markers;
+var service;
+var serviceInfo;
 var serviceMarkers;
-// var service;
+
+
+// Searched place infowindow gets HTML snippet 
+var iwSearch_contentString =  
+'<div id="infowindow-content" class="d-flex flex-column justify-content-center ">'+
+'<h1 id="infowindow-heading" class="justify-content-center text-center"></h1>'+
+'<div id="bodyContent">'+
+  '<div id="infowindow-description" class="text-center">Your destination is in <b><span id="place-type"></span></b></div>'+
+  '<div id="infowindow-image" class="justify-content-center img-responsive center-block"></div>' +
+'</div>'+
+'</div>';
 
 // map function
 function initMap() {
+  
+  // Button Definitions; Set variables to specific buttons id´s to check onClick events
+  var hotelMarkers = document.querySelector('#hotel-markers');
+  var foodMarkers = document.querySelector('#food-markers');
+  var pubMarkers = document.querySelector('#pub-markers');
+  var atmMarkers = document.querySelector('#atm-markers');
+  var museumMarkers = document.querySelector('#museum-markers');
+  var galleryMarkers = document.querySelector('#gallery-markers');
+  var zooMarkers = document.querySelector('#zoo-markers');
+  var stadiumMarkers = document.querySelector('#stadium-markers');
+  var busMarkers = document.querySelector('#bus-markers');
+  var subwayMarkers = document.querySelector('#subway-markers');
+  var taxiMarkers = document.querySelector('#taxi-markers');
+  var airportMarkers = document.querySelector('#airport-markers');
+
+  var searchInput = document.getElementById("search-input");
 
   // Objects' Definitions
   // map Object ("HTML element", {options})
@@ -48,45 +81,29 @@ function initMap() {
     title: "Click to zoom",
     animation: google.maps.Animation.BOUNCE
   });
-
-   // Infowindow content 
-   var contentString =  
-    '<div id="infowindow-content" class="d-flex flex-column justify-content-center ">'+
-    '<h1 id="infowindow-heading" class="justify-content-center text-center"></h1>'+
-    '<div id="bodyContent">'+
-      '<div id="infowindow-description" class="text-center">Your destination is in <b><span id="place-type">(country)</span></b></div>'+
-      '<div id="infowindow-image" class="justify-content-center img-responsive center-block"></div>' +
-    '</div>'+
-  '</div>';
-    
   // infowindow Object + {content: HTML snippet}
-  infowindow = new google.maps.InfoWindow({content: contentString});
-  
-  // autocomplete Object ("HTML element"set into a variable, {options})
-  var searchInput = document.getElementById("search-input"); 
+  infowindow = new google.maps.InfoWindow({content: iwSearch_contentString
+  });   
+  // autocomplete Object ("HTML element "set into a variable, {options})  
   autocomplete = new google.maps.places.Autocomplete(searchInput, {
      // Places type specification to avoid street searches
      type: ['(cities)']
   });
-  // service Object (object referral)
+  // service Object (All features of map to an array)
   service = new google.maps.places.PlacesService(map); 
   // https://developers.google.com/maps/documentation/javascript/examples/places-autocomplete-hotelsearch
-
+     
   // Objects' Methods
-  // autocomplete Methods
  
+  // autocomplete Methods 
   autocomplete.bindTo('bounds', map);   // To set 'bounds' values into map created.
-  // To add a listening method to return a response due to the media query status changing.
   autocomplete.addListener('place_changed', function() {
+    infowindow.close();
     
     // Objects' Definition
     // place Object()
-    var place = autocomplete.getPlace(); // This callback should return all places features to an array, inside a variabke
-    // console.log (place); // Object check purposes only
-
-    // Objects' Methods called inside autocomplete (related to its results)
-    infowindow.close(); // To close and reset any previous value set to this object   
-    marker.setMap(map); // To add the marker created into the map
+    var place = autocomplete.getPlace(); // This callback should return all places features to an array
+    console.log (place); // Object check purposes only
     
     // Condition to cheeck if the name of a place typed in searchInput is empty
     // or hasn't been suggested, or if the Place Details request failed.
@@ -94,43 +111,46 @@ function initMap() {
       window.alert("Please, select one of the suggested places and click on 'Search'. There are no current details available for your selection : '" + place.name + "'");
       return;
     };
-
-    map.setCenter(place.geometry.location);
-    map.setZoom(3);        
-
-    // Set the position of the marker using the place ID and location.
+      
+    // marker Object Methods
+    marker.setMap(map); // To add the marker created into the map      
     marker.setPlace({
       placeId: place.place_id,
       location: place.geometry.location,
-    });
+    });// To set the position of the marker using the place ID and location.
     marker.setVisible(true);
- 
-    marker.addListener('click', function() {
-
-      // To stop the marker bouncing when clicking on it.
-      // https://developers.google.com/maps/documentation/javascript/examples/marker-animations
-      marker.setAnimation(google.maps.Animation.DROP);
-      
-      // To update map options when clicking on bouncing marker
-      // https://developers.google.com/maps/documentation/javascript/reference/map#MapOptions
-      // https://www.w3schools.com/graphics/google_maps_types.asp
-      // https://ourcodeworld.com/articles/read/831/how-to-change-and-preview-map-type-in-google-maps-dinamically-with-javascript
-      map.setZoom(15); // Zoom
-      map.setMapTypeId("roadmap"); // TypeId
-      
-      infowindow.open(map, marker);
-      // To set the values retrieved from the calllback function to different HTML elements in the modal form.      
-      document.getElementById('infowindow-heading').innerHTML = place.name; 
-
-      // To select the first image available using a call back function as method to another previous function
-      // and store it into a variable.
-      var placeImg = place.photos[0].getUrl({maxWidth: 300, maxHeight: 300});
     
-      // To create an img object and set its attributes using a variable
-      // and append its value to the infowindow HTML snippet element. 
-      var img = document.createElement("img");    
-      img.setAttribute('src', placeImg);
+    // map Object Methods
+    map.setCenter(place.geometry.location);
+    map.setZoom(3);  
+ 
+    // To set an event listener to 'map' when clicking out of infowindow, map is centered to the marker position 
+    map.addListener('click', function() {
+      infowindow.close();
+      map.setCenter(place.geometry.location);
+    });
+    
+    // To set an event listener to 'marker' when clicking on it, animation stops, 
+    // type of map changes zoom to place, infowindow opens
+    marker.addListener('click', function() {      
       
+      map.setCenter(place.geometry.location); // To set the center of the map
+      map.setZoom(15); // To zoom into the place area
+      map.setMapTypeId("roadmap");  // To set up the type of map used      
+
+      marker.setAnimation(google.maps.Animation.DROP); // To stop the marker bouncing when clicking on it.
+           
+      // infowindow Object Methods
+      infowindow.close();
+      infowindow.open(map, marker); // To open the infowindow to this marker  
+      // infowindow content sets up     
+      // To set the values retrieved from the calllback function to different HTML elements in the modal form.      
+      document.getElementById('infowindow-heading').innerHTML = place.name;
+      document.getElementById('place-type').innerHTML = place.country;
+      var placeImg = place.photos[0].getUrl({maxWidth: 300, maxHeight: 300}); // To select the first image available when callback places.
+      var img = document.createElement("img"); // To create an img object to set its attributes. 
+      img.setAttribute('src', placeImg);
+      // var placeCountry = place.country;
       // To avoid the appending of more than one picture when click on marker several times
       var infowindowImageCount = document.getElementById('infowindow-image').childElementCount;
       if (infowindowImageCount >0) {
@@ -138,33 +158,8 @@ function initMap() {
         } else {
           document.getElementById('infowindow-image').appendChild(img); 
       }   
-    });
-    
-    // To set an event listener to 'map' when clicking out of infowindow,
-    // this one dissapears and the map is centered to the marker position  
-    
-    map.addListener('click', function() {
-      infowindow.close();
-      map.setCenter(place.geometry.location);
-    });
-
-    var onClickClusterButton = '';
-    // Set variables for specific buttons id´s to check onClick events
-    let hotelMarkers = document.querySelector('#hotel-markers');
-    let foodMarkers = document.querySelector('#food-markers');
-    let pubMarkers = document.querySelector('#pub-markers');
-    let atmMarkers = document.querySelector('#atm-markers');
-    let museumMarkers = document.querySelector('#museum-markers');
-    let galleryMarkers = document.querySelector('#gallery-markers');
-    let zooMarkers = document.querySelector('#zoo-markers');
-    let stadiumMarkers = document.querySelector('#stadium-markers');
-    let busMarkers = document.querySelector('#bus-markers');
-    let subwayMarkers = document.querySelector('#subway-markers');
-    let taxiMarkers = document.querySelector('#taxi-markers');
-    let airportMarkers = document.querySelector('#airport-markers');
-    
-
-
+    });    
+      
     hotelMarkers.onclick = function() {
       // clearMarkers();    
       infowindow.close();
@@ -173,34 +168,23 @@ function initMap() {
       map.setMapTypeId("roadmap"); // TypeId
       onClickClusterButton ='lodging';
 
-      // function clearMarkers() {
-      //   for (var i = 0; i < erviceMmarkers.length; i++) {
-      //   serviceMarkers[i].setMap(null);
-      //   }
-      //   serviceMarkers = [];
-      // };
-
       // Check display onClickClusterButton into an html element
       document.getElementById('map-user-selections').innerHTML = onClickClusterButton;
-
-      // including the service into the .onclick event functionality make it works as desired, but...
 
       // Perform a nearby search.
       // https://developers.google.com/maps/documentation/javascript/places
 
-      service.nearbySearch({location: place.geometry.location, radius: 500, type: onClickClusterButton},  
-      function(results, status, pagination) {
-        if (status !== 'OK') return;
+      service.nearbySearch({location: place.geometry.location, radius: 500, type: onClickClusterButton},
+        function(results, status, pagination) {
+        if (status == google.maps.places.PlacesServiceStatus.OK) return;
 
         createMarkers(results);
         // moreButton.disabled = !pagination.hasNextPage;
         getNextPage = pagination.hasNextPage && function() {
             pagination.nextPage();
           };
-        }
-      );
+        });
 
-      
 
       function createMarkers(places) {
         if (serviceMarkers && serviceMarkers.setMap) {
@@ -228,64 +212,51 @@ function initMap() {
             map: map,
             icon: serviceImage,
             title: place.name,
-            // https://developers.google.com/maps/documentation/javascript/examples/marker-labels
-            // https://github.com/jesstelford/node-MarkerWithLabel
-            label: labels[labelIndex++ % labels.length],
-            
-            // label: place.name,
+            label: labels[labelIndex++ % labels.length],            
             position: place.geometry.location,
             animation: google.maps.Animation.DROP,
           });
-
 
           serviceMarkers.setPlace({
             placeId: place.place_id,
             location: place.geometry.location,
             });
 
+          serviceMarkers.addListener('click', function(){
+
+            infowindow = new google.maps.InfoWindow({content: iwSearch_contentString});
+      
+            map.setCenter(place.geometry.location); // To set the center of the map
+            
+            infowindow.close();
+            infowindow.open(map, serviceMarkers); // To open the infowindow to this marker  
+            document.getElementById('infowindow-heading').innerHTML = place.name;
+            document.getElementById('place-type').innerHTML = place.country;
+            var placeImg = place.photos[0].getUrl({maxWidth: 300, maxHeight: 300}); // To select the first image available when callback places.
+            var img = document.createElement("img"); // To create an img object to set its attributes. 
+            img.setAttribute('src', placeImg);
+            // var placeCountry = place.country;
+            // To avoid the appending of more than one picture when click on marker several times
+            var infowindowImageCount = document.getElementById('infowindow-image').childElementCount;
+            if (infowindowImageCount >0) {
+              document.getElementById('infowindow-image').removeChild(img);
+              } else {
+                document.getElementById('infowindow-image').appendChild(img);      
+              }   
+          });
+
+          var serviceInfo = place.getDetails({placeId: serviceMarkers.placeId});
+          console.log (serviceInfo); // Object check purposes only 
+
           var li = document.createElement('li');
           li.textContent = place.name + " "+labels[i];
           serviceList.appendChild(li);
         }
-        
-        serviceMarkers.addListener('click', function(){
-          // var serviceInfo  = autocomplete.getPlace();
-          // service = new google.maps.places.PlacesService(map);
-          place.getDetails({placeId: serviceMarkers.placeId});
-          // var place = autocomplete.getPlace();
-          // service.getDetails(place.placeId);
-          // var serviceInfo = service.getDetails();
-          console.log (serviceMarkers); // Object check purposes only 
-          // infowindow = new google.maps.InfoWindow({content: contentString});
-          infowindow.open(map, place);
-          // To set the values retrieved from the calllback function to different HTML elements in the modal form.      
-          document.getElementById('infowindow-heading').innerHTML = place.name; 
+      };
 
-          // To select the first image available using a call back function as method to another previous function
-          // and store it into a variable.
-          var placeImg = place.photos[0].getUrl({maxWidth: 300, maxHeight: 300});
-        
-          // To create an img object and set its attributes using a variable
-          // and append its value to the infowindow HTML snippet element. 
-          var serviceImg = document.createElement("img");    
-          img.setAttribute('src', placeImg);
-          
-          // To avoid the appending of more than one picture when click on marker several times
-          var infowindowImageCount = document.getElementById('infowindow-image').childElementCount;
-          if (infowindowImageCount >0) {
-            document.getElementById('infowindow-image').removeChild(serviceImg);
-            } else {
-              document.getElementById('infowindow-image').appendChild(serviceImg); 
-            }   
-          });
-
-      }
-    };
-  }); // End of autocomplete.addListener()
-
-
+    }; // End of hotelMarkers.onclick
+  }); // End of aurocomplete.addListener()    
 }; // End of initMap()
-
 
 // DUSTBIN ------------------------------------------------------------------------------------
 
@@ -322,3 +293,35 @@ function initMap() {
     //     document.getElementById("search-btn").click();
     //   }
     // });
+
+    // function clearMarkers() {
+    //   for (var i = 0; i < erviceMmarkers.length; i++) {
+    //   serviceMarkers[i].setMap(null);
+    //   }
+    //   serviceMarkers = [];
+    // };
+    
+    // service = new google.maps.places.PlacesService(map);
+    //place.getDetails({placeId: serviceMarkers.placeId});
+    // var place = autocomplete.getPlace();
+    // service.getDetails(place.placeId);
+    // var serviceInfo = service.getDetails();
+    // console.log (serviceMarkers); // Object check purposes only 
+    // infowindow = new google.maps.InfoWindow({content: contentString});
+
+
+    // To select the first image available using a call back function as method to another previous function
+    // and store it into a variable.
+    // var placeImg = place.photos[0].getUrl({maxWidth: 300, maxHeight: 300});
+  
+    // To create an img object and set its attributes using a variable
+    // and append its value to the infowindow HTML snippet element. 
+    // var serviceImg = document.createElement("img");    
+    // img.setAttribute('src', placeImg);
+    
+    // To avoid the appending of more than one picture when click on marker several times
+    // var infowindowImageCount = document.getElementById('infowindow-image').childElementCount;
+    // if (infowindowImageCount >0) {
+    // document.getElementById('infowindow-image').removeChild(serviceImg);
+    //   } else {
+    //    document.getElementById('infowindow-image').appendChild(serviceImg); 

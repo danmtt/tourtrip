@@ -24,3 +24,18 @@
 // Link to info about 'if' statements
 // https://stackoverflow.com/questions/2363840/how-to-use-or-condition-in-a-javascript-if-statement
 
+
+// To stop the marker bouncing when clicking on it.
+// https://developers.google.com/maps/documentation/javascript/examples/marker-animations
+
+// To update map options when clicking on bouncing marker
+// https://developers.google.com/maps/documentation/javascript/reference/map#MapOptions
+// https://www.w3schools.com/graphics/google_maps_types.asp
+// https://ourcodeworld.com/articles/read/831/how-to-change-and-preview-map-type-in-google-maps-dinamically-with-javascript
+
+// To callback for all features of map and set to an array)
+// https://developers.google.com/maps/documentation/javascript/examples/places-autocomplete-hotelsearch
+
+// https://developers.google.com/maps/documentation/javascript/examples/marker-labels
+// https://github.com/jesstelford/node-MarkerWithLabel
+
